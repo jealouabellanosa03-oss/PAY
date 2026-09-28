@@ -1,1738 +1,742 @@
-document.addEventListener("DOMContentLoaded", function () {
+/* ============================================================
+   BOARDINGPAY SERVICE WORKER
+   OFFLINE-FIRST
+   GitHub Pages Compatible
+============================================================ */
 
-    "use strict";
-
-
-    /* =====================================================
-       COMMON STORAGE
-    ===================================================== */
-
-    const ACCOUNTS_KEY = "boardingPayAccounts";
+const CACHE_NAME = "boardingpay-v3";
 
 
-    /* =====================================================
-       HELPERS
-    ===================================================== */
+/* ============================================================
+   ACTUAL FILES IN YOUR BOARDINGPAY FOLDER
+============================================================ */
 
-    function getAccounts() {
+const APP_FILES = [
 
-        try {
+    /* =========================
+       MAIN PAGES
+    ========================= */
 
-            const accounts = JSON.parse(
-                localStorage.getItem(ACCOUNTS_KEY) || "[]"
-            );
-
-            return Array.isArray(accounts)
-                ? accounts
-                : [];
-
-        } catch (error) {
-
-            return [];
-
-        }
-
-    }
+    "./",
+    "./index.html",
+    "./get-started.html",
+    "./login.html",
 
 
-    function saveAccounts(accounts) {
+    /* =========================
+       ADMIN
+    ========================= */
 
-        localStorage.setItem(
-            ACCOUNTS_KEY,
-            JSON.stringify(accounts)
-        );
-
-    }
-
-
-    function normalize(value) {
-
-        return String(value || "")
-            .trim()
-            .toLowerCase();
-
-    }
+    "./admin-register.html",
+    "./create-account.html",
+    "./admin-dashboard.html",
 
 
-    function getDashboard(role) {
+    /* =========================
+       LANDLORD
+    ========================= */
 
-        role = normalize(role);
-
-        if (role === "admin") {
-            return "admin-dashboard.html";
-        }
-
-        if (role === "landlord") {
-            return "landlord-dashboard.html";
-        }
-
-        if (role === "tenant") {
-            return "tenant-dashboard.html";
-        }
-
-        return "login.html";
-
-    }
+    "./landlord-register.html",
+    "./landlord-dashboard.html",
 
 
-    /* =====================================================
-       PASSWORD SHOW / HIDE
-       Works with:
-       .password-toggle
-       #passwordToggle
-    ===================================================== */
+    /* =========================
+       TENANT
+    ========================= */
 
-    const passwordToggles =
-        document.querySelectorAll(".password-toggle");
+    "./tenant-register.html",
+    "./tenant-dashboard.html",
 
 
-    passwordToggles.forEach(function (toggle) {
+    /* =========================
+       PAYMENTS
+    ========================= */
 
-        toggle.addEventListener(
-            "click",
-            function (event) {
-
-                event.preventDefault();
-                event.stopPropagation();
-
-                const targetId =
-                    toggle.getAttribute("data-target");
-
-                if (!targetId) {
-                    return;
-                }
-
-                const passwordInput =
-                    document.getElementById(targetId);
-
-                if (!passwordInput) {
-                    return;
-                }
+    "./paymentmethod.html",
+    "./payment-details.html",
+    "./payment-success.html",
 
 
-                if (passwordInput.type === "password") {
+    /* =========================
+       OTHER PAGES
+    ========================= */
 
-                    passwordInput.type = "text";
-
-                    toggle.textContent = "🙈";
-
-                    toggle.setAttribute(
-                        "aria-label",
-                        "Hide password"
-                    );
-
-                } else {
-
-                    passwordInput.type = "password";
-
-                    toggle.textContent = "👁";
-
-                    toggle.setAttribute(
-                        "aria-label",
-                        "Show password"
-                    );
-
-                }
-
-            }
-        );
-
-    });
+    "./profile.html",
+    "./settings.html",
+    "./history.html",
+    "./announcements.html",
+    "./contact.html",
+    "./forgot-password.html",
 
 
-    /* =====================================================
-       LOGIN PASSWORD TOGGLE
-       For login.html
-    ===================================================== */
+    /* =========================
+       CSS
+    ========================= */
 
-    const loginPasswordToggle =
-        document.getElementById("passwordToggle");
+    "./style.css",
 
 
-    if (
-        loginPasswordToggle &&
-        !loginPasswordToggle.classList.contains("password-toggle")
-    ) {
+    /* =========================
+       JAVASCRIPT
+    ========================= */
 
-        loginPasswordToggle.addEventListener(
-            "click",
-            function (event) {
+    "./script.js"
 
-                event.preventDefault();
-                event.stopPropagation();
+];
 
-                const passwordInput =
-                    document.getElementById("password");
 
-                if (!passwordInput) {
-                    return;
+/* ============================================================
+   INSTALL
+============================================================ */
+
+self.addEventListener("install", event => {
+
+    console.log(
+        "[BoardingPay SW] Installing:",
+        CACHE_NAME
+    );
+
+
+    event.waitUntil(
+
+        caches.open(CACHE_NAME)
+
+            .then(async cache => {
+
+                /*
+                   Cache files one by one.
+
+                   This is safer than cache.addAll().
+                   If one file is missing, the entire
+                   Service Worker installation will NOT fail.
+                */
+
+                for (const file of APP_FILES) {
+
+                    try {
+
+                        const response = await fetch(
+                            new Request(file, {
+                                cache: "no-store"
+                            })
+                        );
+
+
+                        if (!response.ok) {
+
+                            console.warn(
+                                "[BoardingPay SW] Could not cache:",
+                                file,
+                                response.status
+                            );
+
+                            continue;
+                        }
+
+
+                        await cache.put(
+                            file,
+                            response.clone()
+                        );
+
+
+                        console.log(
+                            "[BoardingPay SW] Cached:",
+                            file
+                        );
+
+                    }
+
+                    catch (error) {
+
+                        console.warn(
+                            "[BoardingPay SW] Cache failed:",
+                            file,
+                            error
+                        );
+
+                    }
+
                 }
 
 
-                if (passwordInput.type === "password") {
-
-                    passwordInput.type = "text";
-
-                    loginPasswordToggle.textContent = "🙈";
-
-                    loginPasswordToggle.setAttribute(
-                        "aria-label",
-                        "Hide password"
-                    );
-
-                } else {
-
-                    passwordInput.type = "password";
-
-                    loginPasswordToggle.textContent = "👁";
-
-                    loginPasswordToggle.setAttribute(
-                        "aria-label",
-                        "Show password"
-                    );
-
-                }
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       REGISTRATION VALIDATION
-    ===================================================== */
-
-    function validateRegistrationFields(fields) {
-
-        for (const value of Object.values(fields)) {
-
-            if (!String(value || "").trim()) {
-
-                alert("Please complete all fields.");
-
-                return false;
-
-            }
-
-        }
-
-
-        if (fields.email !== undefined) {
-
-            const emailPattern =
-                /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-            if (!emailPattern.test(fields.email)) {
-
-                alert(
-                    "Please enter a valid email address."
+                console.log(
+                    "[BoardingPay SW] All available files processed."
                 );
 
-                return false;
-
-            }
-
-        }
+            })
 
 
-        if (
-            fields.password !== undefined &&
-            fields.password.length < 6
-        ) {
+            .then(() => {
 
-            alert(
-                "Password must be at least 6 characters."
-            );
+                /*
+                   Activate immediately.
+                */
 
-            return false;
+                return self.skipWaiting();
 
-        }
+            })
 
+    );
 
-        if (
-            fields.password !== undefined &&
-            fields.password !== fields.confirmPassword
-        ) {
-
-            alert("Passwords do not match.");
-
-            return false;
-
-        }
+});
 
 
-        return true;
+/* ============================================================
+   ACTIVATE
+============================================================ */
+
+self.addEventListener("activate", event => {
+
+    console.log(
+        "[BoardingPay SW] Activating:",
+        CACHE_NAME
+    );
+
+
+    event.waitUntil(
+
+        caches.keys()
+
+            .then(cacheNames => {
+
+                return Promise.all(
+
+                    cacheNames
+
+                        .filter(cacheName => {
+
+                            return (
+                                cacheName.startsWith(
+                                    "boardingpay-"
+                                ) &&
+                                cacheName !== CACHE_NAME
+                            );
+
+                        })
+
+
+                        .map(oldCache => {
+
+                            console.log(
+                                "[BoardingPay SW] Deleting old cache:",
+                                oldCache
+                            );
+
+
+                            return caches.delete(
+                                oldCache
+                            );
+
+                        })
+
+                );
+
+            })
+
+
+            .then(() => {
+
+                /*
+                   Take control of currently opened pages.
+                */
+
+                return self.clients.claim();
+
+            })
+
+
+            .then(() => {
+
+                console.log(
+                    "[BoardingPay SW] Activation complete."
+                );
+
+            })
+
+    );
+
+});
+
+
+/* ============================================================
+   FETCH HANDLER
+============================================================ */
+
+self.addEventListener("fetch", event => {
+
+    const request = event.request;
+
+
+    /*
+       Only handle GET requests.
+    */
+
+    if (request.method !== "GET") {
+
+        return;
 
     }
 
 
-    /* =====================================================
-       PHONE VALIDATION
-       Must:
-       - Start with 09
-       - Have exactly 11 digits
-    ===================================================== */
+    event.respondWith(
 
-    function validatePhone(phone) {
+        caches.match(request)
 
-        return /^09\d{9}$/.test(phone);
+            .then(cachedResponse => {
 
-    }
 
+                /* =================================================
+                   1. FILE IS ALREADY CACHED
+                ================================================= */
 
-    /* =====================================================
-       LOGIN MESSAGE
-    ===================================================== */
+                if (cachedResponse) {
 
-    function showLoginMessage(text, type) {
+                    return cachedResponse;
 
-        const loginMessage =
-            document.getElementById("loginMessage");
+                }
 
 
-        if (!loginMessage) {
+                /* =================================================
+                   2. IMAGE REQUEST
+                   -------------------------------------------------
+                   This specifically handles the image error you
+                   are seeing:
 
-            alert(text);
-
-            return;
-
-        }
-
-
-        loginMessage.textContent = text;
-
-        loginMessage.className = type;
-
-    }
-
-
-    /* =====================================================
-       SAVE LOGIN SESSION
-    ===================================================== */
-
-    function saveLoginSession(account) {
-
-        const role =
-            normalize(
-                account.role || account.accountType
-            );
-
-
-        /*
-         * MAIN CURRENT USER
-         */
-
-        localStorage.setItem(
-            "boardingPayCurrentUser",
-            JSON.stringify(account)
-        );
-
-
-        /*
-         * COMPATIBILITY KEYS
-         */
-
-        localStorage.setItem(
-            "currentUser",
-            JSON.stringify(account)
-        );
-
-        localStorage.setItem(
-            "loggedInUser",
-            JSON.stringify(account)
-        );
-
-
-        /*
-         * LOGIN FLAGS
-         */
-
-        localStorage.setItem(
-            "boardingPayLoggedIn",
-            "true"
-        );
-
-        localStorage.setItem(
-            "isLoggedIn",
-            "true"
-        );
-
-        localStorage.setItem(
-            "loggedIn",
-            "true"
-        );
-
-
-        /*
-         * USER INFORMATION
-         */
-
-        localStorage.setItem(
-            "currentUserType",
-            role
-        );
-
-        localStorage.setItem(
-            "userRole",
-            role
-        );
-
-        localStorage.setItem(
-            "accountType",
-            role
-        );
-
-        localStorage.setItem(
-            "loggedInName",
-            account.fullName || ""
-        );
-
-        localStorage.setItem(
-            "loggedInEmail",
-            account.email || ""
-        );
-
-        localStorage.setItem(
-            "loggedInPhone",
-            account.phone || ""
-        );
-
-
-        /*
-         * ROLE-SPECIFIC SESSION
-         */
-
-        if (role === "admin") {
-
-            localStorage.setItem(
-                "currentAdmin",
-                JSON.stringify(account)
-            );
-
-        }
-
-
-        if (role === "landlord") {
-
-            localStorage.setItem(
-                "currentLandlord",
-                JSON.stringify(account)
-            );
-
-        }
-
-
-        if (role === "tenant") {
-
-            localStorage.setItem(
-                "currentTenant",
-                JSON.stringify(account)
-            );
-
-        }
-
-
-        /*
-         * REMOVE OLD PENDING LOGIN DATA
-         */
-
-        localStorage.removeItem(
-            "pendingLoginRole"
-        );
-
-        localStorage.removeItem(
-            "pendingLoginIdentifier"
-        );
-
-        localStorage.removeItem(
-            "boardingPayPendingLogin"
-        );
-
-    }
-
-
-    /* =====================================================
-       INDEX / LANDING PAGE
-    ===================================================== */
-
-    const getStartedBtn =
-        document.getElementById("getStartedBtn");
-
-    const loginBtn =
-        document.getElementById("loginBtn");
-
-
-    if (getStartedBtn) {
-
-        getStartedBtn.addEventListener(
-            "click",
-            function (event) {
-
-                event.preventDefault();
-
-                window.location.href =
-                    "create-account.html";
-
-            }
-        );
-
-    }
-
-
-    if (loginBtn) {
-
-        loginBtn.addEventListener(
-            "click",
-            function (event) {
-
-                event.preventDefault();
-
-                window.location.href =
-                    "login.html";
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       LOGIN
-    ===================================================== */
-
-    const loginForm =
-        document.getElementById("loginForm");
-
-
-    if (loginForm) {
-
-        loginForm.addEventListener(
-            "submit",
-            function (event) {
-
-                event.preventDefault();
-
-
-                const roleEl =
-                    document.getElementById("role");
-
-                const identifierEl =
-                    document.getElementById(
-                        "loginIdentifier"
-                    );
-
-                const passwordEl =
-                    document.getElementById(
-                        "password"
-                    );
-
+                   /image/Screenshot 2026-09-23 214808.png
+                ================================================= */
 
                 if (
-                    !identifierEl ||
-                    !passwordEl
+                    request.destination === "image"
                 ) {
 
-                    return;
+                    return fetch(request)
+
+                        .then(networkResponse => {
+
+                            /*
+                               If the image exists online,
+                               save it for future offline use.
+                            */
+
+                            if (
+                                networkResponse &&
+                                networkResponse.ok
+                            ) {
+
+                                const imageCopy =
+                                    networkResponse.clone();
+
+
+                                caches.open(CACHE_NAME)
+
+                                    .then(cache => {
+
+                                        cache.put(
+                                            request,
+                                            imageCopy
+                                        );
+
+                                    })
+
+                                    .catch(error => {
+
+                                        console.warn(
+                                            "[BoardingPay SW] Image cache error:",
+                                            error
+                                        );
+
+                                    });
+
+                            }
+
+
+                            return networkResponse;
+
+                        })
+
+
+                        .catch(() => {
+
+                            /*
+                               =====================================
+                               OFFLINE IMAGE FALLBACK
+                               =====================================
+
+                               Instead of returning a network error,
+                               return a valid transparent image.
+
+                               This prevents the FetchEvent from
+                               returning a rejected/network error.
+                            */
+
+                            const transparentSVG = `
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="1"
+                                    height="1"
+                                    viewBox="0 0 1 1"
+                                >
+                                    <rect
+                                        width="1"
+                                        height="1"
+                                        fill="transparent"
+                                    />
+                                </svg>
+                            `;
+
+
+                            return new Response(
+                                transparentSVG,
+                                {
+                                    status: 200,
+
+                                    headers: {
+                                        "Content-Type":
+                                            "image/svg+xml"
+                                    }
+                                }
+                            );
+
+                        });
 
                 }
 
 
-                const selectedRole =
-                    roleEl
-                        ? normalize(roleEl.value)
-                        : "";
+                /* =================================================
+                   3. NORMAL REQUEST
+                ================================================= */
+
+                return fetch(request)
+
+                    .then(networkResponse => {
 
 
-                const identifier =
-                    normalize(
-                        identifierEl.value
-                    );
+                        /*
+                           Cache successful same-origin resources.
+                        */
+
+                        if (
+                            networkResponse &&
+                            networkResponse.ok &&
+                            networkResponse.type === "basic"
+                        ) {
+
+                            const responseCopy =
+                                networkResponse.clone();
 
 
-                const password =
-                    passwordEl.value;
+                            caches.open(CACHE_NAME)
+
+                                .then(cache => {
+
+                                    return cache.put(
+                                        request,
+                                        responseCopy
+                                    );
+
+                                })
+
+                                .catch(error => {
+
+                                    console.warn(
+                                        "[BoardingPay SW] Dynamic cache error:",
+                                        error
+                                    );
+
+                                });
+
+                        }
 
 
-                /* -----------------------------------------
-                   VALIDATE INPUT
-                ----------------------------------------- */
+                        return networkResponse;
 
-                if (!selectedRole) {
-
-                    showLoginMessage(
-                        "Please select your account type.",
-                        "error"
-                    );
-
-                    return;
-
-                }
+                    })
 
 
-                if (!identifier) {
-
-                    showLoginMessage(
-                        "Please enter your email or phone number.",
-                        "error"
-                    );
-
-                    return;
-
-                }
+                    .catch(() => {
 
 
-                if (!password) {
+                        /* =================================================
+                           4. OFFLINE PAGE FALLBACK
+                        ================================================= */
 
-                    showLoginMessage(
-                        "Please enter your password.",
-                        "error"
-                    );
-
-                    return;
-
-                }
+                        if (
+                            request.mode === "navigate" ||
+                            request.destination === "document"
+                        ) {
 
 
-                /* -----------------------------------------
-                   GET REGISTERED ACCOUNTS
-                ----------------------------------------- */
+                            return caches.match(
+                                "./index.html"
+                            )
 
-                const accounts =
-                    getAccounts();
-
-
-                /* -----------------------------------------
-                   FIND ACCOUNT
-
-                   Matches:
-                   - Email
-                   - Phone
-                   - Identifier
-                   - Username
-
-                   AND:
-                   - Same account role
-                ----------------------------------------- */
-
-                const account =
-                    accounts.find(function (item) {
-
-                        const accountRole =
-                            normalize(
-                                item.role ||
-                                item.accountType
-                            );
+                            .then(indexPage => {
 
 
-                        const accountEmail =
-                            normalize(
-                                item.email
-                            );
+                                /*
+                                   If index.html is cached,
+                                   return it.
+                                */
+
+                                if (indexPage) {
+
+                                    return indexPage;
+
+                                }
 
 
-                        const accountPhone =
-                            normalize(
-                                item.phone
-                            );
+                                /*
+                                   Emergency offline page.
+                                */
+
+                                return new Response(
+
+                                    `
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        BoardingPay Offline
+    </title>
+
+</head>
 
 
-                        const accountIdentifier =
-                            normalize(
-                                item.identifier
-                            );
+<body
+    style="
+        margin:0;
+        min-height:100vh;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        font-family:Arial,sans-serif;
+        background:#f5f7fa;
+        color:#183b56;
+        text-align:center;
+    "
+>
 
 
-                        const accountUsername =
-                            normalize(
-                                item.username
-                            );
+    <div
+        style="
+            max-width:400px;
+            padding:30px;
+        "
+    >
+
+        <h2>
+            BoardingPay
+        </h2>
 
 
-                        const identifierMatch =
-                            identifier === accountEmail ||
-                            identifier === accountPhone ||
-                            identifier === accountIdentifier ||
-                            identifier === accountUsername;
+        <p>
+            You are currently offline.
+        </p>
 
 
-                        const roleMatch =
-                            selectedRole === accountRole;
+        <p>
+            Please connect to the internet once
+            to cache this page.
+        </p>
+
+    </div>
 
 
-                        return (
-                            identifierMatch &&
-                            roleMatch
+</body>
+
+</html>
+                                    `,
+
+                                    {
+                                        status:200,
+
+                                        headers:{
+                                            "Content-Type":
+                                                "text/html; charset=UTF-8"
+                                        }
+                                    }
+
+                                );
+
+                            });
+
+                        }
+
+
+                        /* =================================================
+                           5. OTHER OFFLINE RESOURCES
+                        ================================================= */
+
+                        return new Response(
+                            "",
+                            {
+                                status:200,
+
+                                headers:{
+                                    "Content-Type":
+                                        "text/plain; charset=UTF-8"
+                                }
+                            }
                         );
 
                     });
 
+            })
 
-                /* -----------------------------------------
-                   ACCOUNT NOT FOUND
-                ----------------------------------------- */
+    );
 
-                if (!account) {
+});
 
-                    showLoginMessage(
-                        "Account not found. Please use the same email/phone, password, and account type you used when creating your account.",
-                        "error"
+
+/* ============================================================
+   MESSAGE HANDLER
+============================================================ */
+
+self.addEventListener("message", event => {
+
+    if (!event.data) {
+
+        return;
+
+    }
+
+
+    /* =========================================================
+       SKIP WAITING
+    ========================================================= */
+
+    if (
+        event.data.action ===
+        "SKIP_WAITING"
+    ) {
+
+        self.skipWaiting();
+
+    }
+
+
+    /* =========================================================
+       CLEAR ALL BOARDINGPAY CACHE
+    ========================================================= */
+
+    if (
+        event.data.action ===
+        "CLEAR_CACHE"
+    ) {
+
+        event.waitUntil(
+
+            caches.keys()
+
+                .then(cacheNames => {
+
+                    return Promise.all(
+
+                        cacheNames.map(
+                            cacheName => {
+
+                                return caches.delete(
+                                    cacheName
+                                );
+
+                            }
+                        )
+
                     );
 
-                    return;
+                })
 
-                }
+                .then(() => {
 
-
-                /* -----------------------------------------
-                   PASSWORD CHECK
-                ----------------------------------------- */
-
-                if (
-                    String(account.password) !==
-                    String(password)
-                ) {
-
-                    showLoginMessage(
-                        "Incorrect password.",
-                        "error"
+                    console.log(
+                        "[BoardingPay SW] All caches cleared."
                     );
 
-                    return;
+                })
 
-                }
-
-
-                /* -----------------------------------------
-                   LOGIN SUCCESS
-                ----------------------------------------- */
-
-                saveLoginSession(account);
-
-
-                showLoginMessage(
-                    "Login successful! Redirecting...",
-                    "success"
-                );
-
-
-                /*
-                 * DIRECT ROLE-BASED REDIRECT
-                 *
-                 * No timeout needed.
-                 */
-
-                const dashboard =
-                    getDashboard(account.role);
-
-
-                window.location.replace(
-                    dashboard
-                );
-
-            }
         );
 
     }
 
 
-    /* =====================================================
-       CREATE ACCOUNT PAGE
-    ===================================================== */
+    /* =========================================================
+       CACHE APP AGAIN
+    ========================================================= */
 
-    const createBackBtn =
-        document.getElementById("backBtn");
+    if (
+        event.data.action ===
+        "CACHE_APP"
+    ) {
 
-    const tenantBtn =
-        document.getElementById("tenantBtn");
+        event.waitUntil(
 
-    const landlordBtn =
-        document.getElementById("landlordBtn");
+            caches.open(CACHE_NAME)
 
-    const adminBtn =
-        document.getElementById("adminBtn");
+                .then(async cache => {
 
+                    for (
+                        const file of APP_FILES
+                    ) {
 
-    if (createBackBtn) {
+                        try {
 
-        createBackBtn.addEventListener(
-            "click",
-            function (event) {
+                            const response =
+                                await fetch(
 
-                event.preventDefault();
+                                    new Request(
+                                        file,
+                                        {
+                                            cache:
+                                                "no-store"
+                                        }
+                                    )
 
-                window.location.href =
-                    "login.html";
+                                );
 
-            }
-        );
 
-    }
+                            if (response.ok) {
 
+                                await cache.put(
+                                    file,
+                                    response.clone()
+                                );
 
-    if (tenantBtn) {
 
-        tenantBtn.addEventListener(
-            "click",
-            function (event) {
+                                console.log(
+                                    "[BoardingPay SW] Re-cached:",
+                                    file
+                                );
 
-                event.preventDefault();
+                            }
 
-                window.location.href =
-                    "tenant-register.html";
+                        }
 
-            }
-        );
+                        catch (error) {
 
-    }
-
-
-    if (landlordBtn) {
-
-        landlordBtn.addEventListener(
-            "click",
-            function (event) {
-
-                event.preventDefault();
-
-                window.location.href =
-                    "landlord-register.html";
-
-            }
-        );
-
-    }
-
-
-    if (adminBtn) {
-
-        adminBtn.addEventListener(
-            "click",
-            function (event) {
-
-                event.preventDefault();
-
-                window.location.href =
-                    "admin-register.html";
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       TENANT BACK
-    ===================================================== */
-
-    const tenantBackBtn =
-        document.getElementById(
-            "tenantBackBtn"
-        );
-
-
-    if (tenantBackBtn) {
-
-        tenantBackBtn.addEventListener(
-            "click",
-            function (event) {
-
-                event.preventDefault();
-
-                window.location.href =
-                    "create-account.html";
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       TENANT REGISTRATION
-    ===================================================== */
-
-    const tenantForm =
-        document.getElementById(
-            "tenantRegistrationForm"
-        );
-
-
-    if (tenantForm) {
-
-        tenantForm.addEventListener(
-            "submit",
-            function (event) {
-
-                event.preventDefault();
-
-
-                if (!tenantForm.checkValidity()) {
-
-                    tenantForm.reportValidity();
-
-                    return;
-
-                }
-
-
-                const nameEl =
-                    document.getElementById(
-                        "tenantName"
-                    );
-
-                const emailEl =
-                    document.getElementById(
-                        "tenantEmail"
-                    );
-
-                const phoneEl =
-                    document.getElementById(
-                        "tenantPhone"
-                    );
-
-                const passwordEl =
-                    document.getElementById(
-                        "tenantPassword"
-                    );
-
-                const confirmEl =
-                    document.getElementById(
-                        "tenantConfirmPassword"
-                    );
-
-
-                if (
-                    !nameEl ||
-                    !emailEl ||
-                    !phoneEl ||
-                    !passwordEl ||
-                    !confirmEl
-                ) {
-
-                    alert(
-                        "Some tenant registration fields are missing."
-                    );
-
-                    return;
-
-                }
-
-
-                const name =
-                    nameEl.value.trim();
-
-                const email =
-                    emailEl.value
-                        .trim()
-                        .toLowerCase();
-
-                const phone =
-                    phoneEl.value.trim();
-
-                const password =
-                    passwordEl.value;
-
-                const confirmPassword =
-                    confirmEl.value;
-
-
-                if (
-                    !validateRegistrationFields({
-                        name,
-                        email,
-                        phone,
-                        password,
-                        confirmPassword
-                    })
-                ) {
-
-                    return;
-
-                }
-
-
-                if (!validatePhone(phone)) {
-
-                    alert(
-                        "Phone number must start with 09 and contain exactly 11 digits."
-                    );
-
-                    phoneEl.focus();
-
-                    return;
-
-                }
-
-
-                const accounts =
-                    getAccounts();
-
-
-                const duplicate =
-                    accounts.some(
-                        function (account) {
-
-                            return (
-                                normalize(
-                                    account.email
-                                ) === email ||
-
-                                normalize(
-                                    account.phone
-                                ) === phone
+                            console.warn(
+                                "[BoardingPay SW] Re-cache failed:",
+                                file
                             );
 
                         }
-                    );
 
+                    }
 
-                if (duplicate) {
+                })
 
-                    alert(
-                        "This email or phone number is already registered."
-                    );
-
-                    return;
-
-                }
-
-
-                const account = {
-
-                    id:
-                        "TENANT-" +
-                        Date.now(),
-
-                    fullName:
-                        name,
-
-                    identifier:
-                        email,
-
-                    email:
-                        email,
-
-                    phone:
-                        phone,
-
-                    password:
-                        password,
-
-                    role:
-                        "tenant",
-
-                    accountType:
-                        "Tenant",
-
-                    createdAt:
-                        new Date().toISOString()
-
-                };
-
-
-                accounts.push(account);
-
-                saveAccounts(accounts);
-
-
-                /* -----------------------------------------
-                   OLD TENANT DATA
-                ----------------------------------------- */
-
-                localStorage.setItem(
-                    "tenantName",
-                    name
-                );
-
-                localStorage.setItem(
-                    "tenantEmail",
-                    email
-                );
-
-                localStorage.setItem(
-                    "tenantPhone",
-                    phone
-                );
-
-                localStorage.setItem(
-                    "tenantPassword",
-                    password
-                );
-
-
-                /* -----------------------------------------
-                   PENDING LOGIN
-                ----------------------------------------- */
-
-                localStorage.setItem(
-                    "pendingLoginRole",
-                    "tenant"
-                );
-
-                localStorage.setItem(
-                    "pendingLoginIdentifier",
-                    email
-                );
-
-
-                alert(
-                    "Tenant account created successfully. Please log in using the same email/phone and password."
-                );
-
-
-                window.location.href =
-                    "login.html";
-
-            }
         );
 
     }
-
-
-    /* =====================================================
-       LANDLORD BACK
-    ===================================================== */
-
-    const landlordBackBtn =
-        document.getElementById(
-            "landlordBackBtn"
-        );
-
-
-    if (landlordBackBtn) {
-
-        landlordBackBtn.addEventListener(
-            "click",
-            function (event) {
-
-                event.preventDefault();
-
-                window.location.href =
-                    "create-account.html";
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       LANDLORD REGISTRATION
-    ===================================================== */
-
-    const landlordForm =
-        document.getElementById(
-            "landlordRegistrationForm"
-        );
-
-
-    if (landlordForm) {
-
-        landlordForm.addEventListener(
-            "submit",
-            function (event) {
-
-                event.preventDefault();
-
-
-                if (!landlordForm.checkValidity()) {
-
-                    landlordForm.reportValidity();
-
-                    return;
-
-                }
-
-
-                const nameEl =
-                    document.getElementById(
-                        "landlordName"
-                    );
-
-                const emailEl =
-                    document.getElementById(
-                        "landlordEmail"
-                    );
-
-                const phoneEl =
-                    document.getElementById(
-                        "landlordPhone"
-                    );
-
-                const passwordEl =
-                    document.getElementById(
-                        "landlordPassword"
-                    );
-
-                const confirmEl =
-                    document.getElementById(
-                        "landlordConfirmPassword"
-                    );
-
-
-                if (
-                    !nameEl ||
-                    !emailEl ||
-                    !phoneEl ||
-                    !passwordEl ||
-                    !confirmEl
-                ) {
-
-                    alert(
-                        "Some landlord registration fields are missing. Make sure landlordPhone exists in the HTML."
-                    );
-
-                    return;
-
-                }
-
-
-                const name =
-                    nameEl.value.trim();
-
-                const email =
-                    emailEl.value
-                        .trim()
-                        .toLowerCase();
-
-                const phone =
-                    phoneEl.value.trim();
-
-                const password =
-                    passwordEl.value;
-
-                const confirmPassword =
-                    confirmEl.value;
-
-
-                if (
-                    !validateRegistrationFields({
-                        name,
-                        email,
-                        phone,
-                        password,
-                        confirmPassword
-                    })
-                ) {
-
-                    return;
-
-                }
-
-
-                if (!validatePhone(phone)) {
-
-                    alert(
-                        "Phone number must start with 09 and contain exactly 11 digits."
-                    );
-
-                    phoneEl.focus();
-
-                    return;
-
-                }
-
-
-                const accounts =
-                    getAccounts();
-
-
-                const duplicate =
-                    accounts.some(
-                        function (account) {
-
-                            return (
-                                normalize(
-                                    account.email
-                                ) === email ||
-
-                                normalize(
-                                    account.phone
-                                ) === phone
-                            );
-
-                        }
-                    );
-
-
-                if (duplicate) {
-
-                    alert(
-                        "This email or phone number is already registered."
-                    );
-
-                    return;
-
-                }
-
-
-                const account = {
-
-                    id:
-                        "LANDLORD-" +
-                        Date.now(),
-
-                    fullName:
-                        name,
-
-                    identifier:
-                        email,
-
-                    email:
-                        email,
-
-                    phone:
-                        phone,
-
-                    password:
-                        password,
-
-                    role:
-                        "landlord",
-
-                    accountType:
-                        "Landlord",
-
-                    createdAt:
-                        new Date().toISOString()
-
-                };
-
-
-                accounts.push(account);
-
-                saveAccounts(accounts);
-
-
-                /* -----------------------------------------
-                   OLD LANDLORD DATA
-                ----------------------------------------- */
-
-                localStorage.setItem(
-                    "landlordName",
-                    name
-                );
-
-                localStorage.setItem(
-                    "landlordEmail",
-                    email
-                );
-
-                localStorage.setItem(
-                    "landlordPhone",
-                    phone
-                );
-
-                localStorage.setItem(
-                    "landlordPassword",
-                    password
-                );
-
-
-                /* -----------------------------------------
-                   CURRENT LANDLORD
-                ----------------------------------------- */
-
-                localStorage.setItem(
-                    "currentLandlord",
-                    JSON.stringify(account)
-                );
-
-
-                /* -----------------------------------------
-                   PENDING LOGIN
-                ----------------------------------------- */
-
-                localStorage.setItem(
-                    "pendingLoginRole",
-                    "landlord"
-                );
-
-                localStorage.setItem(
-                    "pendingLoginIdentifier",
-                    email
-                );
-
-
-                alert(
-                    "Landlord account created successfully. Please log in using the same email/phone and password."
-                );
-
-
-                window.location.href =
-                    "login.html";
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       ADMIN BACK
-    ===================================================== */
-
-    const adminBackBtn =
-        document.getElementById(
-            "adminBackBtn"
-        );
-
-
-    if (adminBackBtn) {
-
-        adminBackBtn.addEventListener(
-            "click",
-            function (event) {
-
-                event.preventDefault();
-
-                window.location.href =
-                    "create-account.html";
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       ADMIN REGISTRATION
-    ===================================================== */
-
-    const adminForm =
-        document.getElementById(
-            "adminRegistrationForm"
-        );
-
-
-    if (adminForm) {
-
-        adminForm.addEventListener(
-            "submit",
-            function (event) {
-
-                event.preventDefault();
-
-
-                if (!adminForm.checkValidity()) {
-
-                    adminForm.reportValidity();
-
-                    return;
-
-                }
-
-
-                const nameEl =
-                    document.getElementById(
-                        "adminName"
-                    );
-
-                const emailEl =
-                    document.getElementById(
-                        "adminEmail"
-                    );
-
-                const usernameEl =
-                    document.getElementById(
-                        "adminUsername"
-                    );
-
-                const passwordEl =
-                    document.getElementById(
-                        "adminPassword"
-                    );
-
-                const confirmEl =
-                    document.getElementById(
-                        "adminConfirmPassword"
-                    );
-
-
-                if (
-                    !nameEl ||
-                    !emailEl ||
-                    !usernameEl ||
-                    !passwordEl ||
-                    !confirmEl
-                ) {
-
-                    alert(
-                        "Some admin registration fields are missing."
-                    );
-
-                    return;
-
-                }
-
-
-                const name =
-                    nameEl.value.trim();
-
-                const email =
-                    emailEl.value
-                        .trim()
-                        .toLowerCase();
-
-                const username =
-                    usernameEl.value.trim();
-
-                const password =
-                    passwordEl.value;
-
-                const confirmPassword =
-                    confirmEl.value;
-
-
-                if (
-                    !validateRegistrationFields({
-                        name,
-                        email,
-                        username,
-                        password,
-                        confirmPassword
-                    })
-                ) {
-
-                    return;
-
-                }
-
-
-                /* -----------------------------------------
-                   ADMIN MUST USE GMAIL
-                ----------------------------------------- */
-
-                const gmailPattern =
-                    /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
-
-
-                if (!gmailPattern.test(email)) {
-
-                    alert(
-                        "Admin email must be a valid Gmail address."
-                    );
-
-                    emailEl.focus();
-
-                    return;
-
-                }
-
-
-                const accounts =
-                    getAccounts();
-
-
-                const duplicate =
-                    accounts.some(
-                        function (account) {
-
-                            return (
-                                normalize(
-                                    account.email
-                                ) === email ||
-
-                                normalize(
-                                    account.identifier
-                                ) === email ||
-
-                                normalize(
-                                    account.username
-                                ) ===
-                                normalize(username)
-                            );
-
-                        }
-                    );
-
-
-                if (duplicate) {
-
-                    alert(
-                        "This email or username is already registered."
-                    );
-
-                    return;
-
-                }
-
-
-                const account = {
-
-                    id:
-                        "ADMIN-" +
-                        Date.now(),
-
-                    fullName:
-                        name,
-
-                    identifier:
-                        email,
-
-                    email:
-                        email,
-
-                    username:
-                        username,
-
-                    password:
-                        password,
-
-                    role:
-                        "admin",
-
-                    accountType:
-                        "Admin",
-
-                    createdAt:
-                        new Date().toISOString()
-
-                };
-
-
-                accounts.push(account);
-
-                saveAccounts(accounts);
-
-
-                /* -----------------------------------------
-                   OLD ADMIN DATA
-                ----------------------------------------- */
-
-                localStorage.setItem(
-                    "adminName",
-                    name
-                );
-
-                localStorage.setItem(
-                    "adminEmail",
-                    email
-                );
-
-                localStorage.setItem(
-                    "adminUsername",
-                    username
-                );
-
-                localStorage.setItem(
-                    "adminPassword",
-                    password
-                );
-
-
-                /* -----------------------------------------
-                   PENDING LOGIN
-                ----------------------------------------- */
-
-                localStorage.setItem(
-                    "pendingLoginRole",
-                    "admin"
-                );
-
-                localStorage.setItem(
-                    "pendingLoginIdentifier",
-                    email
-                );
-
-
-                alert(
-                    "Admin account created successfully. Please log in using the same email and password."
-                );
-
-
-                /*
-                 * IMPORTANT:
-                 * ADMIN DOES NOT GO DIRECTLY
-                 * TO DASHBOARD AFTER REGISTRATION.
-                 *
-                 * USER MUST LOGIN FIRST.
-                 */
-
-                window.location.href =
-                    "login.html";
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       AUTO-FILL LOGIN AFTER REGISTRATION
-    ===================================================== */
-
-    const loginPageForm =
-        document.getElementById(
-            "loginForm"
-        );
-
-
-    if (loginPageForm) {
-
-        const pendingRole =
-            localStorage.getItem(
-                "pendingLoginRole"
-            );
-
-
-        const pendingIdentifier =
-            localStorage.getItem(
-                "pendingLoginIdentifier"
-            );
-
-
-        const roleInput =
-            document.getElementById(
-                "role"
-            );
-
-
-        const identifierInput =
-            document.getElementById(
-                "loginIdentifier"
-            );
-
-
-        if (
-            pendingRole &&
-            roleInput
-        ) {
-
-            roleInput.value =
-                pendingRole;
-
-        }
-
-
-        if (
-            pendingIdentifier &&
-            identifierInput
-        ) {
-
-            identifierInput.value =
-                pendingIdentifier;
-
-        }
-
-
-        /*
-         * DO NOT AUTOMATICALLY LOGIN.
-         *
-         * User still needs to enter
-         * the password.
-         */
-
-        localStorage.removeItem(
-            "pendingLoginRole"
-        );
-
-        localStorage.removeItem(
-            "pendingLoginIdentifier"
-        );
-
-    }
-
 
 });

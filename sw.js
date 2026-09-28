@@ -47,8 +47,7 @@ const APP_FILES = [
     /* CSS */
     "./style.css",
 
-    /* JAVASCRIPT */
-    "./script.js"
+   
 
 ];
 

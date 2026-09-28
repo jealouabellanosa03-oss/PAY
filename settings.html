@@ -1,0 +1,2657 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Settings - JNJC Boarding House Pay</title>
+
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+
+/* =====================================================
+   BODY
+===================================================== */
+
+body{
+
+    min-height:100vh;
+
+    background:#eef8fd;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    color:#173b63;
+
+    overflow-x:hidden;
+
+}
+
+
+/* =====================================================
+   MAIN APP
+===================================================== */
+
+.settings-app{
+
+    width:100%;
+
+    max-width:500px;
+
+    min-height:100vh;
+
+    margin:auto;
+
+    background:#f8fcff;
+
+    padding-bottom:30px;
+
+    box-shadow:
+        0 0 30px rgba(0,80,130,.08);
+
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.settings-header{
+
+    height:78px;
+
+    background:#fff;
+
+    border-bottom:
+        1px solid #dceaf2;
+
+    display:flex;
+
+    align-items:center;
+
+    padding:
+        0 16px;
+
+    gap:12px;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:20;
+
+}
+
+
+.back-btn{
+
+    width:38px;
+
+    height:38px;
+
+    border:
+        1px solid #d7e8f2;
+
+    border-radius:50%;
+
+    background:#fff;
+
+    color:#07559b;
+
+    font-size:27px;
+
+    line-height:30px;
+
+    cursor:pointer;
+
+    flex-shrink:0;
+
+}
+
+
+.back-btn:active{
+
+    transform:scale(.96);
+
+}
+
+
+.header-text{
+
+    flex:1;
+
+}
+
+
+.header-text h1{
+
+    color:#07559b;
+
+    font-size:19px;
+
+    font-weight:800;
+
+}
+
+
+.header-text p{
+
+    color:#7893a5;
+
+    font-size:10px;
+
+    margin-top:3px;
+
+}
+
+
+/* =====================================================
+   CONTENT
+===================================================== */
+
+.settings-content{
+
+    padding:
+        18px
+        12px
+        35px;
+
+}
+
+
+.section-title{
+
+    font-size:11px;
+
+    font-weight:800;
+
+    color:#7893a5;
+
+    text-transform:uppercase;
+
+    letter-spacing:.5px;
+
+    margin:
+        4px
+        6px
+        8px;
+
+}
+
+
+.settings-card{
+
+    background:#fff;
+
+    border:
+        1px solid #dceaf2;
+
+    border-radius:14px;
+
+    overflow:hidden;
+
+    margin-bottom:18px;
+
+    box-shadow:
+        0 3px 12px rgba(0,65,100,.05);
+
+}
+
+
+.setting-item{
+
+    width:100%;
+
+    min-height:68px;
+
+    padding:
+        12px
+        14px;
+
+    border:0;
+
+    border-bottom:
+        1px solid #edf3f6;
+
+    background:#fff;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    text-align:left;
+
+    cursor:pointer;
+
+}
+
+
+.setting-item:last-child{
+
+    border-bottom:0;
+
+}
+
+
+.setting-item:hover{
+
+    background:#f7fcff;
+
+}
+
+
+.setting-item:active{
+
+    background:#f4fbff;
+
+}
+
+
+.setting-icon{
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:11px;
+
+    background:#def2ff;
+
+    color:#168bd0;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:20px;
+
+    flex-shrink:0;
+
+}
+
+
+.setting-icon.green{
+
+    background:#ddf6ec;
+
+    color:#13a77a;
+
+}
+
+
+.setting-icon.purple{
+
+    background:#eee4ff;
+
+    color:#7650b8;
+
+}
+
+
+.setting-info{
+
+    flex:1;
+
+    min-width:0;
+
+}
+
+
+.setting-info strong{
+
+    display:block;
+
+    color:#183e70;
+
+    font-size:12px;
+
+}
+
+
+.setting-info span{
+
+    display:block;
+
+    color:#8a9baa;
+
+    font-size:9px;
+
+    margin-top:4px;
+
+    line-height:1.3;
+
+}
+
+
+.arrow{
+
+    color:#91a6b5;
+
+    font-size:20px;
+
+}
+
+
+/* =====================================================
+   SLIDE OVERLAY
+===================================================== */
+
+.slide-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+        rgba(7,43,70,.38);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:
+        opacity .25s ease,
+        visibility .25s ease;
+
+    z-index:100;
+
+}
+
+
+.slide-overlay.show{
+
+    opacity:1;
+
+    visibility:visible;
+
+}
+
+
+/* =====================================================
+   SLIDE PANEL
+===================================================== */
+
+.slide-panel{
+
+    position:absolute;
+
+    top:0;
+
+    right:0;
+
+    width:100%;
+
+    max-width:500px;
+
+    height:100%;
+
+    background:#f8fcff;
+
+    transform:
+        translateX(100%);
+
+    transition:
+        transform .35s
+        cubic-bezier(.22,.61,.36,1);
+
+    overflow-y:auto;
+
+    box-shadow:
+        -8px 0 30px
+        rgba(0,55,90,.12);
+
+}
+
+
+.slide-overlay.show
+.slide-panel{
+
+    transform:
+        translateX(0);
+
+}
+
+
+/* =====================================================
+   SLIDE HEADER
+===================================================== */
+
+.slide-header{
+
+    height:78px;
+
+    background:#fff;
+
+    border-bottom:
+        1px solid #dceaf2;
+
+    display:flex;
+
+    align-items:center;
+
+    padding:
+        0 16px;
+
+    gap:12px;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:10;
+
+}
+
+
+.slide-back{
+
+    width:38px;
+
+    height:38px;
+
+    border:
+        1px solid #d7e8f2;
+
+    border-radius:50%;
+
+    background:#fff;
+
+    color:#07559b;
+
+    font-size:27px;
+
+    line-height:30px;
+
+    cursor:pointer;
+
+    flex-shrink:0;
+
+}
+
+
+.slide-back:active{
+
+    transform:scale(.96);
+
+}
+
+
+.slide-title{
+
+    flex:1;
+
+}
+
+
+.slide-title h2{
+
+    color:#07559b;
+
+    font-size:18px;
+
+    font-weight:800;
+
+}
+
+
+.slide-title p{
+
+    color:#7893a5;
+
+    font-size:10px;
+
+    margin-top:3px;
+
+}
+
+
+/* =====================================================
+   SLIDE CONTENT
+===================================================== */
+
+.slide-content{
+
+    padding:
+        22px
+        16px
+        40px;
+
+}
+
+
+/* =====================================================
+   CSS ILLUSTRATION
+===================================================== */
+
+.illustration-box{
+
+    width:100%;
+
+    height:190px;
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #f7fcff 0%,
+            #e7f6ff 100%
+        );
+
+    border:
+        1px solid #d8edf8;
+
+    position:relative;
+
+    overflow:hidden;
+
+    margin-bottom:20px;
+
+}
+
+
+.sky-circle{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    background:#dff2fc;
+
+}
+
+
+.sky-circle.one{
+
+    width:55px;
+
+    height:55px;
+
+    top:25px;
+
+    left:25px;
+
+}
+
+
+.sky-circle.two{
+
+    width:38px;
+
+    height:38px;
+
+    top:52px;
+
+    left:65px;
+
+    background:#d2ecfa;
+
+}
+
+
+.sky-circle.three{
+
+    width:50px;
+
+    height:50px;
+
+    top:35px;
+
+    right:42px;
+
+    background:#d9effb;
+
+}
+
+
+.city{
+
+    position:absolute;
+
+    bottom:50px;
+
+    right:25px;
+
+    display:flex;
+
+    align-items:flex-end;
+
+    gap:5px;
+
+}
+
+
+.building{
+
+    background:#bde1f4;
+
+    border-radius:
+        3px
+        3px
+        0
+        0;
+
+}
+
+
+.building.one{
+
+    width:20px;
+
+    height:48px;
+
+}
+
+
+.building.two{
+
+    width:25px;
+
+    height:72px;
+
+}
+
+
+.building.three{
+
+    width:18px;
+
+    height:57px;
+
+}
+
+
+.building.four{
+
+    width:27px;
+
+    height:84px;
+
+}
+
+
+.ground{
+
+    position:absolute;
+
+    bottom:0;
+
+    left:0;
+
+    width:100%;
+
+    height:55px;
+
+    background:#a9dcf3;
+
+    clip-path:
+        polygon(
+            0 48%,
+            18% 25%,
+            31% 48%,
+            48% 15%,
+            62% 45%,
+            78% 22%,
+            100% 50%,
+            100% 100%,
+            0 100%
+        );
+
+}
+
+
+.house{
+
+    position:absolute;
+
+    left:32px;
+
+    bottom:42px;
+
+    width:118px;
+
+    height:83px;
+
+    background:#fff;
+
+    border:
+        3px solid #5aa9dc;
+
+    border-top:0;
+
+    border-radius:
+        0
+        0
+        5px
+        5px;
+
+}
+
+
+.house-roof{
+
+    position:absolute;
+
+    width:86px;
+
+    height:86px;
+
+    left:13px;
+
+    top:-43px;
+
+    background:#fff;
+
+    border-left:
+        6px solid #5aa9dc;
+
+    border-top:
+        6px solid #5aa9dc;
+
+    transform:
+        rotate(45deg);
+
+}
+
+
+.house-window{
+
+    position:absolute;
+
+    width:27px;
+
+    height:27px;
+
+    left:17px;
+
+    top:25px;
+
+    background:#bfe7fa;
+
+    border:
+        3px solid #4f9ed3;
+
+    z-index:2;
+
+}
+
+
+.house-window:before{
+
+    content:"";
+
+    position:absolute;
+
+    left:9px;
+
+    top:0;
+
+    height:100%;
+
+    width:3px;
+
+    background:#4f9ed3;
+
+}
+
+
+.house-window:after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    top:10px;
+
+    width:100%;
+
+    height:3px;
+
+    background:#4f9ed3;
+
+}
+
+
+.house-door{
+
+    position:absolute;
+
+    width:25px;
+
+    height:43px;
+
+    right:18px;
+
+    bottom:0;
+
+    background:#75b9e4;
+
+    border-radius:
+        4px
+        4px
+        0
+        0;
+
+    z-index:2;
+
+}
+
+
+.payment-card{
+
+    position:absolute;
+
+    right:32px;
+
+    top:65px;
+
+    width:112px;
+
+    height:70px;
+
+    border-radius:10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #07559b,
+            #168bd0
+        );
+
+    box-shadow:
+        0 8px 18px
+        rgba(7,85,155,.20);
+
+    transform:
+        rotate(-4deg);
+
+    z-index:5;
+
+}
+
+
+.payment-card:before{
+
+    content:"";
+
+    position:absolute;
+
+    left:12px;
+
+    top:13px;
+
+    width:25px;
+
+    height:18px;
+
+    border-radius:4px;
+
+    background:#e9f7ff;
+
+}
+
+
+.payment-card:after{
+
+    content:"";
+
+    position:absolute;
+
+    right:12px;
+
+    bottom:12px;
+
+    width:40px;
+
+    height:5px;
+
+    border-radius:5px;
+
+    background:#aee1fa;
+
+}
+
+
+/* =====================================================
+   SLIDE TEXT
+===================================================== */
+
+.slide-content h3{
+
+    color:#183e70;
+
+    font-size:14px;
+
+    margin:
+        18px
+        0
+        7px;
+
+}
+
+
+.slide-content p{
+
+    color:#6f8495;
+
+    font-size:11px;
+
+    line-height:1.7;
+
+}
+
+
+.subtitle-center{
+
+    text-align:center;
+
+    color:#7893a5;
+
+    font-size:10px;
+
+    margin-top:5px;
+
+}
+
+
+/* =====================================================
+   INFO BOX
+===================================================== */
+
+.info-box{
+
+    margin-top:15px;
+
+    padding:12px;
+
+    border-radius:10px;
+
+    background:#f4faff;
+
+    border:
+        1px solid #e0eef5;
+
+}
+
+
+.info-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:12px;
+
+    padding:8px 0;
+
+    border-bottom:
+        1px solid #e8f1f5;
+
+    font-size:10px;
+
+}
+
+
+.info-row:last-child{
+
+    border-bottom:0;
+
+}
+
+
+.info-row span:first-child{
+
+    color:#8194a3;
+
+}
+
+
+.info-row span:last-child{
+
+    color:#315a7d;
+
+    font-weight:700;
+
+    text-align:right;
+
+}
+
+
+/* =====================================================
+   DEVELOPER PROFILE
+===================================================== */
+
+.developer-profile{
+
+    text-align:center;
+
+    padding-top:5px;
+
+}
+
+
+/* AVATAR */
+
+.developer-avatar{
+
+    width:105px;
+
+    height:105px;
+
+    margin:0 auto 14px;
+
+    border-radius:50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #07559b,
+            #168bd0
+        );
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#fff;
+
+    font-size:34px;
+
+    font-weight:800;
+
+    letter-spacing:1px;
+
+    border:
+        5px solid #fff;
+
+    box-shadow:
+        0 6px 20px
+        rgba(7,85,155,.18);
+
+}
+
+
+/* NAME */
+
+.developer-name{
+
+    color:#07559b;
+
+    font-size:20px;
+
+    font-weight:800;
+
+    line-height:1.3;
+
+}
+
+
+.developer-role{
+
+    color:#7893a5;
+
+    font-size:10px;
+
+    margin-top:5px;
+
+}
+
+
+/* DEVELOPER INFO */
+
+.developer-info{
+
+    margin-top:20px;
+
+    text-align:left;
+
+}
+
+
+.developer-info-title{
+
+    color:#183e70;
+
+    font-size:14px;
+
+    font-weight:800;
+
+    margin-bottom:8px;
+
+}
+
+
+/* COURSE / SCHOOL CARD */
+
+.developer-details{
+
+    background:#fff;
+
+    border:
+        1px solid #dceaf2;
+
+    border-radius:13px;
+
+    padding:
+        5px
+        12px;
+
+    box-shadow:
+        0 3px 12px
+        rgba(0,65,100,.05);
+
+}
+
+
+.developer-detail-row{
+
+    padding:
+        11px
+        2px;
+
+    border-bottom:
+        1px solid #edf3f6;
+
+}
+
+
+.developer-detail-row:last-child{
+
+    border-bottom:0;
+
+}
+
+
+.developer-detail-label{
+
+    display:block;
+
+    color:#8a9baa;
+
+    font-size:9px;
+
+    margin-bottom:4px;
+
+}
+
+
+.developer-detail-value{
+
+    display:block;
+
+    color:#315a7d;
+
+    font-size:11px;
+
+    font-weight:700;
+
+    line-height:1.4;
+
+}
+
+
+/* =====================================================
+   SKILLS
+===================================================== */
+
+.skills-section{
+
+    margin-top:20px;
+
+}
+
+
+.skills-list{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:7px;
+
+}
+
+
+.skill{
+
+    padding:
+        7px
+        10px;
+
+    border-radius:20px;
+
+    background:#eaf6ff;
+
+    border:
+        1px solid #d5ebf8;
+
+    color:#07559b;
+
+    font-size:9px;
+
+    font-weight:700;
+
+}
+
+
+/* =====================================================
+   DEVELOPER DESCRIPTION
+===================================================== */
+
+.developer-description{
+
+    margin-top:20px;
+
+    padding:13px;
+
+    background:#f4faff;
+
+    border:
+        1px solid #e0eef5;
+
+    border-radius:12px;
+
+}
+
+
+.developer-description p{
+
+    margin:0;
+
+    text-align:left;
+
+    color:#6f8495;
+
+    font-size:10px;
+
+    line-height:1.7;
+
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.developer-footer{
+
+    margin-top:22px;
+
+    text-align:center;
+
+    color:#9aabb7;
+
+    font-size:9px;
+
+    line-height:1.6;
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:380px){
+
+    .settings-header,
+    .slide-header{
+
+        height:70px;
+
+    }
+
+
+    .header-text h1{
+
+        font-size:17px;
+
+    }
+
+
+    .slide-title h2{
+
+        font-size:16px;
+
+    }
+
+
+    .illustration-box{
+
+        height:175px;
+
+    }
+
+
+    .developer-avatar{
+
+        width:92px;
+
+        height:92px;
+
+        font-size:30px;
+
+    }
+
+
+    .developer-name{
+
+        font-size:18px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<main class="settings-app">
+
+
+    <!-- =================================================
+         SETTINGS HEADER
+    ================================================== -->
+
+    <header class="settings-header">
+
+        <button
+            type="button"
+            class="back-btn"
+            id="backBtn"
+            aria-label="Back to tenant dashboard">
+
+            ‹
+
+        </button>
+
+
+        <div class="header-text">
+
+            <h1>Settings</h1>
+
+            <p>
+                JNJC Boarding House Pay
+            </p>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =================================================
+         SETTINGS CONTENT
+    ================================================== -->
+
+    <section class="settings-content">
+
+
+        <div class="section-title">
+
+            Information
+
+        </div>
+
+
+        <div class="settings-card">
+
+
+            <!-- =================================================
+                 ABOUT APP
+            ================================================= -->
+
+            <button
+                type="button"
+                class="setting-item"
+                id="aboutAppBtn">
+
+                <div class="setting-icon">
+
+                    📱
+
+                </div>
+
+
+                <div class="setting-info">
+
+                    <strong>
+                        About App
+                    </strong>
+
+                    <span>
+                        Learn about JNJC Boarding House Pay
+                    </span>
+
+                </div>
+
+
+                <div class="arrow">
+
+                    ›
+
+                </div>
+
+            </button>
+
+
+
+            <!-- =================================================
+                 ABOUT BOARDING HOUSE
+            ================================================= -->
+
+            <button
+                type="button"
+                class="setting-item"
+                id="aboutBoardingBtn">
+
+                <div class="setting-icon green">
+
+                    🏠
+
+                </div>
+
+
+                <div class="setting-info">
+
+                    <strong>
+                        About the Boarding House
+                    </strong>
+
+                    <span>
+                        View information about JNJC Boarding House
+                    </span>
+
+                </div>
+
+
+                <div class="arrow">
+
+                    ›
+
+                </div>
+
+            </button>
+
+
+
+            <!-- =================================================
+                 ABOUT DEVELOPER
+            ================================================= -->
+
+            <button
+                type="button"
+                class="setting-item"
+                id="aboutDeveloperBtn">
+
+                <div class="setting-icon purple">
+
+                    👨‍💻
+
+                </div>
+
+
+                <div class="setting-info">
+
+                    <strong>
+                        About Developer
+                    </strong>
+
+                    <span>
+                        View developer profile and information
+                    </span>
+
+                </div>
+
+
+                <div class="arrow">
+
+                    ›
+
+                </div>
+
+            </button>
+
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     ABOUT APP SLIDE
+====================================================== -->
+
+<div
+    class="slide-overlay"
+    id="aboutAppOverlay">
+
+
+    <section class="slide-panel">
+
+
+        <header class="slide-header">
+
+
+            <button
+                type="button"
+                class="slide-back"
+                id="aboutAppBack"
+                aria-label="Back">
+
+                ‹
+
+            </button>
+
+
+            <div class="slide-title">
+
+                <h2>
+                    About App
+                </h2>
+
+                <p>
+                    JNJC Boarding House Pay
+                </p>
+
+            </div>
+
+
+        </header>
+
+
+
+        <div class="slide-content">
+
+
+            <div class="illustration-box">
+
+                <div class="sky-circle one"></div>
+
+                <div class="sky-circle two"></div>
+
+                <div class="sky-circle three"></div>
+
+
+                <div class="city">
+
+                    <div class="building one"></div>
+
+                    <div class="building two"></div>
+
+                    <div class="building three"></div>
+
+                    <div class="building four"></div>
+
+                </div>
+
+
+                <div class="house">
+
+                    <div class="house-roof"></div>
+
+                    <div class="house-window"></div>
+
+                    <div class="house-door"></div>
+
+                </div>
+
+
+                <div class="payment-card"></div>
+
+
+                <div class="ground"></div>
+
+            </div>
+
+
+
+            <h2
+                style="
+                    text-align:center;
+                    color:#07559b;
+                    font-size:20px;
+                ">
+
+                JNJC Boarding House Pay
+
+            </h2>
+
+
+            <div class="subtitle-center">
+
+                About the Application
+
+            </div>
+
+
+
+            <h3>
+
+                What is JNJC Boarding House Pay?
+
+            </h3>
+
+
+            <p>
+
+                JNJC Boarding House Pay is a boarding house
+                management and payment system designed to make
+                boarding-related transactions easier, more
+                organized, and convenient for tenants,
+                landlords, and administrators.
+
+            </p>
+
+
+
+            <h3>
+
+                What the App Provides
+
+            </h3>
+
+
+            <p>
+
+                The system provides features for account
+                management, boarding house information,
+                room management, payment monitoring,
+                payment history, notifications, and
+                communication between users.
+
+            </p>
+
+
+
+            <div class="info-box">
+
+
+                <div class="info-row">
+
+                    <span>
+                        Application
+                    </span>
+
+                    <span>
+                        JNJC Boarding House Pay
+                    </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <span>
+                        Platform
+                    </span>
+
+                    <span>
+                        Offline Web App
+                    </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <span>
+                        Version
+                    </span>
+
+                    <span>
+                        1.0
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+</div>
+
+
+
+<!-- =====================================================
+     ABOUT BOARDING HOUSE SLIDE
+====================================================== -->
+
+<div
+    class="slide-overlay"
+    id="aboutBoardingOverlay">
+
+
+    <section class="slide-panel">
+
+
+        <header class="slide-header">
+
+
+            <button
+                type="button"
+                class="slide-back"
+                id="aboutBoardingBack"
+                aria-label="Back">
+
+                ‹
+
+            </button>
+
+
+            <div class="slide-title">
+
+                <h2>
+
+                    About Boarding House
+
+                </h2>
+
+                <p>
+
+                    JNJC Boarding House
+
+                </p>
+
+            </div>
+
+
+        </header>
+
+
+
+        <div class="slide-content">
+
+
+            <div class="illustration-box">
+
+                <div class="sky-circle one"></div>
+
+                <div class="sky-circle two"></div>
+
+                <div class="sky-circle three"></div>
+
+
+                <div class="city">
+
+                    <div class="building one"></div>
+
+                    <div class="building two"></div>
+
+                    <div class="building three"></div>
+
+                    <div class="building four"></div>
+
+                </div>
+
+
+                <div class="house">
+
+                    <div class="house-roof"></div>
+
+                    <div class="house-window"></div>
+
+                    <div class="house-door"></div>
+
+                </div>
+
+
+                <div class="payment-card"></div>
+
+
+                <div class="ground"></div>
+
+            </div>
+
+
+
+            <h2
+                style="
+                    text-align:center;
+                    color:#07559b;
+                    font-size:20px;
+                ">
+
+                JNJC Boarding House
+
+            </h2>
+
+
+            <div class="subtitle-center">
+
+                About the Boarding House
+
+            </div>
+
+
+
+            <h3>
+
+                Welcome
+
+            </h3>
+
+
+            <p>
+
+                Welcome to JNJC Boarding House.
+                This section provides general information
+                about the boarding house and helps tenants
+                access important boarding-related information
+                through the JNJC Boarding House Pay system.
+
+            </p>
+
+
+
+            <h3>
+
+                Boarding House Information
+
+            </h3>
+
+
+            <div class="info-box">
+
+
+                <div class="info-row">
+
+                    <span>
+                        Boarding House
+                    </span>
+
+                    <span>
+                        JNJC Boarding House
+                    </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <span>
+                        Management System
+                    </span>
+
+                    <span>
+                        JNJC Boarding House Pay
+                    </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <span>
+                        Payment
+                    </span>
+
+                    <span>
+                        Boarding Payment Management
+                    </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                    <span>
+                        Users
+                    </span>
+
+                    <span>
+                        Tenant • Landlord • Admin
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+
+            <h3>
+
+                Purpose
+
+            </h3>
+
+
+            <p>
+
+                The system helps organize boarding house
+                records, payments, room information,
+                notifications, and other important
+                boarding house transactions.
+
+            </p>
+
+
+        </div>
+
+
+    </section>
+
+</div>
+
+
+
+<!-- =====================================================
+     ABOUT DEVELOPER SLIDE
+====================================================== -->
+
+<div
+    class="slide-overlay"
+    id="aboutDeveloperOverlay">
+
+
+    <section class="slide-panel">
+
+
+        <!-- DEVELOPER HEADER -->
+
+        <header class="slide-header">
+
+
+            <button
+                type="button"
+                class="slide-back"
+                id="aboutDeveloperBack"
+                aria-label="Back">
+
+                ‹
+
+            </button>
+
+
+            <div class="slide-title">
+
+                <h2>
+                    About Developer
+                </h2>
+
+                <p>
+                    Developer Profile
+                </p>
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- DEVELOPER CONTENT -->
+
+        <div class="slide-content">
+
+
+            <div class="developer-profile">
+
+
+                <!-- =================================================
+                     AVATAR
+                ================================================== -->
+
+                <div
+                    class="developer-avatar"
+                    aria-label="Developer avatar">
+
+                    JG
+
+                </div>
+
+
+                <!-- =================================================
+                     NAME
+                ================================================== -->
+
+                <div class="developer-name">
+
+                    Jeslet Jay T. Gahira
+
+                </div>
+
+
+                <div class="developer-role">
+
+                    Web Application Developer
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 DEVELOPER INFORMATION
+            ================================================== -->
+
+            <div class="developer-info">
+
+
+                <div class="developer-info-title">
+
+                    Developer Information
+
+                </div>
+
+
+                <div class="developer-details">
+
+
+                    <!-- COURSE -->
+
+                    <div class="developer-detail-row">
+
+                        <span class="developer-detail-label">
+
+                            Course
+
+                        </span>
+
+                        <span class="developer-detail-value">
+
+                            Bachelor of Science in Information Technology
+
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- SCHOOL -->
+
+                    <div class="developer-detail-row">
+
+                        <span class="developer-detail-label">
+
+                            School
+
+                        </span>
+
+                        <span class="developer-detail-value">
+
+                            Madridejos Community College
+
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- ROLE -->
+
+                    <div class="developer-detail-row">
+
+                        <span class="developer-detail-label">
+
+                            Role
+
+                        </span>
+
+                        <span class="developer-detail-value">
+
+                            Web Application Developer
+
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- PROJECT -->
+
+                    <div class="developer-detail-row">
+
+                        <span class="developer-detail-label">
+
+                            Project
+
+                        </span>
+
+                        <span class="developer-detail-value">
+
+                            JNJC Boarding House Pay
+
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 SKILLS
+            ================================================== -->
+
+            <div class="skills-section">
+
+
+                <div class="developer-info-title">
+
+                    Skills
+
+                </div>
+
+
+                <div class="skills-list">
+
+
+                    <span class="skill">
+                        HTML
+                    </span>
+
+
+                    <span class="skill">
+                        CSS
+                    </span>
+
+
+                    <span class="skill">
+                        JavaScript
+                    </span>
+
+
+                    <span class="skill">
+                        UI/UX Design
+                    </span>
+
+
+                    <span class="skill">
+                        Responsive Web Design
+                    </span>
+
+
+                    <span class="skill">
+                        GitHub
+                    </span>
+
+
+                    <span class="skill">
+                        Basic PHP
+                    </span>
+
+
+                    <span class="skill">
+                        Web Development
+                    </span>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ABOUT DEVELOPER
+            ================================================== -->
+
+            <div class="developer-description">
+
+
+                <p>
+
+                    Jeslet Jay T. Gahira is an Information
+                    Technology student and web application
+                    developer involved in the development of
+                    the JNJC Boarding House Pay system.
+                    The project focuses on creating an
+                    organized and user-friendly digital
+                    platform for boarding house management
+                    and payment-related transactions.
+
+                </p>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 FOOTER
+            ================================================== -->
+
+            <div class="developer-footer">
+
+                JNJC Boarding House Pay<br>
+
+                Developer Profile • Version 1.0
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+</div>
+
+
+
+<script>
+
+(function(){
+
+    "use strict";
+
+
+    /* =================================================
+       GET ELEMENTS
+    ================================================= */
+
+    const backBtn =
+        document.getElementById(
+            "backBtn"
+        );
+
+
+    const aboutAppBtn =
+        document.getElementById(
+            "aboutAppBtn"
+        );
+
+
+    const aboutBoardingBtn =
+        document.getElementById(
+            "aboutBoardingBtn"
+        );
+
+
+    const aboutDeveloperBtn =
+        document.getElementById(
+            "aboutDeveloperBtn"
+        );
+
+
+    const aboutAppOverlay =
+        document.getElementById(
+            "aboutAppOverlay"
+        );
+
+
+    const aboutBoardingOverlay =
+        document.getElementById(
+            "aboutBoardingOverlay"
+        );
+
+
+    const aboutDeveloperOverlay =
+        document.getElementById(
+            "aboutDeveloperOverlay"
+        );
+
+
+    const aboutAppBack =
+        document.getElementById(
+            "aboutAppBack"
+        );
+
+
+    const aboutBoardingBack =
+        document.getElementById(
+            "aboutBoardingBack"
+        );
+
+
+    const aboutDeveloperBack =
+        document.getElementById(
+            "aboutDeveloperBack"
+        );
+
+
+
+    /* =================================================
+       BACK TO TENANT DASHBOARD
+    ================================================= */
+
+    if(backBtn){
+
+        backBtn.addEventListener(
+            "click",
+            function(){
+
+                window.location.href =
+                    "tenant-dashboard.html";
+
+            }
+        );
+
+    }
+
+
+
+    /* =================================================
+       OPEN ABOUT APP
+    ================================================= */
+
+    if(
+        aboutAppBtn &&
+        aboutAppOverlay
+    ){
+
+        aboutAppBtn.addEventListener(
+            "click",
+            function(){
+
+                aboutAppOverlay.classList.add(
+                    "show"
+                );
+
+                document.body.style.overflow =
+                    "hidden";
+
+            }
+        );
+
+    }
+
+
+
+    /* =================================================
+       CLOSE ABOUT APP
+    ================================================= */
+
+    function closeAboutApp(){
+
+        if(aboutAppOverlay){
+
+            aboutAppOverlay.classList.remove(
+                "show"
+            );
+
+        }
+
+        document.body.style.overflow =
+            "";
+
+    }
+
+
+    if(aboutAppBack){
+
+        aboutAppBack.addEventListener(
+            "click",
+            closeAboutApp
+        );
+
+    }
+
+
+
+    /* =================================================
+       OPEN ABOUT BOARDING HOUSE
+    ================================================= */
+
+    if(
+        aboutBoardingBtn &&
+        aboutBoardingOverlay
+    ){
+
+        aboutBoardingBtn.addEventListener(
+            "click",
+            function(){
+
+                aboutBoardingOverlay.classList.add(
+                    "show"
+                );
+
+                document.body.style.overflow =
+                    "hidden";
+
+            }
+        );
+
+    }
+
+
+
+    /* =================================================
+       CLOSE ABOUT BOARDING HOUSE
+    ================================================= */
+
+    function closeAboutBoarding(){
+
+        if(aboutBoardingOverlay){
+
+            aboutBoardingOverlay.classList.remove(
+                "show"
+            );
+
+        }
+
+        document.body.style.overflow =
+            "";
+
+    }
+
+
+    if(aboutBoardingBack){
+
+        aboutBoardingBack.addEventListener(
+            "click",
+            closeAboutBoarding
+        );
+
+    }
+
+
+
+    /* =================================================
+       OPEN ABOUT DEVELOPER
+    ================================================= */
+
+    if(
+        aboutDeveloperBtn &&
+        aboutDeveloperOverlay
+    ){
+
+        aboutDeveloperBtn.addEventListener(
+            "click",
+            function(){
+
+                aboutDeveloperOverlay.classList.add(
+                    "show"
+                );
+
+                document.body.style.overflow =
+                    "hidden";
+
+            }
+        );
+
+    }
+
+
+
+    /* =================================================
+       CLOSE ABOUT DEVELOPER
+    ================================================= */
+
+    function closeAboutDeveloper(){
+
+        if(aboutDeveloperOverlay){
+
+            aboutDeveloperOverlay.classList.remove(
+                "show"
+            );
+
+        }
+
+        document.body.style.overflow =
+            "";
+
+    }
+
+
+    if(aboutDeveloperBack){
+
+        aboutDeveloperBack.addEventListener(
+            "click",
+            closeAboutDeveloper
+        );
+
+    }
+
+
+
+    /* =================================================
+       CLICK OUTSIDE ABOUT APP
+    ================================================= */
+
+    if(aboutAppOverlay){
+
+        aboutAppOverlay.addEventListener(
+            "click",
+            function(event){
+
+                if(
+                    event.target ===
+                    aboutAppOverlay
+                ){
+
+                    closeAboutApp();
+
+                }
+
+            }
+        );
+
+    }
+
+
+
+    /* =================================================
+       CLICK OUTSIDE ABOUT BOARDING HOUSE
+    ================================================= */
+
+    if(aboutBoardingOverlay){
+
+        aboutBoardingOverlay.addEventListener(
+            "click",
+            function(event){
+
+                if(
+                    event.target ===
+                    aboutBoardingOverlay
+                ){
+
+                    closeAboutBoarding();
+
+                }
+
+            }
+        );
+
+    }
+
+
+
+    /* =================================================
+       CLICK OUTSIDE ABOUT DEVELOPER
+    ================================================= */
+
+    if(aboutDeveloperOverlay){
+
+        aboutDeveloperOverlay.addEventListener(
+            "click",
+            function(event){
+
+                if(
+                    event.target ===
+                    aboutDeveloperOverlay
+                ){
+
+                    closeAboutDeveloper();
+
+                }
+
+            }
+        );
+
+    }
+
+
+
+    /* =================================================
+       ESCAPE KEY
+    ================================================= */
+
+    document.addEventListener(
+        "keydown",
+        function(event){
+
+            if(
+                event.key === "Escape"
+            ){
+
+                closeAboutApp();
+
+                closeAboutBoarding();
+
+                closeAboutDeveloper();
+
+            }
+
+        }
+    );
+
+
+})();
+
+</script>
+
+
+</body>
+
+</html>

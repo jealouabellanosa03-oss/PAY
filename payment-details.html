@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Payment Details - BoardingPay</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #ffffff;
+            color: #173b63;
+        }
+
+        .page {
+            max-width: 430px;
+
+            min-height: 100vh;
+
+            margin: auto;
+
+            background: #ffffff;
+
+            padding-bottom: 80px;
+        }
+
+
+        /* HEADER */
+
+        .header {
+            height: 58px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            position: relative;
+
+            border-bottom:
+                1px solid #edf1f4;
+        }
+
+        .header h1 {
+            font-size: 15px;
+        }
+
+
+        /* BACK */
+
+        .back-btn {
+            position: absolute;
+
+            left: 12px;
+
+            width: 35px;
+            height: 35px;
+
+            border: none;
+
+            background: transparent;
+
+            color: #657786;
+
+            font-size: 28px;
+
+            cursor: pointer;
+        }
+
+
+        /* CONTENT */
+
+        .details {
+            padding: 14px;
+        }
+
+
+        .room-box {
+            background: #f1f8fc;
+
+            border-radius: 4px;
+
+            padding: 13px;
+
+            margin-bottom: 18px;
+
+            font-size: 12px;
+
+            font-weight: bold;
+        }
+
+
+        .payment-info {
+            padding: 0 8px;
+        }
+
+
+        .info-row {
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            padding: 12px 0;
+
+            border-bottom:
+                1px solid #edf1f4;
+
+            font-size: 12px;
+        }
+
+
+        .info-row span {
+            color: #36556f;
+        }
+
+
+        .info-row strong {
+            color: #173b63;
+        }
+
+
+        /* METHOD */
+
+        .selected-method {
+
+            margin-top: 16px;
+
+            background: #f1f8fc;
+
+            padding: 13px;
+
+            border-radius: 5px;
+
+            font-size: 12px;
+        }
+
+
+        .selected-method strong {
+            color: #078bd0;
+        }
+
+
+        /* PROCEED */
+
+        .proceed-btn {
+
+            position: fixed;
+
+            left: 50%;
+
+            bottom: 12px;
+
+            transform:
+                translateX(-50%);
+
+            width:
+                min(414px, calc(100% - 16px));
+
+            height: 48px;
+
+            border: none;
+
+            border-radius: 6px;
+
+            background: #168bd4;
+
+            color: white;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<main class="page">
+
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <button
+            type="button"
+            class="back-btn"
+            id="backBtn">
+
+            ‹
+
+        </button>
+
+        <h1>
+            Payment Details
+        </h1>
+
+    </header>
+
+
+    <!-- PAYMENT DETAILS -->
+
+    <section class="details">
+
+
+        <div class="room-box">
+
+            Room 101
+
+        </div>
+
+
+        <div class="payment-info">
+
+
+            <div class="info-row">
+
+                <span>
+                    Monthly Rent
+                </span>
+
+                <strong>
+                    ₱ 2,500.00
+                </strong>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span>
+                    Due Date
+                </span>
+
+                <strong>
+                    October 1, 2026
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="selected-method">
+
+            Payment Method:
+
+            <strong id="selectedMethod">
+                —
+            </strong>
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+<!-- PROCEED -->
+
+<button
+    type="button"
+    class="proceed-btn"
+    id="proceedBtn">
+
+    Proceed to Pay
+
+</button>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const method = localStorage.getItem('selectedPaymentMethod') || 'GCash';
+    document.getElementById('selectedMethod').textContent = method;
+
+    function getJSON(key, fallback) {
+        try { const v = JSON.parse(localStorage.getItem(key)); return v ?? fallback; }
+        catch (e) { return fallback; }
+    }
+    function first(...values) {
+        for (const v of values) if (v !== undefined && v !== null && String(v).trim() !== '') return v;
+        return '';
+    }
+    function currentUser() {
+        const type = String(localStorage.getItem('currentUserType') || '').toLowerCase();
+        const email = first(localStorage.getItem('currentUserEmail'), localStorage.getItem('loggedInEmail'), localStorage.getItem('tenantEmail'), localStorage.getItem('landlordEmail')).toLowerCase();
+        const id = first(localStorage.getItem('currentTenantId'), localStorage.getItem('loggedInTenantId'), localStorage.getItem('tenantId'), localStorage.getItem('currentLandlordId'), localStorage.getItem('landlordId'));
+        let person = type === 'landlord' ? getJSON('currentLandlord', {}) : getJSON('currentTenant', {});
+        const listKeys = type === 'landlord' ? ['boardingPay_landlords'] : ['boardingPay_tenants','boardingPay_boarders'];
+        const list = listKeys.flatMap(k => getJSON(k, []));
+        const found = list.find(x => String(x.id || x.tenantId || x.landlordId || '').toLowerCase() === String(id).toLowerCase()) ||
+                      list.find(x => String(x.email || x.tenantEmail || x.landlordEmail || '').toLowerCase() === email);
+        return {...(person || {}), ...(found || {}), userType: type || 'tenant'};
+    }
+
+    const user = currentUser();
+    const userType = user.userType === 'landlord' ? 'Landlord' : 'Tenant';
+    const payerName = first(user.fullName, user.name, user.landlordName, user.tenantName, user.boarderName, userType);
+    const payerEmail = first(user.email, user.landlordEmail, user.tenantEmail, localStorage.getItem('currentUserEmail'));
+    const room = first(user.room, user.roomNumber, user.assignedRoom, localStorage.getItem('selectedRoom'), 'Room 101');
+    const amount = Number(String(first(localStorage.getItem('paymentAmount'), user.monthlyRent, user.rent, user.amount, 2500)).replace(/[^0-9.-]/g,'')) || 2500;
+    const dueDate = first(localStorage.getItem('paymentDueDate'), user.dueDate, 'October 1, 2026');
+    const propertyName = first(user.propertyName, user.property, user.boardingHouse, user.boardingHouseName);
+
+    document.querySelector('.room-box').textContent = room;
+    document.querySelector('.payment-info').innerHTML = `
+        <div class="info-row"><span>Monthly Rent</span><strong>₱ ${amount.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}</strong></div>
+        <div class="info-row"><span>Due Date</span><strong>${dueDate}</strong></div>
+    `;
+
+    document.getElementById('backBtn').addEventListener('click', function () {
+        window.location.href = 'paymentmethod.html';
+    });
+
+    document.getElementById('proceedBtn').addEventListener('click', function () {
+        const now = new Date();
+        const id = 'BP-' + Date.now() + '-' + Math.random().toString(36).slice(2,7).toUpperCase();
+        const transaction = {
+            id,
+            paymentId: id,
+            payerType: userType,
+            tenantId: userType === 'Tenant' ? first(user.id, user.tenantId, localStorage.getItem('currentTenantId'), localStorage.getItem('tenantId')) : '',
+            tenantName: userType === 'Tenant' ? payerName : '',
+            tenantEmail: userType === 'Tenant' ? payerEmail : '',
+            landlordId: first(user.landlordId, user.ownerId, localStorage.getItem('currentLandlordId'), localStorage.getItem('landlordId')),
+            landlordName: first(user.landlordName, user.ownerName, user.owner, user.landlord, userType === 'Landlord' ? payerName : ''),
+            landlordEmail: first(user.landlordEmail, user.ownerEmail),
+            payerId: first(user.id, user.tenantId, user.landlordId),
+            payerName,
+            payerEmail,
+            room,
+            propertyName,
+            method,
+            paymentMethod: method,
+            reference: id,
+            referenceNo: id,
+            transactionId: id,
+            description: 'Monthly Rent',
+            amount,
+            total: amount,
+            dueDate,
+            date: now.toISOString(),
+            paymentDate: now.toISOString(),
+            createdAt: now.toISOString(),
+            updatedAt: now.toISOString(),
+            status: 'Pending'
+        };
+
+        const payments = getJSON('boardingPay_payments', []);
+        payments.unshift(transaction);
+        localStorage.setItem('boardingPay_payments', JSON.stringify(payments.slice(0,500)));
+
+        const history = getJSON('paymentHistory', []);
+        history.unshift(transaction);
+        localStorage.setItem('paymentHistory', JSON.stringify(history.slice(0,500)));
+        localStorage.setItem('latestPayment', JSON.stringify(transaction));
+        localStorage.setItem('boardingPay_lastUpdate', String(Date.now()));
+
+        const activities = getJSON('boardingPay_activities', []);
+        activities.unshift({
+            id:'ACT-'+Date.now(), type:'payment_submitted', title:'New Payment Submitted',
+            message:payerName+' submitted a '+method+' payment of ₱'+amount.toLocaleString(undefined,{minimumFractionDigits:2}),
+            ...transaction, createdAt:now.toISOString()
+        });
+        localStorage.setItem('boardingPay_activities', JSON.stringify(activities.slice(0,200)));
+
+        const notifications = getJSON('adminNotifications', []);
+        notifications.unshift({
+            id:'NOTIF-'+Date.now(), type:'payment', title:'New Payment Submitted',
+            message:payerName+' submitted a payment of ₱'+amount.toLocaleString(undefined,{minimumFractionDigits:2})+' for '+room+'.',
+            paymentId:id, payerType:userType, payerName, payerEmail, tenantName:transaction.tenantName,
+            landlordName:transaction.landlordName, room, amount, method, status:'Pending', read:false, createdAt:now.toISOString()
+        });
+        localStorage.setItem('adminNotifications', JSON.stringify(notifications.slice(0,200)));
+
+        window.location.href = 'payment-success.html';
+    });
+});
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Announcements - JNJC Boarding House Pay
+    </title>
+
+
+    <style>
+
+        /* =====================================================
+           RESET
+        ===================================================== */
+
+        *{
+            box-sizing:border-box;
+            margin:0;
+            padding:0;
+        }
+
+
+        /* =====================================================
+           BODY
+        ===================================================== */
+
+        body{
+
+            min-height:100vh;
+
+            background:#eef8fd;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            color:#173b63;
+
+            overflow-x:hidden;
+
+        }
+
+
+        /* =====================================================
+           MAIN APP
+        ===================================================== */
+
+        .announcement-app{
+
+            width:100%;
+
+            max-width:500px;
+
+            min-height:100vh;
+
+            margin:auto;
+
+            background:#f8fcff;
+
+            box-shadow:
+                0 0 30px
+                rgba(0,80,130,.08);
+
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        .announcement-header{
+
+            height:78px;
+
+            background:#fff;
+
+            border-bottom:
+                1px solid #dceaf2;
+
+            display:flex;
+
+            align-items:center;
+
+            padding:
+                0 16px;
+
+            gap:12px;
+
+            position:sticky;
+
+            top:0;
+
+            z-index:20;
+
+        }
+
+
+        /* =====================================================
+           BACK BUTTON
+        ===================================================== */
+
+        .back-btn{
+
+            width:38px;
+
+            height:38px;
+
+            border:
+                1px solid #d7e8f2;
+
+            border-radius:50%;
+
+            background:#fff;
+
+            color:#07559b;
+
+            font-size:27px;
+
+            line-height:30px;
+
+            cursor:pointer;
+
+            flex-shrink:0;
+
+        }
+
+
+        .back-btn:hover{
+
+            background:#f4fbff;
+
+        }
+
+
+        .back-btn:active{
+
+            transform:scale(.96);
+
+        }
+
+
+        /* =====================================================
+           HEADER TEXT
+        ===================================================== */
+
+        .header-text{
+
+            flex:1;
+
+        }
+
+
+        .header-text h1{
+
+            color:#07559b;
+
+            font-size:19px;
+
+            font-weight:800;
+
+        }
+
+
+        .header-text p{
+
+            color:#7893a5;
+
+            font-size:10px;
+
+            margin-top:3px;
+
+        }
+
+
+        /* =====================================================
+           CONTENT
+        ===================================================== */
+
+        .announcement-content{
+
+            padding:
+                20px
+                14px
+                35px;
+
+        }
+
+
+        /* =====================================================
+           PAGE TITLE
+        ===================================================== */
+
+        .page-title{
+
+            color:#07559b;
+
+            font-size:21px;
+
+            font-weight:800;
+
+            margin-bottom:5px;
+
+        }
+
+
+        .page-subtitle{
+
+            color:#7893a5;
+
+            font-size:11px;
+
+            margin-bottom:20px;
+
+            line-height:1.5;
+
+        }
+
+
+        /* =====================================================
+           ANNOUNCEMENT LIST
+        ===================================================== */
+
+        .announcement-list{
+
+            display:flex;
+
+            flex-direction:column;
+
+            gap:14px;
+
+        }
+
+
+        /* =====================================================
+           ANNOUNCEMENT CARD
+        ===================================================== */
+
+        .announcement-card{
+
+            background:#fff;
+
+            border:
+                1px solid #dceaf2;
+
+            border-radius:15px;
+
+            padding:16px;
+
+            box-shadow:
+                0 3px 12px
+                rgba(0,65,100,.05);
+
+        }
+
+
+        /* =====================================================
+           ANNOUNCEMENT HEADER
+        ===================================================== */
+
+        .announcement-card-header{
+
+            display:flex;
+
+            align-items:flex-start;
+
+            gap:10px;
+
+            margin-bottom:10px;
+
+        }
+
+
+        .announcement-icon{
+
+            width:40px;
+
+            height:40px;
+
+            border-radius:11px;
+
+            background:#e7f4ff;
+
+            color:#07559b;
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:center;
+
+            font-size:20px;
+
+            flex-shrink:0;
+
+        }
+
+
+        .announcement-heading{
+
+            flex:1;
+
+            min-width:0;
+
+        }
+
+
+        .announcement-title{
+
+            color:#07559b;
+
+            font-size:15px;
+
+            font-weight:800;
+
+            line-height:1.4;
+
+            word-break:break-word;
+
+        }
+
+
+        .announcement-date{
+
+            color:#9aaeba;
+
+            font-size:9px;
+
+            margin-top:4px;
+
+        }
+
+
+        /* =====================================================
+           MESSAGE
+        ===================================================== */
+
+        .announcement-message{
+
+            color:#506b80;
+
+            font-size:12px;
+
+            line-height:1.65;
+
+            white-space:pre-wrap;
+
+            word-break:break-word;
+
+        }
+
+
+        /* =====================================================
+           META
+        ===================================================== */
+
+        .announcement-meta{
+
+            margin-top:13px;
+
+            padding-top:10px;
+
+            border-top:
+                1px solid #edf3f6;
+
+            color:#91a6b5;
+
+            font-size:9px;
+
+        }
+
+
+        /* =====================================================
+           EMPTY STATE
+        ===================================================== */
+
+        .empty-state{
+
+            background:#fff;
+
+            border:
+                1px solid #dceaf2;
+
+            border-radius:15px;
+
+            padding:
+                40px
+                20px;
+
+            text-align:center;
+
+            box-shadow:
+                0 3px 12px
+                rgba(0,65,100,.04);
+
+        }
+
+
+        .empty-icon{
+
+            width:58px;
+
+            height:58px;
+
+            margin:
+                0
+                auto
+                14px;
+
+            border-radius:50%;
+
+            background:#e7f4ff;
+
+            color:#07559b;
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:center;
+
+            font-size:25px;
+
+        }
+
+
+        .empty-title{
+
+            color:#42647f;
+
+            font-size:14px;
+
+            font-weight:700;
+
+        }
+
+
+        .empty-message{
+
+            color:#91a6b5;
+
+            font-size:10px;
+
+            margin-top:6px;
+
+            line-height:1.5;
+
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        .announcement-footer{
+
+            text-align:center;
+
+            padding:
+                20px
+                10px
+                12px;
+
+        }
+
+
+        .announcement-footer p{
+
+            color:#9aaeba;
+
+            font-size:9px;
+
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media(max-width:380px){
+
+            .announcement-header{
+
+                height:70px;
+
+            }
+
+
+            .header-text h1{
+
+                font-size:17px;
+
+            }
+
+
+            .announcement-content{
+
+                padding:
+                    18px
+                    12px
+                    30px;
+
+            }
+
+
+            .announcement-card{
+
+                padding:14px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<main class="announcement-app">
+
+
+    <!-- =====================================================
+         HEADER
+    ===================================================== -->
+
+    <header class="announcement-header">
+
+
+        <button
+            type="button"
+            class="back-btn"
+            id="backBtn"
+            aria-label="Back to dashboard"
+        >
+            ‹
+        </button>
+
+
+        <div class="header-text">
+
+            <h1>
+                Announcements
+            </h1>
+
+            <p>
+                JNJC Boarding House Pay
+            </p>
+
+        </div>
+
+
+    </header>
+
+
+
+    <!-- =====================================================
+         CONTENT
+    ===================================================== -->
+
+    <section class="announcement-content">
+
+
+    
+
+
+        <p class="page-subtitle">
+            sView the latest announcements and updates
+            from the Admin, landlord, or management.
+        </p>
+
+
+        <!-- ANNOUNCEMENTS WILL APPEAR HERE -->
+
+        <div
+            class="announcement-list"
+            id="announcementList"
+        ></div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ===================================================== -->
+
+    <footer class="announcement-footer">
+
+        <p>
+            © 2026 JNJC Boarding House Pay
+        </p>
+
+    </footer>
+
+
+</main>
+
+
+
+<script>
+
+(function(){
+
+    "use strict";
+
+
+    /* =====================================================
+       STORAGE KEY
+    ===================================================== */
+
+    // SHARED ADMIN ANNOUNCEMENTS STORAGE
+// This is the same key used by the Admin dashboard.
+const ANNOUNCEMENTS_KEY =
+        "boardingPay_announcements";
+
+
+    /* =====================================================
+       GET CURRENT USER
+    ===================================================== */
+
+    function getCurrentUser(){
+
+        try{
+
+            const savedUser =
+                localStorage.getItem(
+                    "boardingPayCurrentUser"
+                );
+
+
+            if(!savedUser){
+
+                return null;
+
+            }
+
+
+            return JSON.parse(savedUser);
+
+        }catch(error){
+
+            console.error(
+                "Unable to read current user:",
+                error
+            );
+
+            return null;
+
+        }
+
+    }
+
+
+    /* =====================================================
+       GET ANNOUNCEMENTS
+    ===================================================== */
+
+    function getAnnouncements(){
+
+        try{
+
+            const saved =
+                localStorage.getItem(
+                    ANNOUNCEMENTS_KEY
+                );
+
+
+            if(!saved){
+
+                return [];
+
+            }
+
+
+            const announcements =
+                JSON.parse(saved);
+
+
+            if(!Array.isArray(announcements)){
+
+                return [];
+
+            }
+
+
+            return announcements;
+
+        }catch(error){
+
+            console.error(
+                "Unable to read announcements:",
+                error
+            );
+
+            return [];
+
+        }
+
+    }
+
+
+    /* =====================================================
+       SAVE ANNOUNCEMENTS
+    ===================================================== */
+
+    function saveAnnouncements(announcements){
+
+        try{
+
+            localStorage.setItem(
+                ANNOUNCEMENTS_KEY,
+                JSON.stringify(announcements)
+            );
+
+            return true;
+
+        }catch(error){
+
+            console.error(
+                "Unable to save announcements:",
+                error
+            );
+
+            return false;
+
+        }
+
+    }
+
+
+    /* =====================================================
+       FORMAT DATE
+    ===================================================== */
+
+    function formatDate(value){
+
+        if(!value){
+
+            return "";
+
+        }
+
+
+        const date =
+            new Date(value);
+
+
+        if(isNaN(date.getTime())){
+
+            return String(value);
+
+        }
+
+
+        return date.toLocaleString(
+            "en-US",
+            {
+                month:"short",
+                day:"numeric",
+                year:"numeric",
+                hour:"numeric",
+                minute:"2-digit"
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       ESCAPE HTML
+    ===================================================== */
+
+    function escapeHTML(value){
+
+        return String(value || "")
+            .replace(/&/g,"&amp;")
+            .replace(/</g,"&lt;")
+            .replace(/>/g,"&gt;")
+            .replace(/"/g,"&quot;")
+            .replace(/'/g,"&#039;");
+
+    }
+
+
+    /* =====================================================
+       RENDER EMPTY STATE
+    ===================================================== */
+
+    function renderEmptyState(){
+
+        const list =
+            document.getElementById(
+                "announcementList"
+            );
+
+
+        list.innerHTML = `
+
+            <div class="empty-state">
+
+                <div class="empty-icon">
+                    🔔
+                </div>
+
+                <div class="empty-title">
+                    No announcements yet
+                </div>
+
+                <div class="empty-message">
+                    There are currently no announcements
+                    from the Admin, landlord, or management.
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* =====================================================
+       RENDER ANNOUNCEMENTS
+    ===================================================== */
+
+    function renderAnnouncements(){
+
+        const list =
+            document.getElementById(
+                "announcementList"
+            );
+
+
+        const announcements =
+            getAnnouncements();
+
+        // Show announcements published by Admin for this page.
+        // Admin announcements may target:
+        // all, tenant, landlord, tenants, landlords, tenant_landlord, or tenant+landlord.
+        const visibleAnnouncements = announcements.filter(function(item){
+            const audience = String(
+                item.audience ||
+                item.target ||
+                item.visibleTo ||
+                "all"
+            ).toLowerCase().replace(/[\s-]+/g,"_");
+
+            const createdBy = String(
+                item.createdBy ||
+                item.postedBy ||
+                item.authorRole ||
+                ""
+            ).toLowerCase();
+
+            // Admin-created announcements are visible here unless
+            // explicitly restricted to landlords only.
+            if (
+                createdBy === "admin" &&
+                !["landlord","landlords","landlord_only"].includes(audience)
+            ) {
+                return true;
+            }
+
+            return [
+                "all",
+                "tenant",
+                "tenants",
+                "tenant_landlord",
+                "tenant_and_landlord",
+                "tenant+landlord",
+                "both"
+            ].includes(audience);
+        });
+
+        list.innerHTML = "";
+
+
+        if(visibleAnnouncements.length === 0){
+
+            renderEmptyState();
+
+            return;
+
+        }
+
+
+        /*
+            Newest announcement first.
+            Supports both:
+            - createdAt
+            - date
+        */
+
+        const sorted =
+            visibleAnnouncements
+                .slice()
+                .sort(function(a,b){
+
+                    const dateA =
+                        new Date(
+                            a.createdAt ||
+                            a.date ||
+                            0
+                        ).getTime();
+
+
+                    const dateB =
+                        new Date(
+                            b.createdAt ||
+                            b.date ||
+                            0
+                        ).getTime();
+
+
+                    return dateB - dateA;
+
+                });
+
+
+        sorted.forEach(function(item){
+
+            const title =
+                item.title ||
+                "Announcement";
+
+
+            const message =
+                item.message ||
+                item.description ||
+                "";
+
+
+            const createdBy =
+                item.createdBy ||
+                item.postedBy ||
+                "Landlord";
+
+
+            const rawDate =
+                item.createdAt ||
+                item.date ||
+                "";
+
+
+            const displayDate =
+                formatDate(rawDate);
+
+
+            const card =
+                document.createElement(
+                    "article"
+                );
+
+
+            card.className =
+                "announcement-card";
+
+
+            card.innerHTML = `
+
+                <div class="announcement-card-header">
+
+                    <div class="announcement-icon">
+                        🔔
+                    </div>
+
+
+                    <div class="announcement-heading">
+
+                        <div class="announcement-title">
+                            ${escapeHTML(title)}
+                        </div>
+
+
+                        ${
+                            displayDate
+                            ?
+                            `
+                            <div class="announcement-date">
+                                ${escapeHTML(displayDate)}
+                            </div>
+                            `
+                            :
+                            ""
+                        }
+
+                    </div>
+
+                </div>
+
+
+                <div class="announcement-message">
+                    ${escapeHTML(message)}
+                </div>
+
+
+                <div class="announcement-meta">
+
+                    Posted by
+                    ${escapeHTML(createdBy)}
+
+                </div>
+
+            `;
+
+
+            list.appendChild(card);
+
+        });
+
+    }
+
+
+    /* =====================================================
+       BACK BUTTON
+    ===================================================== */
+
+    function goBack(){
+
+        const currentUser =
+            getCurrentUser();
+
+
+        const role =
+            currentUser &&
+            String(
+                currentUser.role || ""
+            ).toLowerCase();
+
+
+        if(role === "admin"){
+
+            window.location.href =
+                "admin-dashboard.html";
+
+            return;
+
+        }
+
+
+        if(role === "landlord"){
+
+            window.location.href =
+                "landlord-dashboard.html";
+
+            return;
+
+        }
+
+
+        if(role === "tenant"){
+
+            window.location.href =
+                "tenant-dashboard.html";
+
+            return;
+
+        }
+
+
+        /*
+            Default destination
+            if no current user exists.
+        */
+
+        window.location.href =
+            "tenant-dashboard.html";
+
+    }
+
+
+    /* =====================================================
+       CONNECT BACK BUTTON
+    ===================================================== */
+
+    const backBtn =
+        document.getElementById(
+            "backBtn"
+        );
+
+
+    if(backBtn){
+
+        backBtn.addEventListener(
+            "click",
+            goBack
+        );
+
+    }
+
+
+    /* =====================================================
+       INITIAL DISPLAY
+    ===================================================== */
+
+    renderAnnouncements();
+
+
+    /* =====================================================
+       REFRESH WHEN PAGE BECOMES ACTIVE
+    ===================================================== */
+
+    window.addEventListener(
+        "pageshow",
+        function(){
+
+            renderAnnouncements();
+
+        }
+    );
+
+
+    /* =====================================================
+       UPDATE IF LOCAL STORAGE CHANGES
+    ===================================================== */
+
+    window.addEventListener(
+        "storage",
+        function(event){
+
+            if(
+                event.key ===
+                ANNOUNCEMENTS_KEY
+            ){
+
+                renderAnnouncements();
+
+            }
+
+        }
+    );
+
+
+})();
+
+</script>
+
+
+</body>
+
+</html>

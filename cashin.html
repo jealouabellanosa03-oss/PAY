@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cash In - BoardingPay</title>
+<!-- Connected to tenant-dashboard.html through shared localStorage keys. -->
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;font-family:Arial,Helvetica,sans-serif;background:#eef8fd;color:#173b63}
+body{display:flex;justify-content:center;padding:24px 14px}
+.cash-page{width:100%;max-width:460px;min-height:calc(100vh - 48px);background:#f8fcff;border-radius:24px;box-shadow:0 12px 40px rgba(0,65,100,.12);overflow:hidden}
+.header{padding:24px 22px 20px;background:linear-gradient(135deg,#087ecf,#238ed9);color:#fff}
+.header-top{display:flex;align-items:center;gap:12px}
+.back-btn{width:40px;height:40px;border:0;border-radius:12px;background:rgba(255,255,255,.18);color:#fff;font-size:23px;cursor:pointer}
+.header h1{font-size:22px;font-weight:800}
+.header p{margin-top:4px;font-size:11px;opacity:.88}
+.content{padding:18px}
+.card{background:#fff;border-radius:18px;box-shadow:0 4px 16px rgba(0,65,100,.07);padding:17px;margin-bottom:14px}
+.balance-card{background:linear-gradient(135deg,#e9f7ff,#f8fcff);border:1px solid #d9edf8}
+.balance-label{font-size:10px;color:#7891a2;font-weight:700}
+.balance-value{margin-top:6px;font-size:28px;font-weight:900;color:#087ecf}
+.balance-note{margin-top:7px;font-size:9px;line-height:1.4;color:#7d929f}
+.message{display:none;padding:11px 12px;border-radius:11px;font-size:10px;font-weight:700;line-height:1.4;margin-bottom:14px}
+.message.show{display:block}
+.message.success{background:#e3f8ee;color:#12845d}
+.message.error{background:#ffe7e9;color:#c83f4c}
+.form-group{margin-bottom:14px}
+label{display:block;margin-bottom:6px;color:#31536e;font-size:10px;font-weight:800}
+input,select{width:100%;height:45px;border:1px solid #d7e7f0;border-radius:11px;background:#f9fcfe;color:#29475f;padding:0 12px;font:11px Arial,Helvetica,sans-serif;outline:none}
+input:focus,select:focus{border-color:#62b8e6;box-shadow:0 0 0 3px rgba(98,184,230,.12)}
+.submit-btn{width:100%;height:46px;border:0;border-radius:12px;background:linear-gradient(135deg,#0b9b70,#22b583);color:#fff;font-size:11px;font-weight:800;cursor:pointer;box-shadow:0 7px 16px rgba(17,145,103,.16)}
+.submit-btn:disabled{opacity:.55;cursor:not-allowed}
+.dashboard-btn{width:100%;height:43px;margin-top:9px;border:1px solid #cfe3ee;border-radius:12px;background:#fff;color:#17618f;font-size:10px;font-weight:800;cursor:pointer}
+.dashboard-btn:hover{background:#f2f9fd}
+.info{background:#fff6df;border-radius:11px;padding:11px 12px;color:#9a701c;font-size:9px;line-height:1.5}
+.info strong{font-weight:800}
+.recent-title{font-size:12px;color:#183e70;font-weight:800;margin-bottom:10px}
+.payment{border:1px solid #edf2f5;border-radius:11px;padding:11px;margin-top:8px;display:flex;justify-content:space-between;gap:10px}
+.payment strong{display:block;color:#29475f;font-size:10px}
+.payment small{display:block;color:#8b9aa6;font-size:8px;margin-top:3px}
+.status{padding:4px 7px;border-radius:7px;font-size:7px;font-weight:800;height:max-content}
+.status.pending{background:#fff4d8;color:#a87413}
+.status.approved{background:#e3f8ee;color:#12845d}
+.status.rejected{background:#ffe7e9;color:#c83f4c}
+.empty{text-align:center;color:#91a1ad;font-size:9px;padding:12px}
+.footer{text-align:center;padding:0 18px 20px;color:#91a1ad;font-size:8px;line-height:1.4}
+@media(max-width:380px){body{padding:0}.cash-page{min-height:100vh;border-radius:0}.header{padding-top:20px}.content{padding:14px}}
+</style>
+</head>
+<body>
+<main class="cash-page">
+<header class="header">
+  <div class="header-top">
+    <button class="back-btn" id="backBtn" type="button" aria-label="Back">‹</button>
+    <div>
+      <h1>Cash In</h1>
+      <p>Add a payment toward your outstanding balance</p>
+    </div>
+  </div>
+</header>
+
+<section class="content">
+  <div class="card balance-card">
+    <div class="balance-label">CURRENT OUTSTANDING BALANCE</div>
+    <div class="balance-value" id="outstandingBalance">₱ 2,500.00</div>
+    <div class="balance-note">Your balance decreases only after Admin approves your Cash In payment.</div>
+  </div>
+
+  <div class="card">
+    <div id="message" class="message"></div>
+
+    <div class="form-group">
+      <label for="cashInAmount">Cash In Amount</label>
+      <input id="cashInAmount" type="number" min="1" step="0.01" inputmode="decimal" placeholder="Enter amount">
+    </div>
+
+    <div class="form-group">
+      <label for="cashInMethod">Payment Method</label>
+      <select id="cashInMethod">
+        <option value="Cash In">Cash In</option>
+        <option value="GCash">GCash</option>
+        <option value="Cash">Cash</option>
+        <option value="Bank Transfer">Bank Transfer</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="cashInReference">Reference Number <span style="font-weight:400;color:#91a1ad">(optional)</span></label>
+      <input id="cashInReference" type="text" placeholder="Enter reference number">
+    </div>
+
+    <div class="info">
+      <strong>Important:</strong> Your Cash In will be saved as <strong>Pending</strong>.
+      It will appear in Admin → All Payments. The amount will be deducted from your Outstanding Balance only after Admin approves it.
+    </div>
+
+    <button class="submit-btn" id="submitBtn" type="button" style="margin-top:14px">Submit Cash In</button>
+    <button class="dashboard-btn" id="dashboardBtn" type="button">Back to Tenant Dashboard</button>
+  </div>
+
+  <div class="card">
+    <div class="recent-title">My Recent Cash In</div>
+    <div id="recentPayments"><div class="empty">Loading...</div></div>
+  </div>
+</section>
+
+<div class="footer">BoardingPay · Manage. Pay. Stay.</div>
+</main>
+
+<script>
+(function(){
+"use strict";
+
+const DEFAULT_OUTSTANDING = 2500;
+const $ = id => document.getElementById(id);
+
+const balanceEl = $("outstandingBalance");
+const amountEl = $("cashInAmount");
+const methodEl = $("cashInMethod");
+const referenceEl = $("cashInReference");
+const submitBtn = $("submitBtn");
+const messageEl = $("message");
+const recentEl = $("recentPayments");
+
+function readJSON(key, fallback){
+  try{
+    const raw = localStorage.getItem(key);
+    if(!raw) return fallback;
+    const parsed = JSON.parse(raw);
+    return parsed;
+  }catch(e){ return fallback; }
+}
+
+function money(value){
+  const n = Number(value);
+  return "₱ " + (Number.isFinite(n) ? n : 0).toLocaleString("en-PH",{
+    minimumFractionDigits:2,
+    maximumFractionDigits:2
+  });
+}
+
+function clean(v){
+  return String(v == null ? "" : v).trim();
+}
+
+function normalize(v){
+  return clean(v).toLowerCase();
+}
+
+function getIdentity(){
+  const sources = [
+    readJSON("currentTenant", null),
+    readJSON("loggedInTenant", null),
+    readJSON("boardingPay_currentTenant", null),
+    readJSON("currentUser", null),
+    readJSON("loggedInUser", null),
+    readJSON("boardingPay_currentUser", null)
+  ].filter(Boolean);
+
+  let id="", email="", name="", room="";
+
+  for(const obj of sources){
+    if(typeof obj !== "object") continue;
+    id = id || clean(obj.id || obj.tenantId || obj.userId || obj.boarderId);
+    email = email || clean(obj.email || obj.tenantEmail || obj.payerEmail);
+    name = name || clean(obj.name || obj.fullName || obj.tenantName || obj.boarderName || obj.payerName);
+    room = room || clean(obj.room || obj.roomNumber || obj.house || obj.roomName);
+  }
+
+  const ls = localStorage;
+  id = id || clean(ls.getItem("tenantId") || ls.getItem("currentTenantId") || ls.getItem("userId"));
+  email = email || clean(ls.getItem("tenantEmail") || ls.getItem("currentTenantEmail") || ls.getItem("userEmail"));
+  name = name || clean(ls.getItem("tenantName") || ls.getItem("currentTenantName") || ls.getItem("fullName") || ls.getItem("userName"));
+  room = room || clean(ls.getItem("tenantRoom") || ls.getItem("roomNumber") || ls.getItem("room"));
+
+  const tenantLists = [
+    readJSON("boardingPay_tenants", []),
+    readJSON("boardingPay_boarders", [])
+  ];
+
+  for(const list of tenantLists){
+    if(!Array.isArray(list)) continue;
+    const found = list.find(t=>{
+      if(!t || typeof t!=="object") return false;
+      return (id && normalize(t.id || t.tenantId || t.userId || t.boarderId)===normalize(id)) ||
+             (email && normalize(t.email || t.tenantEmail)===normalize(email)) ||
+             (name && normalize(t.name || t.fullName || t.tenantName || t.boarderName)===normalize(name));
+    });
+    if(found){
+      id = id || clean(found.id || found.tenantId || found.userId || found.boarderId);
+      email = email || clean(found.email || found.tenantEmail);
+      name = name || clean(found.name || found.fullName || found.tenantName || found.boarderName);
+      room = room || clean(found.room || found.roomNumber || found.house);
+      break;
+    }
+  }
+
+  return {id,email,name,room};
+}
+
+function belongs(payment, identity){
+  const pId = clean(payment.tenantId || payment.userId || payment.payerId || payment.boarderId);
+  const pEmail = clean(payment.tenantEmail || payment.payerEmail || payment.email);
+  const pName = clean(payment.tenantName || payment.payerName || payment.boarderName || payment.boarder || payment.tenant || payment.name);
+
+  if(identity.email && pEmail && normalize(identity.email)===normalize(pEmail)) return true;
+  if(identity.id && pId && normalize(identity.id)===normalize(pId)) return true;
+  if(identity.name && pName && normalize(identity.name)===normalize(pName)) return true;
+  return false;
+}
+
+function paymentAmount(p){
+  const n = Number(String(p.amount ?? p.total ?? p.paid ?? 0).replace(/[^0-9.-]/g,""));
+  return Number.isFinite(n) && n>0 ? n : 0;
+}
+
+function getOutstanding(){
+  let starting = Number(localStorage.getItem("boardingPay_initialOutstanding"));
+  if(!Number.isFinite(starting) || starting < 0) starting = DEFAULT_OUTSTANDING;
+
+  const identity = getIdentity();
+  const payments = readJSON("boardingPay_payments", []);
+
+  if(!Array.isArray(payments) || (!identity.id && !identity.email && !identity.name)){
+    return starting;
+  }
+
+  const deducted = payments
+    .filter(p=>belongs(p,identity))
+    .filter(p=>{
+      const s=normalize(p.status);
+      return s==="approved" || s==="paid" || s==="processed";
+    })
+    .reduce((sum,p)=>sum+paymentAmount(p),0);
+
+  return Math.max(0, starting-deducted);
+}
+
+function renderBalance(){
+  const balance=getOutstanding();
+  balanceEl.textContent=money(balance);
+  submitBtn.disabled=balance<=0;
+  if(balance<=0){
+    amountEl.disabled=true;
+    methodEl.disabled=true;
+    referenceEl.disabled=true;
+  }else{
+    amountEl.disabled=false;
+    methodEl.disabled=false;
+    referenceEl.disabled=false;
+  }
+}
+
+function showMessage(text,type){
+  messageEl.textContent=text;
+  messageEl.className="message show "+(type||"success");
+}
+
+function hideMessage(){
+  messageEl.textContent="";
+  messageEl.className="message";
+}
+
+function statusClass(status){
+  const s=normalize(status);
+  if(s==="approved"||s==="paid"||s==="processed") return "approved";
+  if(s==="rejected"||s==="declined") return "rejected";
+  return "pending";
+}
+
+function displayStatus(status){
+  const s=normalize(status);
+  if(s==="approved"||s==="paid"||s==="processed") return "Approved";
+  if(s==="rejected"||s==="declined") return "Rejected";
+  return "Pending";
+}
+
+function renderRecent(){
+  const identity=getIdentity();
+  const payments=readJSON("boardingPay_payments",[]);
+  if(!Array.isArray(payments)){
+    recentEl.innerHTML='<div class="empty">No cash-in records.</div>';
+    return;
+  }
+
+  const list=payments.filter(p=>{
+    return p && p.source==="tenant_cash_in" && belongs(p,identity);
+  }).slice(0,5);
+
+  if(!list.length){
+    recentEl.innerHTML='<div class="empty">No Cash In submitted yet.</div>';
+    return;
+  }
+
+  recentEl.innerHTML=list.map(p=>{
+    const date=p.createdAt||p.date||p.paymentDate;
+    let formatted="";
+    if(date){
+      const d=new Date(date);
+      if(!isNaN(d)) formatted=d.toLocaleString("en-PH",{dateStyle:"medium",timeStyle:"short"});
+    }
+    return '<div class="payment">'+
+      '<div><strong>'+escapeHtml(p.title||"Cash In")+'</strong>'+
+      '<small>'+escapeHtml(formatted||"Date unavailable")+' · '+escapeHtml(p.paymentMethod||p.method||"Cash In")+'</small></div>'+
+      '<div style="text-align:right"><strong>'+escapeHtml(money(paymentAmount(p)))+'</strong>'+
+      '<span class="status '+statusClass(p.status)+'">'+escapeHtml(displayStatus(p.status))+'</span></div>'+
+      '</div>';
+  }).join("");
+}
+
+function escapeHtml(value){
+  return String(value??"").replace(/[&<>"']/g,c=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+  }[c]));
+}
+
+function submitCashIn(){
+  hideMessage();
+
+  const identity=getIdentity();
+  const amount=Number(amountEl.value);
+  const outstanding=getOutstanding();
+
+  if(!Number.isFinite(amount) || amount<=0){
+    showMessage("Please enter a valid Cash In amount.","error");
+    return;
+  }
+
+  if(outstanding<=0){
+    showMessage("Your Outstanding Balance is already ₱0.00.","error");
+    renderBalance();
+    return;
+  }
+
+  if(amount>outstanding){
+    showMessage("Cash In amount cannot be greater than your Outstanding Balance of "+money(outstanding)+".","error");
+    return;
+  }
+
+  if(!identity.id && !identity.email && !identity.name){
+    showMessage("Tenant information is not available. Please log in again.","error");
+    return;
+  }
+
+  const payments=readJSON("boardingPay_payments",[]);
+  if(!Array.isArray(payments)){
+    showMessage("Unable to save the Cash In right now.","error");
+    return;
+  }
+
+  const now=new Date().toISOString();
+  const id="CASHIN-"+Date.now()+"-"+Math.random().toString(36).slice(2,7).toUpperCase();
+  const method=clean(methodEl.value)||"Cash In";
+  const reference=clean(referenceEl.value);
+
+  const record={
+    id:id,
+    paymentId:id,
+    transactionId:id,
+    tenantId:identity.id,
+    userId:identity.id,
+    boarderId:identity.id,
+    tenantName:identity.name,
+    payerName:identity.name,
+    boarderName:identity.name,
+    boarder:identity.name,
+    tenant:identity.name,
+    tenantEmail:identity.email,
+    payerEmail:identity.email,
+    email:identity.email,
+    room:identity.room,
+    roomNumber:identity.room,
+    amount:amount,
+    total:amount,
+    paid:amount,
+    paymentMethod:method,
+    method:method,
+    reference:reference,
+    referenceNumber:reference,
+    description:"Cash In for Outstanding Balance",
+    title:"Cash In",
+    status:"Pending",
+    createdAt:now,
+    date:now,
+    paymentDate:now,
+    source:"tenant_cash_in"
+  };
+
+  payments.unshift(record);
+  localStorage.setItem("boardingPay_payments",JSON.stringify(payments.slice(0,500)));
+
+  // Shared sync marker used by the Tenant Dashboard and Admin Dashboard.
+  localStorage.setItem("boardingPay_lastUpdate",Date.now().toString());
+
+  // Shared tenant notification so the Dashboard notification panel can
+  // immediately show that the Cash In is under review.
+  const tenantNotifications = readJSON("tenantNotifications",[]);
+  if(Array.isArray(tenantNotifications)){
+    tenantNotifications.unshift({
+      id:"TENANT-CASHIN-"+Date.now(),
+      type:"cash_in",
+      title:"Cash In Under Review",
+      message:"Your Cash In of "+money(amount)+" was submitted and is waiting for Admin approval.",
+      paymentId:id,
+      tenantId:identity.id,
+      tenantEmail:identity.email,
+      status:"Pending",
+      createdAt:now,
+      read:false
+    });
+    localStorage.setItem("tenantNotifications",JSON.stringify(tenantNotifications.slice(0,100)));
+  }
+
+  const activities=readJSON("boardingPay_activities",[]);
+  if(Array.isArray(activities)){
+    activities.unshift({
+      id:"ACT-"+Date.now(),
+      type:"cash_in",
+      title:"Cash In Submitted",
+      message:(identity.name||"Tenant")+" submitted a cash-in payment of "+money(amount)+" for the outstanding balance.",
+      paymentId:id,
+      tenantId:identity.id,
+      status:"Pending",
+      createdAt:now
+    });
+    localStorage.setItem("boardingPay_activities",JSON.stringify(activities.slice(0,200)));
+  }
+
+  const adminNotifications=readJSON("adminNotifications",[]);
+  if(Array.isArray(adminNotifications)){
+    adminNotifications.unshift({
+      id:"ADMIN-CASHIN-"+Date.now(),
+      type:"cash_in",
+      title:"New Cash In",
+      message:(identity.name||"Tenant")+" submitted "+money(amount)+" cash in for outstanding balance.",
+      paymentId:id,
+      tenantId:identity.id,
+      tenantName:identity.name,
+      room:identity.room,
+      amount:amount,
+      status:"Pending",
+      createdAt:now,
+      read:false
+    });
+    localStorage.setItem("adminNotifications",JSON.stringify(adminNotifications.slice(0,200)));
+  }
+
+  amountEl.value="";
+  referenceEl.value="";
+  submitBtn.disabled=true;
+
+  showMessage("Cash In submitted successfully. Status: Pending. Your Outstanding Balance will decrease after Admin approval.","success");
+  renderRecent();
+
+  setTimeout(()=>{
+    renderBalance();
+    submitBtn.disabled=getOutstanding()<=0;
+  },100);
+}
+
+submitBtn.addEventListener("click",submitCashIn);
+
+amountEl.addEventListener("input",()=>{
+  const amount=Number(amountEl.value);
+  const outstanding=getOutstanding();
+  if(Number.isFinite(amount) && amount>outstanding && outstanding>0){
+    showMessage("Maximum Cash In allowed is "+money(outstanding)+".","error");
+  }else{
+    hideMessage();
+  }
+});
+
+function goToDashboard(){
+  // The standalone Cash In page is intentionally connected to the same
+  // localStorage records used by the Tenant Dashboard.
+  window.location.href = "tenant-dashboard.html";
+}
+
+$("backBtn").addEventListener("click", goToDashboard);
+$("dashboardBtn").addEventListener("click", goToDashboard);
+
+window.addEventListener("storage",event=>{
+  if([
+    "boardingPay_payments",
+    "boardingPay_lastUpdate",
+    "boardingPay_initialOutstanding",
+    "boardingPay_currentTenant",
+    "currentTenant",
+    "loggedInTenant",
+    "boardingPay_currentUser",
+    "currentUser"
+  ].includes(event.key)){
+    renderBalance();
+    renderRecent();
+  }
+});
+
+// Refresh while this page is open so an Admin approval made in another
+// tab/window is reflected automatically.
+renderBalance();
+renderRecent();
+setInterval(()=>{
+  renderBalance();
+  renderRecent();
+},1000);
+
+})();
+</script>
+</body>
+</html>

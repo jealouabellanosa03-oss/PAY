@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Create Account - BoardingPay</title>
+
+    <link
+        rel="stylesheet"
+        href="./style.css?v=21"
+    >
+
+    <style>
+
+        /* =========================================
+           CREATE ACCOUNT - BLUE MOBILE DESIGN
+           Same visual style as Admin, Landlord,
+           and Tenant registration pages.
+        ========================================== */
+
+        .registration-page {
+            width: 100%;
+            min-height: 100vh;
+            background: linear-gradient(
+                180deg,
+                #eef7ff 0%,
+                #ffffff 38%,
+                #ffffff 100%
+            );
+        }
+
+        .registration-header {
+            background: linear-gradient(
+                135deg,
+                #0d8bdc,
+                #1677c8
+            );
+            color: #ffffff;
+            border-bottom: 3px solid #0b6fb8;
+            box-shadow:
+                0 4px 14px rgba(13, 139, 220, 0.18);
+        }
+
+        .registration-header .header-title h1,
+        .registration-header .header-title p {
+            color: #ffffff;
+        }
+
+        .registration-header .back-btn {
+            color: #ffffff;
+        }
+
+        /* ACCOUNT TYPE CONTAINER */
+
+        .account-types {
+            width: min(94%, 760px);
+            max-width: 760px;
+            margin: 22px auto 0;
+            padding: 30px 24px 42px;
+            background: #ffffff;
+            border: 1px solid #cfe7f8;
+            border-top: 5px solid #168bd2;
+            border-radius: 16px;
+            box-shadow:
+                0 8px 28px rgba(18, 116, 175, 0.12);
+            box-sizing: border-box;
+        }
+
+        /* ACCOUNT CARD */
+
+        .account-card {
+            width: 100%;
+            min-height: 125px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 18px;
+            padding: 20px 20px;
+            border: 1px solid #cfe7f8;
+            border-radius: 14px;
+            background: #fbfdff;
+            color: #123b5d;
+            text-align: left;
+            box-sizing: border-box;
+            cursor: pointer;
+
+            transition:
+                transform 0.15s ease,
+                box-shadow 0.15s ease,
+                border-color 0.15s ease,
+                background 0.15s ease;
+        }
+
+        .account-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .account-card:hover {
+            transform: translateY(-2px);
+            border-color: #168bd2;
+            background: #f5fbff;
+            box-shadow:
+                0 7px 18px rgba(22, 139, 210, 0.14);
+        }
+
+        .account-card:active {
+            transform: scale(0.985);
+        }
+
+        /* ICON */
+
+        .account-icon {
+            width: 64px;
+            height: 64px;
+            min-width: 64px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            background: #e5f4ff;
+            color: #168bd2;
+            border: 1px solid #c5e5f8;
+        }
+
+        .tenant-icon,
+        .landlord-icon,
+        .admin-icon {
+            background: #e5f4ff;
+            color: #168bd2;
+        }
+
+        /* ACCOUNT TEXT */
+
+        .account-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .account-info h2 {
+            margin: 0 0 7px;
+            color: #064f86;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .account-info p {
+            margin: 0;
+            color: #6f8799;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* ARROW */
+
+        .account-card .arrow {
+            width: 38px;
+            height: 38px;
+            min-width: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #eaf6ff;
+            color: #168bd2;
+            font-size: 27px;
+            line-height: 1;
+            font-weight: 500;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            .account-types {
+                width: calc(100% - 20px);
+                max-width: none;
+                margin-top: 16px;
+                padding: 24px 14px 32px;
+                border-radius: 14px;
+            }
+
+            .account-card {
+                min-height: 120px;
+                gap: 13px;
+                padding: 17px 14px;
+                margin-bottom: 16px;
+                border-radius: 13px;
+            }
+
+            .account-icon {
+                width: 58px;
+                height: 58px;
+                min-width: 58px;
+                border-radius: 12px;
+                font-size: 27px;
+            }
+
+            .account-info h2 {
+                font-size: 18px;
+                margin-bottom: 5px;
+            }
+
+            .account-info p {
+                font-size: 13px;
+                line-height: 1.4;
+            }
+
+            .account-card .arrow {
+                width: 34px;
+                height: 34px;
+                min-width: 34px;
+                font-size: 24px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<main class="app registration-page">
+
+
+    <!-- =========================================
+         HEADER
+    ========================================== -->
+
+    <header class="registration-header">
+
+        <button
+            type="button"
+            id="backBtn"
+            class="back-btn"
+            aria-label="Back"
+        >
+            ‹
+        </button>
+
+
+        <div class="header-title">
+
+            <h1>
+                Create Account
+            </h1>
+
+            <p>
+                Choose your account type
+            </p>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =========================================
+         ACCOUNT TYPES
+    ========================================== -->
+
+    <section class="account-types">
+
+
+        <!-- TENANT -->
+
+        <button
+            type="button"
+            id="tenantBtn"
+            class="account-card"
+        >
+
+            <div class="account-icon tenant-icon">
+
+                <span>
+                    ●
+                </span>
+
+            </div>
+
+
+            <div class="account-info">
+
+                <h2>
+                    Tenant
+                </h2>
+
+                <p>
+                    Manage your room, payments,
+                    and stay easily.
+                </p>
+
+            </div>
+
+
+            <span class="arrow">
+                ›
+            </span>
+
+        </button>
+
+
+
+        <!-- LANDLORD -->
+
+        <button
+            type="button"
+            id="landlordBtn"
+            class="account-card"
+        >
+
+            <div class="account-icon landlord-icon">
+
+                <span>
+                    ⌂
+                </span>
+
+            </div>
+
+
+            <div class="account-info">
+
+                <h2>
+                    Landlord
+                </h2>
+
+                <p>
+                    Manage your rooms, tenants,
+                    and payments.
+                </p>
+
+            </div>
+
+
+            <span class="arrow">
+                ›
+            </span>
+
+        </button>
+
+
+
+        <!-- ADMIN -->
+
+        <button
+            type="button"
+            id="adminBtn"
+            class="account-card"
+        >
+
+            <div class="account-icon admin-icon">
+
+                <span>
+                    ⚙
+                </span>
+
+            </div>
+
+
+            <div class="account-info">
+
+                <h2>
+                    Admin
+                </h2>
+
+                <p>
+                    Manage users and system
+                    administration.
+                </p>
+
+            </div>
+
+
+            <span class="arrow">
+                ›
+            </span>
+
+        </button>
+
+
+    </section>
+
+
+</main>
+
+
+
+<script>
+
+(function () {
+
+    "use strict";
+
+
+    /* =========================================
+       ELEMENTS
+    ========================================== */
+
+    const backBtn =
+        document.getElementById("backBtn");
+
+    const tenantBtn =
+        document.getElementById("tenantBtn");
+
+    const landlordBtn =
+        document.getElementById("landlordBtn");
+
+    const adminBtn =
+        document.getElementById("adminBtn");
+
+
+
+    /* =========================================
+       BACK TO LOGIN
+    ========================================== */
+
+    if (backBtn) {
+
+        backBtn.addEventListener(
+            "click",
+            function () {
+
+                window.location.href =
+                    "index.html";
+
+            }
+        );
+
+    }
+
+
+
+    /* =========================================
+       TENANT
+    ========================================== */
+
+    if (tenantBtn) {
+
+        tenantBtn.addEventListener(
+            "click",
+            function () {
+
+                window.location.href =
+                    "tenant-register.html";
+
+            }
+        );
+
+    }
+
+
+
+    /* =========================================
+       LANDLORD
+    ========================================== */
+
+    if (landlordBtn) {
+
+        landlordBtn.addEventListener(
+            "click",
+            function () {
+
+                window.location.href =
+                    "landlord-register.html";
+
+            }
+        );
+
+    }
+
+
+
+    /* =========================================
+       ADMIN
+    ========================================== */
+
+    if (adminBtn) {
+
+        adminBtn.addEventListener(
+            "click",
+            function () {
+
+                window.location.href =
+                    "admin-register.html";
+
+            }
+        );
+
+    }
+
+
+})();
+
+</script>
+
+
+</body>
+</html>

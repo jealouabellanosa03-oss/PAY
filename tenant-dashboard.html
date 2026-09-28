@@ -1,0 +1,5029 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Home - BoardingPay</title>
+
+
+    <style>
+
+        /* =====================================================
+           RESET
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+        }
+
+
+        body {
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: #eef8fd;
+
+            color: #173b63;
+
+            overflow-x: hidden;
+        }
+
+
+        /* =====================================================
+           MAIN DASHBOARD
+        ===================================================== */
+
+        .boarding-dashboard {
+
+            width: 100%;
+
+            max-width: 500px;
+
+            min-height: 100vh;
+
+            margin: 0 auto;
+
+            background: #f8fcff;
+
+            padding-bottom: 75px;
+
+            position: relative;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 0 30px rgba(0, 80, 130, .08);
+        }
+
+
+        /* =====================================================
+           TENANT DASHBOARD ILLUSTRATION HEADER
+           NO IMAGE FILE USED
+        ===================================================== */
+
+        .home-hero {
+
+            position: relative;
+
+            width: 100%;
+
+            height: 255px;
+
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #ffffff 0%,
+                    #ffffff 57%,
+                    #eaf7fd 100%
+                );
+
+            color: #173b63;
+        }
+
+
+        /* =====================================================
+           SOFT SKY SHAPES
+        ===================================================== */
+
+        .sky-shape {
+
+            position: absolute;
+
+            border-radius: 50%;
+
+            background: #edf8fd;
+
+            pointer-events: none;
+        }
+
+
+        .sky-shape.one {
+
+            width: 150px;
+            height: 150px;
+
+            right: -45px;
+            top: 45px;
+        }
+
+
+        .sky-shape.two {
+
+            width: 90px;
+            height: 90px;
+
+            left: -35px;
+            top: 125px;
+
+            background: #f1faff;
+        }
+
+
+        /* =====================================================
+           CLOUDS
+        ===================================================== */
+
+        .cloud {
+
+            position: absolute;
+
+            background: #d9f0fb;
+
+            border-radius: 50%;
+
+            opacity: .9;
+        }
+
+
+        .cloud.one {
+
+            width: 62px;
+            height: 21px;
+
+            left: 20px;
+            top: 155px;
+        }
+
+
+        .cloud.one::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 31px;
+            height: 31px;
+
+            left: 9px;
+            top: -16px;
+
+            border-radius: 50%;
+
+            background: #d9f0fb;
+        }
+
+
+        .cloud.one::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 23px;
+            height: 23px;
+
+            left: 34px;
+            top: -9px;
+
+            border-radius: 50%;
+
+            background: #d9f0fb;
+        }
+
+
+        .cloud.two {
+
+            width: 74px;
+            height: 24px;
+
+            right: 8px;
+            top: 134px;
+        }
+
+
+        .cloud.two::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 36px;
+            height: 36px;
+
+            left: 11px;
+            top: -18px;
+
+            border-radius: 50%;
+
+            background: #d9f0fb;
+        }
+
+
+        .cloud.two::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 27px;
+            height: 27px;
+
+            right: 8px;
+            top: -11px;
+
+            border-radius: 50%;
+
+            background: #d9f0fb;
+        }
+
+
+        /* =====================================================
+           BRAND AREA
+        ===================================================== */
+
+        .hero-brand {
+
+            position: absolute;
+
+            left: 50%;
+
+            top: 14px;
+
+            transform: translateX(-50%);
+
+            z-index: 20;
+
+            width: 220px;
+
+            text-align: center;
+        }
+
+
+        /* =====================================================
+           INLINE HOUSE LOGO
+        ===================================================== */
+
+        .brand-logo {
+
+            width: 72px;
+
+            height: 62px;
+
+            margin: 0 auto 3px;
+
+            position: relative;
+        }
+
+
+        .brand-logo svg {
+
+            width: 100%;
+
+            height: 100%;
+
+            display: block;
+        }
+
+
+        .brand-name {
+
+            font-size: 25px;
+
+            line-height: 1;
+
+            font-weight: 800;
+
+            letter-spacing: -.7px;
+
+            color: #07559b;
+        }
+
+
+        .brand-tagline {
+
+            margin-top: 7px;
+
+            font-size: 11px;
+
+            color: #71859a;
+
+            font-weight: 500;
+
+            letter-spacing: .1px;
+        }
+
+
+        /* =====================================================
+           HEADER PROFILE
+        ===================================================== */
+
+        .hero-profile {
+
+            position: absolute;
+
+            top: 15px;
+
+            right: 15px;
+
+            width: 39px;
+
+            height: 39px;
+
+            border-radius: 50%;
+
+            border: 1px solid #d7eaf5;
+
+            background: rgba(255,255,255,.94);
+
+            color: #1266a3;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            cursor: pointer;
+
+            z-index: 30;
+
+            box-shadow:
+                0 3px 10px rgba(0,75,120,.10);
+        }
+
+
+        .hero-profile svg {
+
+            width: 19px;
+
+            height: 19px;
+
+            stroke: currentColor;
+
+            fill: none;
+
+            stroke-width: 1.8;
+
+            stroke-linecap: round;
+
+            stroke-linejoin: round;
+        }
+
+
+        /* =====================================================
+           NOTIFICATION
+        ===================================================== */
+
+        .hero-notification {
+
+            position: absolute;
+
+            top: 18px;
+
+            right: 62px;
+
+            width: 32px;
+
+            height: 32px;
+
+            border: none;
+
+            background: transparent;
+
+            color: #1266a3;
+
+            cursor: pointer;
+
+            z-index: 30;
+        }
+
+
+        .hero-notification svg {
+
+            width: 20px;
+
+            height: 20px;
+
+            stroke: currentColor;
+
+            fill: none;
+
+            stroke-width: 1.8;
+
+            stroke-linecap: round;
+
+            stroke-linejoin: round;
+        }
+
+
+        .notification-dot {
+
+            position: absolute;
+
+            width: 7px;
+
+            height: 7px;
+
+            top: 3px;
+
+            right: 3px;
+
+            border-radius: 50%;
+
+            background: #f35d67;
+
+            border: 1px solid white;
+        }
+
+
+        /* =====================================================
+           GREETING
+        ===================================================== */
+
+        .hero-greeting {
+
+            position: absolute;
+
+            left: 20px;
+
+            top: 112px;
+
+            z-index: 25;
+        }
+
+
+        .hero-greeting h2 {
+
+            color: #174d7b;
+
+            font-size: 18px;
+
+            line-height: 1.2;
+
+            font-weight: 800;
+        }
+
+
+        .hero-greeting h2 span {
+
+            color: #078bd0;
+        }
+
+
+        .hero-greeting p {
+
+            margin-top: 5px;
+
+            color: #71899c;
+
+            font-size: 9px;
+        }
+
+
+        /* =====================================================
+           CITY + HOUSES ILLUSTRATION
+           INLINE CSS SHAPES
+        ===================================================== */
+
+        .city-illustration {
+
+            position: absolute;
+
+            left: 0;
+
+            right: 0;
+
+            bottom: 0;
+
+            width: 100%;
+
+            height: 105px;
+
+            z-index: 5;
+
+            pointer-events: none;
+        }
+
+
+        /* BACK CITY */
+
+        .city-building {
+
+            position: absolute;
+
+            bottom: 0;
+
+            background: #d7edf8;
+
+            border-radius: 2px 2px 0 0;
+        }
+
+
+        .building-1 {
+
+            left: 49%;
+
+            width: 34px;
+
+            height: 75px;
+        }
+
+
+        .building-2 {
+
+            left: 57%;
+
+            width: 29px;
+
+            height: 53px;
+
+            background: #cde8f5;
+        }
+
+
+        .building-3 {
+
+            left: 65%;
+
+            width: 40px;
+
+            height: 86px;
+
+            background: #d9eef8;
+        }
+
+
+        .building-4 {
+
+            left: 75%;
+
+            width: 29px;
+
+            height: 61px;
+
+            background: #cce8f6;
+        }
+
+
+        .building-5 {
+
+            left: 83%;
+
+            width: 39px;
+
+            height: 47px;
+
+            background: #d9eff9;
+        }
+
+
+        .building-window {
+
+            position: absolute;
+
+            width: 5px;
+
+            height: 7px;
+
+            background: #b8dced;
+
+            border-radius: 1px;
+        }
+
+
+        /* =====================================================
+           LARGE HOUSE
+        ===================================================== */
+
+        .main-house {
+
+            position: absolute;
+
+            left: 0;
+
+            bottom: 0;
+
+            width: 175px;
+
+            height: 95px;
+
+            z-index: 10;
+        }
+
+
+        .house-body {
+
+            position: absolute;
+
+            left: 17px;
+
+            bottom: 0;
+
+            width: 122px;
+
+            height: 61px;
+
+            background: #ffffff;
+
+            border: 3px solid #b7def2;
+
+            border-top: none;
+
+            border-radius: 2px;
+        }
+
+
+        .house-roof {
+
+            position: absolute;
+
+            left: 8px;
+
+            top: 13px;
+
+            width: 128px;
+
+            height: 75px;
+
+            background: #ffffff;
+
+            border-left: 6px solid #65b5e4;
+
+            border-top: 6px solid #65b5e4;
+
+            transform: rotate(45deg) scale(.72);
+
+            border-radius: 4px 0 0 0;
+        }
+
+
+        .house-door {
+
+            position: absolute;
+
+            left: 68px;
+
+            bottom: 0;
+
+            width: 25px;
+
+            height: 38px;
+
+            background: #d8eef9;
+
+            border-radius: 3px 3px 0 0;
+
+            border: 2px solid #8bc9e9;
+        }
+
+
+        .house-window {
+
+            position: absolute;
+
+            width: 23px;
+
+            height: 23px;
+
+            background: #d9effa;
+
+            border: 3px solid #69b7e4;
+
+        }
+
+
+        .house-window::before {
+
+            content: "";
+
+            position: absolute;
+
+            left: 50%;
+
+            top: 0;
+
+            bottom: 0;
+
+            width: 2px;
+
+            transform: translateX(-50%);
+
+            background: #69b7e4;
+        }
+
+
+        .house-window::after {
+
+            content: "";
+
+            position: absolute;
+
+            top: 50%;
+
+            left: 0;
+
+            right: 0;
+
+            height: 2px;
+
+            transform: translateY(-50%);
+
+            background: #69b7e4;
+        }
+
+
+        .window-left {
+
+            left: 31px;
+
+            bottom: 28px;
+        }
+
+
+        .window-right {
+
+            left: 101px;
+
+            bottom: 28px;
+        }
+
+
+        /* =====================================================
+           SMALL HOUSE
+        ===================================================== */
+
+        .small-house {
+
+            position: absolute;
+
+            right: 87px;
+
+            bottom: 0;
+
+            width: 75px;
+
+            height: 62px;
+
+            z-index: 11;
+        }
+
+
+        .small-house-body {
+
+            position: absolute;
+
+            bottom: 0;
+
+            left: 10px;
+
+            width: 59px;
+
+            height: 37px;
+
+            background: #ffffff;
+
+            border: 3px solid #b7def2;
+
+            border-top: none;
+        }
+
+
+        .small-house-roof {
+
+            position: absolute;
+
+            left: 7px;
+
+            top: 6px;
+
+            width: 58px;
+
+            height: 58px;
+
+            background: #8ecce9;
+
+            transform: rotate(45deg) scale(.7);
+
+            border-radius: 4px;
+        }
+
+
+        .small-house-door {
+
+            position: absolute;
+
+            left: 34px;
+
+            bottom: 0;
+
+            width: 13px;
+
+            height: 24px;
+
+            background: #d2ebf7;
+
+            border: 2px solid #82c5e5;
+
+        }
+
+
+        /* =====================================================
+           TREES
+        ===================================================== */
+
+        .tree {
+
+            position: absolute;
+
+            bottom: -3px;
+
+            width: 54px;
+
+            height: 70px;
+
+            z-index: 13;
+        }
+
+
+        .tree-left {
+
+            left: 145px;
+        }
+
+
+        .tree-right {
+
+            right: 0;
+
+            width: 65px;
+
+            transform: scale(1.1);
+        }
+
+
+        .tree-trunk {
+
+            position: absolute;
+
+            bottom: 0;
+
+            left: 23px;
+
+            width: 9px;
+
+            height: 27px;
+
+            background: #a9c7d4;
+
+            border-radius: 3px;
+        }
+
+
+        .tree-leaf {
+
+            position: absolute;
+
+            border-radius: 50%;
+
+            background: #91d4b7;
+        }
+
+
+        .leaf-1 {
+
+            width: 40px;
+
+            height: 40px;
+
+            left: 2px;
+
+            top: 15px;
+        }
+
+
+        .leaf-2 {
+
+            width: 44px;
+
+            height: 44px;
+
+            right: 0;
+
+            top: 8px;
+
+            background: #77cba8;
+        }
+
+
+        .leaf-3 {
+
+            width: 34px;
+
+            height: 34px;
+
+            left: 15px;
+
+            top: 0;
+
+            background: #a5dfc2;
+        }
+
+
+        /* =====================================================
+           BALANCE CARD
+        ===================================================== */
+
+        .balance-card {
+
+            position: relative;
+
+            z-index: 100;
+
+            width: calc(100% - 20px);
+
+            min-height: 76px;
+
+            margin:
+                -9px
+                10px
+                10px;
+
+            padding:
+                11px
+                13px;
+
+            border-radius: 13px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #087ecf,
+                    #238ed9
+                );
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            box-shadow:
+                0 6px 14px
+                rgba(0,87,145,.18);
+        }
+
+
+        .balance-icon {
+
+            width: 40px;
+
+            height: 40px;
+
+            flex-shrink: 0;
+
+            border-radius: 10px;
+
+            background: rgba(255,255,255,.18);
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+
+        .balance-icon svg {
+
+            width: 21px;
+
+            height: 21px;
+
+            stroke: white;
+
+            fill: none;
+
+            stroke-width: 1.8;
+
+            stroke-linecap: round;
+
+            stroke-linejoin: round;
+        }
+
+
+        .balance-information {
+
+            flex: 1;
+
+            min-width: 0;
+        }
+
+
+        .balance-information span {
+
+            display: block;
+
+            color: white;
+
+            font-size: 8px;
+
+            margin-bottom: 4px;
+        }
+
+
+        .balance-information h2 {
+
+            color: white;
+
+            font-size: 21px;
+
+            line-height: 1;
+
+            font-weight: 800;
+        }
+
+
+        .balance-pay-btn {
+
+            min-width: 94px;
+
+            height: 35px;
+
+            padding: 0 10px;
+
+            border: 0;
+
+            border-radius: 20px;
+
+            background: white;
+
+            color: #173d6b;
+
+            font-size: 8px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+        }
+
+
+        .balance-pay-btn span {
+
+            margin-left: 5px;
+
+            font-size: 13px;
+        }
+
+
+        /* =====================================================
+           QUICK ACTIONS
+        ===================================================== */
+
+        .quick-actions-card {
+
+            width: calc(100% - 20px);
+
+            margin:
+                0
+                10px
+                10px;
+
+            padding:
+                13px
+                5px;
+
+            border-radius: 13px;
+
+            background: white;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap:
+                16px 2px;
+
+            box-shadow:
+                0 2px 10px
+                rgba(0,65,100,.06);
+        }
+
+
+        .action-item {
+
+            border: none;
+
+            background: transparent;
+
+            min-width: 0;
+
+            color: #243d5d;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            font-size: 7px;
+
+            line-height: 1.15;
+
+            text-align: center;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 5px;
+
+            cursor: pointer;
+        }
+
+
+        .action-icon {
+
+            width: 43px;
+
+            height: 43px;
+
+            border-radius: 11px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+
+        .action-icon svg {
+
+            width: 20px;
+
+            height: 20px;
+
+            stroke: currentColor;
+
+            fill: none;
+
+            stroke-width: 1.8;
+
+            stroke-linecap: round;
+
+            stroke-linejoin: round;
+        }
+
+
+        .action-blue {
+            background: #def2ff;
+            color: #168bd0;
+        }
+
+
+        .action-green {
+            background: #ddf6ec;
+            color: #13a77a;
+        }
+
+
+        .action-purple {
+            background: #e7e3ff;
+            color: #6653d5;
+        }
+
+
+        .action-red {
+            background: #ffe1e3;
+            color: #e14f58;
+        }
+
+
+        .action-yellow {
+            background: #fff0c9;
+            color: #e9a527;
+        }
+
+
+        .action-lightblue {
+            background: #dff3ff;
+            color: #238bcf;
+        }
+
+
+        .action-violet {
+            background: #e7e2ff;
+            color: #6955d8;
+        }
+
+
+        .action-gray {
+            background: #e4edf3;
+            color: #506b80;
+        }
+
+
+        /* =====================================================
+           RECENT PAYMENTS
+        ===================================================== */
+
+        .recent-payments-card {
+
+            width: calc(100% - 20px);
+
+            margin:
+                0
+                10px
+                10px;
+
+            padding: 11px;
+
+            border-radius: 13px;
+
+            background: white;
+
+            box-shadow:
+                0 2px 10px
+                rgba(0,65,100,.06);
+        }
+
+
+        .recent-header {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-bottom: 8px;
+        }
+
+
+        .recent-header h3 {
+
+            color: #183e70;
+
+            font-size: 12px;
+        }
+
+
+        .recent-header button {
+
+            border: none;
+
+            background: transparent;
+
+            color: #1389d1;
+
+            font-size: 7px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+
+        .payment-record {
+
+            min-height: 47px;
+
+            padding: 6px;
+
+            border:
+                1px solid
+                #edf2f5;
+
+            border-radius: 9px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+        }
+
+
+        .payment-check {
+
+            width: 29px;
+
+            height: 29px;
+
+            flex-shrink: 0;
+
+            border-radius: 50%;
+
+            background: #3bb78a;
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 14px;
+        }
+
+
+        .payment-record-info {
+
+            flex: 1;
+
+            display: flex;
+
+            flex-direction: column;
+        }
+
+
+        .payment-record-info strong {
+
+            color: #243e5d;
+
+            font-size: 8px;
+        }
+
+
+        .payment-record-info span {
+
+            color: #8b9aa6;
+
+            font-size: 6px;
+
+            margin-top: 2px;
+        }
+
+
+        .payment-record-amount {
+
+            text-align: right;
+        }
+
+
+        .payment-record-amount strong {
+
+            display: block;
+
+            color: #1da878;
+
+            font-size: 8px;
+        }
+
+
+        .payment-record-amount span {
+
+            display: inline-block;
+
+            margin-top: 2px;
+
+            padding: 2px 5px;
+
+            border-radius: 5px;
+
+            background: #dff7ed;
+
+            color: #20a878;
+
+            font-size: 6px;
+        }
+
+
+        /* =====================================================
+           BANNER
+        ===================================================== */
+
+        .home-banner {
+
+            position: relative;
+
+            width: calc(100% - 20px);
+
+            height: 80px;
+
+            margin:
+                0
+                10px
+                10px;
+
+            padding:
+                10px
+                12px;
+
+            border-radius: 12px;
+
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    110deg,
+                    #dff4ff,
+                    #c7e9fa
+                );
+        }
+
+
+        .banner-text {
+
+            position: relative;
+
+            z-index: 5;
+        }
+
+
+        .banner-text strong {
+
+            display: block;
+
+            color: #183d6e;
+
+            font-size: 10px;
+        }
+
+
+        .banner-text p {
+
+            margin-top: 2px;
+
+            color: #183d6e;
+
+            font-size: 8px;
+
+            font-weight: 600;
+
+            line-height: 1.15;
+        }
+
+
+        .banner-text small {
+
+            display: block;
+
+            margin-top: 4px;
+
+            color: #69859a;
+
+            font-size: 5px;
+        }
+
+
+        .banner-phone {
+
+            position: absolute;
+
+            right: 51px;
+
+            bottom: -13px;
+
+            font-size: 51px;
+
+            transform: rotate(-10deg);
+
+            z-index: 3;
+        }
+
+
+        .banner-check {
+
+            position: absolute;
+
+            right: 13px;
+
+            bottom: 16px;
+
+            color: #168bd0;
+
+            font-size: 19px;
+        }
+
+
+        /* =====================================================
+           BOTTOM NAVIGATION
+        ===================================================== */
+
+        .bottom-navigation {
+
+            position: fixed;
+
+            left: 50%;
+
+            bottom: 0;
+
+            transform:
+                translateX(-50%);
+
+            width: 100%;
+
+            max-width: 500px;
+
+            height: 61px;
+
+            background: white;
+
+            border-top:
+                1px solid
+                #dce6ed;
+
+            box-shadow:
+                0 -3px 12px
+                rgba(0,60,100,.09);
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            z-index: 9999;
+        }
+
+
+        .nav-item {
+
+            border: none;
+
+            background: transparent;
+
+            color: #718493;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 3px;
+
+            cursor: pointer;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+        }
+
+
+        .nav-icon {
+
+            width: 24px;
+
+            height: 24px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+
+        .nav-icon svg {
+
+            width: 18px;
+
+            height: 18px;
+
+            stroke: currentColor;
+
+            fill: none;
+
+            stroke-width: 1.8;
+
+            stroke-linecap: round;
+
+            stroke-linejoin: round;
+        }
+
+
+        .nav-label {
+
+            font-size: 7px;
+        }
+
+
+        .nav-item.active {
+
+            color: #078bd0;
+
+            font-weight: 700;
+        }
+
+
+        /* =====================================================
+           BUTTON
+        ===================================================== */
+
+        button {
+
+            -webkit-tap-highlight-color:
+                transparent;
+        }
+
+
+        button:active {
+
+            transform: scale(.97);
+        }
+
+
+
+        /* =====================================================
+           COMPLAINTS
+        ===================================================== */
+        .complaint-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 49, 77, .42);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 18px;
+            z-index: 20000;
+        }
+
+        .complaint-modal.show {
+            display: flex;
+        }
+
+        .complaint-box {
+            width: 100%;
+            max-width: 440px;
+            max-height: calc(100vh - 36px);
+            overflow-y: auto;
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 18px;
+            box-shadow: 0 18px 50px rgba(0, 50, 90, .22);
+        }
+
+        .complaint-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .complaint-head h3 {
+            color: #174d7b;
+            font-size: 17px;
+            font-weight: 800;
+        }
+
+        .complaint-head p {
+            margin-top: 3px;
+            color: #8193a2;
+            font-size: 8px;
+        }
+
+        .complaint-close {
+            width: 32px;
+            height: 32px;
+            border: 0;
+            border-radius: 50%;
+            background: #eef7fc;
+            color: #286b95;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .complaint-form-group {
+            margin-bottom: 12px;
+        }
+
+        .complaint-form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #31536e;
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+        .complaint-form-group input,
+        .complaint-form-group select,
+        .complaint-form-group textarea {
+            width: 100%;
+            border: 1px solid #d7e7f0;
+            border-radius: 10px;
+            background: #f9fcfe;
+            color: #29475f;
+            padding: 10px 11px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 10px;
+            outline: none;
+        }
+
+        .complaint-form-group input:focus,
+        .complaint-form-group select:focus,
+        .complaint-form-group textarea:focus {
+            border-color: #62b8e6;
+            box-shadow: 0 0 0 3px rgba(98,184,230,.12);
+        }
+
+        .complaint-form-group textarea {
+            min-height: 105px;
+            resize: vertical;
+            line-height: 1.4;
+        }
+
+        .complaint-readonly {
+            background: #eef7fc !important;
+        }
+
+        .complaint-submit {
+            width: 100%;
+            height: 42px;
+            margin-top: 4px;
+            border: 0;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #087ecf, #238ed9);
+            color: white;
+            font-size: 10px;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 6px 14px rgba(0,87,145,.16);
+        }
+
+        .complaint-note {
+            margin-top: 8px;
+            text-align: center;
+            color: #91a1ad;
+            font-size: 7px;
+            line-height: 1.35;
+        }
+
+        .complaint-success {
+            display: none;
+            margin-bottom: 10px;
+            padding: 9px 10px;
+            border-radius: 9px;
+            background: #e2f8ee;
+            color: #14845e;
+            font-size: 8px;
+            font-weight: 700;
+        }
+
+        .complaint-success.show {
+            display: block;
+        }
+
+        .complaint-badge {
+            position: absolute;
+            top: 5px;
+            right: 9px;
+            min-width: 15px;
+            height: 15px;
+            padding: 0 4px;
+            border-radius: 8px;
+            background: #e85c68;
+            color: white;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 6px;
+            font-weight: 800;
+        }
+
+        .complaint-action {
+            position: relative;
+        }
+
+
+        /* =====================================================
+           TENANT NOTIFICATIONS
+        ===================================================== */
+        .tenant-notification-panel {
+            position: fixed;
+            top: 55px;
+            right: 12px;
+            width: min(360px, calc(100vw - 24px));
+            max-height: 70vh;
+            overflow-y: auto;
+            background: #fff;
+            border: 1px solid #dcecf5;
+            border-radius: 16px;
+            box-shadow: 0 16px 40px rgba(0,55,95,.18);
+            z-index: 21000;
+            display: none;
+        }
+        .tenant-notification-panel.show { display: block; }
+        .tenant-notification-head {
+            position: sticky;
+            top: 0;
+            background: #fff;
+            padding: 13px 14px 10px;
+            border-bottom: 1px solid #edf3f7;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .tenant-notification-head strong {
+            color: #174d7b;
+            font-size: 12px;
+        }
+        .tenant-notification-head button {
+            border: 0;
+            background: transparent;
+            color: #168bd0;
+            font-size: 8px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .tenant-notification-item {
+            padding: 11px 13px;
+            border-bottom: 1px solid #eef3f6;
+            cursor: pointer;
+        }
+        .tenant-notification-item.unread {
+            background: #f1f9fe;
+        }
+        .tenant-notification-item strong {
+            display: block;
+            color: #244763;
+            font-size: 9px;
+            margin-bottom: 3px;
+        }
+        .tenant-notification-item p {
+            color: #687f91;
+            font-size: 8px;
+            line-height: 1.35;
+        }
+        .tenant-notification-item small {
+            display: block;
+            color: #9aaab5;
+            font-size: 6px;
+            margin-top: 5px;
+        }
+        .tenant-notification-empty {
+            padding: 25px 15px;
+            text-align: center;
+            color: #8b9da9;
+            font-size: 8px;
+        }
+        .tenant-notification-dot {
+            position: absolute;
+            top: 1px;
+            right: 1px;
+            min-width: 14px;
+            height: 14px;
+            padding: 0 3px;
+            border-radius: 8px;
+            background: #f35d67;
+            color: #fff;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 6px;
+            font-weight: 800;
+        }
+        .hero-notification { position: absolute; }
+
+        /* =====================================================
+           TEMPORARY HOME PAYMENT TOAST
+           Appears only when payment status changes, then fades out.
+        ===================================================== */
+        .home-payment-toast {
+            position: fixed;
+            top: 16px;
+            left: 50%;
+            transform: translate(-50%, -18px);
+            width: min(430px, calc(100vw - 28px));
+            padding: 12px 14px;
+            border-radius: 13px;
+            background: #ffffff;
+            border: 1px solid #dcecf5;
+            box-shadow: 0 12px 30px rgba(0,55,95,.18);
+            z-index: 30000;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity .25s ease, transform .25s ease, visibility .25s ease;
+        }
+
+        .home-payment-toast.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, 0);
+        }
+
+        .home-payment-toast.approved {
+            border-left: 4px solid #24aa7a;
+        }
+
+        .home-payment-toast.rejected {
+            border-left: 4px solid #e25460;
+        }
+
+        .home-payment-toast.pending {
+            border-left: 4px solid #e4aa2c;
+        }
+
+        .home-payment-toast strong {
+            display: block;
+            color: #173f67;
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .home-payment-toast span {
+            display: block;
+            margin-top: 3px;
+            color: #6c8191;
+            font-size: 8px;
+            line-height: 1.35;
+        }
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 380px) {
+
+            .home-hero {
+
+                height: 245px;
+            }
+
+
+            .brand-name {
+
+                font-size: 23px;
+            }
+
+
+            .brand-tagline {
+
+                font-size: 10px;
+            }
+
+
+            .hero-greeting {
+
+                left: 16px;
+
+                top: 108px;
+            }
+
+
+            .hero-greeting h2 {
+
+                font-size: 17px;
+            }
+
+
+            .main-house {
+
+                transform: scale(.9);
+
+                transform-origin:
+                    left bottom;
+            }
+
+
+            .small-house {
+
+                right: 75px;
+            }
+
+
+            .tree-left {
+
+                left: 125px;
+
+                transform: scale(.85);
+            }
+
+
+            .balance-information h2 {
+
+                font-size: 20px;
+            }
+
+
+            .balance-pay-btn {
+
+                min-width: 88px;
+            }
+
+
+            .action-icon {
+
+                width: 40px;
+
+                height: 40px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<main class="boarding-dashboard">
+
+
+    <!-- =====================================================
+         TENANT HOME ILLUSTRATION
+         ALL VECTOR/CSS — NO IMAGE
+    ====================================================== -->
+
+    <section class="home-hero">
+
+
+        <div class="sky-shape one"></div>
+
+        <div class="sky-shape two"></div>
+
+
+        <!-- CLOUDS -->
+
+        <div class="cloud one"></div>
+
+        <div class="cloud two"></div>
+
+
+        <!-- =================================================
+             BOARDINGPAY LOGO
+             INLINE SVG
+        ================================================== -->
+
+        <div class="hero-brand">
+
+            <div class="brand-logo">
+
+                <svg
+                    viewBox="0 0 100 82"
+                    xmlns="http://www.w3.org/2000/svg">
+
+                    <!-- House roof -->
+
+                    <path
+                        d="M12 38 L43 10 L65 29"
+                        fill="none"
+                        stroke="#07559b"
+                        stroke-width="7"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"/>
+
+
+                    <!-- House -->
+
+                    <path
+                        d="M21 35 V65 H62 V35"
+                        fill="white"
+                        stroke="#07559b"
+                        stroke-width="6"
+                        stroke-linejoin="round"/>
+
+
+                    <!-- Window -->
+
+                    <rect
+                        x="34"
+                        y="42"
+                        width="14"
+                        height="14"
+                        rx="1"
+                        fill="#42a8df"/>
+
+                    <path
+                        d="M41 42 V56 M34 49 H48"
+                        stroke="white"
+                        stroke-width="2"/>
+
+
+                    <!-- Payment card -->
+
+                    <rect
+                        x="55"
+                        y="37"
+                        width="37"
+                        height="24"
+                        rx="4"
+                        fill="#168bd0"
+                        stroke="#07559b"
+                        stroke-width="2"/>
+
+
+                    <line
+                        x1="61"
+                        y1="45"
+                        x2="86"
+                        y2="45"
+                        stroke="white"
+                        stroke-width="2"/>
+
+
+                    <circle
+                        cx="84"
+                        cy="54"
+                        r="2"
+                        fill="white"/>
+
+                </svg>
+
+            </div>
+
+
+            <div class="brand-name">
+                BoardingPay
+            </div>
+
+
+            <div class="brand-tagline">
+                Manage. Pay. Stay.
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             NOTIFICATION
+        ================================================== -->
+
+        <button
+            type="button"
+            class="hero-notification"
+            id="heroNotification"
+            aria-label="Notifications">
+
+            <svg
+                viewBox="0 0 24 24">
+
+                <path
+                    d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/>
+
+                <path
+                    d="M10 21h4"/>
+
+            </svg>
+
+            <span class="notification-dot"></span>
+            <span class="tenant-notification-dot" id="tenantNotificationBadge">0</span>
+
+        </button>
+
+
+        <!-- =================================================
+             PROFILE
+        ================================================== -->
+
+        <button
+            type="button"
+            class="hero-profile"
+            id="heroProfile"
+            aria-label="Profile">
+
+            <svg
+                viewBox="0 0 24 24">
+
+                <circle
+                    cx="12"
+                    cy="8"
+                    r="3.5"/>
+
+                <path
+                    d="M5 20c.8-3.5 3.2-5.5 7-5.5s6.2 2 7 5.5"/>
+
+            </svg>
+
+        </button>
+
+
+        <!-- =================================================
+             GREETING
+        ================================================== -->
+
+        <div class="hero-greeting">
+
+            <h2>
+                 Welcome,
+                <span id="dashboardUserName">
+                    User!
+                </span>
+            </h2>
+
+            <p>
+               To JNJC Your boarding house, made easier.
+            </p>
+
+        </div>
+
+
+        <!-- =================================================
+             CITY / HOUSE ILLUSTRATION
+        ================================================== -->
+
+        <div class="city-illustration">
+
+
+            <!-- CITY BUILDINGS -->
+
+            <div class="city-building building-1">
+
+                <span
+                    class="building-window"
+                    style="left:8px;top:13px;"></span>
+
+                <span
+                    class="building-window"
+                    style="left:21px;top:13px;"></span>
+
+                <span
+                    class="building-window"
+                    style="left:8px;top:29px;"></span>
+
+                <span
+                    class="building-window"
+                    style="left:21px;top:29px;"></span>
+
+            </div>
+
+
+            <div class="city-building building-2">
+
+                <span
+                    class="building-window"
+                    style="left:7px;top:12px;"></span>
+
+                <span
+                    class="building-window"
+                    style="left:18px;top:12px;"></span>
+
+            </div>
+
+
+            <div class="city-building building-3">
+
+                <span
+                    class="building-window"
+                    style="left:9px;top:12px;"></span>
+
+                <span
+                    class="building-window"
+                    style="left:25px;top:12px;"></span>
+
+                <span
+                    class="building-window"
+                    style="left:9px;top:29px;"></span>
+
+                <span
+                    class="building-window"
+                    style="left:25px;top:29px;"></span>
+
+            </div>
+
+
+            <div class="city-building building-4">
+
+                <span
+                    class="building-window"
+                    style="left:8px;top:12px;"></span>
+
+                <span
+                    class="building-window"
+                    style="left:19px;top:12px;"></span>
+
+            </div>
+
+
+            <div class="city-building building-5"></div>
+
+
+            <!-- =================================================
+                 MAIN HOUSE
+            ================================================== -->
+
+            <div class="main-house">
+
+                <div class="house-roof"></div>
+
+                <div class="house-body"></div>
+
+                <div class="house-window window-left"></div>
+
+                <div class="house-window window-right"></div>
+
+                <div class="house-door"></div>
+
+            </div>
+
+
+            <!-- =================================================
+                 SMALL HOUSE
+            ================================================== -->
+
+            <div class="small-house">
+
+                <div class="small-house-roof"></div>
+
+                <div class="small-house-body"></div>
+
+                <div class="small-house-door"></div>
+
+            </div>
+
+
+            <!-- =================================================
+                 LEFT TREE
+            ================================================== -->
+
+            <div class="tree tree-left">
+
+                <div class="tree-leaf leaf-1"></div>
+
+                <div class="tree-leaf leaf-2"></div>
+
+                <div class="tree-leaf leaf-3"></div>
+
+                <div class="tree-trunk"></div>
+
+            </div>
+
+
+            <!-- =================================================
+                 RIGHT TREE
+            ================================================== -->
+
+            <div class="tree tree-right">
+
+                <div class="tree-leaf leaf-1"></div>
+
+                <div class="tree-leaf leaf-2"></div>
+
+                <div class="tree-leaf leaf-3"></div>
+
+                <div class="tree-trunk"></div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         OUTSTANDING BALANCE
+    ====================================================== -->
+
+    <section class="balance-card">
+
+
+        <div class="balance-icon">
+
+            <svg viewBox="0 0 24 24">
+
+                <rect
+                    x="3"
+                    y="5"
+                    width="18"
+                    height="14"
+                    rx="2"/>
+
+                <path
+                    d="M3 9h18"/>
+
+                <path
+                    d="M16 14h2"/>
+
+            </svg>
+
+        </div>
+
+
+        <div class="balance-information">
+
+            <span>
+                Outstanding Balance
+            </span>
+
+            <h2>
+                ₱ 2,500.00
+            </h2>
+
+        </div>
+
+
+        <button
+            type="button"
+            class="balance-pay-btn"
+            id="homePayNowBtn">
+
+            Pay Now
+
+            <span>→</span>
+
+        </button>
+
+    </section>
+
+
+    <!-- =====================================================
+         QUICK ACTIONS
+    ====================================================== -->
+
+    <section class="quick-actions-card">
+
+
+        <!-- MAKE PAYMENT -->
+
+        <button
+            type="button"
+            class="action-item"
+            id="quickPaymentBtn">
+
+            <div class="action-icon action-blue">
+
+                <svg viewBox="0 0 24 24">
+
+                    <rect
+                        x="3"
+                        y="5"
+                        width="18"
+                        height="14"
+                        rx="2"/>
+
+                    <path d="M3 9h18"/>
+
+                    <path d="M7 14h4"/>
+
+                </svg>
+
+            </div>
+
+            <span>
+                Make Payment
+            </span>
+
+        </button>
+
+
+        <!-- PAYMENT HISTORY -->
+
+        <button
+            type="button"
+            class="action-item"
+            id="quickHistoryBtn">
+
+            <div class="action-icon action-green">
+
+                <svg viewBox="0 0 24 24">
+
+                    <path d="M6 3h12v18H6z"/>
+
+                    <path d="M9 7h6"/>
+
+                    <path d="M9 11h6"/>
+
+                    <path d="M9 15h4"/>
+
+                </svg>
+
+            </div>
+
+            <span>
+                Payment History
+            </span>
+
+        </button>
+
+
+        <!-- MY BOARDING HOUSE -->
+
+        <button
+            type="button"
+            class="action-item"
+            id="quickBoardingBtn">
+
+            <div class="action-icon action-purple">
+
+                <svg viewBox="0 0 24 24">
+
+                    <path d="M3 11l9-8 9 8"/>
+
+                    <path d="M5 10v10h14V10"/>
+
+                    <path d="M9 20v-6h6v6"/>
+
+                </svg>
+
+            </div>
+
+            <span>
+                Profile<br>
+                
+            </span>
+
+        </button>
+
+
+        <!-- BILLING DETAILS -->
+
+        <button
+            type="button"
+            class="action-item"
+            id="quickBillingBtn">
+
+            <div class="action-icon action-red">
+
+                <svg viewBox="0 0 24 24">
+
+                    <path d="M5 3h14v18H5z"/>
+
+                    <path d="M8 7h8"/>
+
+                    <path d="M8 11h8"/>
+
+                    <path d="M8 15h5"/>
+
+                </svg>
+
+            </div>
+
+            <span>
+                Billing Details
+            </span>
+
+        </button>
+
+
+        <!-- COMPLAINTS -->
+
+        <button
+            type="button"
+            class="action-item complaint-action"
+            id="quickComplaintBtn"
+            aria-label="Complaints">
+
+            <div class="action-icon action-yellow">
+
+                <svg viewBox="0 0 24 24">
+                    <path d="M4 4h16v12H8l-4 4V4z"/>
+                    <path d="M8 8h8"/>
+                    <path d="M8 11h5"/>
+                </svg>
+
+            </div>
+
+            <span>
+                Complaints
+            </span>
+
+            <span
+                class="complaint-badge"
+                id="complaintBadge">!</span>
+
+        </button>
+
+
+        <!-- CONTACT -->
+
+        <button
+            type="button"
+            class="action-item"
+            id="quickContactBtn">
+
+            <div class="action-icon action-violet">
+
+                <svg viewBox="0 0 24 24">
+
+                    <path
+                        d="M20 11.5a7.5 7.5 0 0 1-8 7.5 8 8 0 0 1-4-.9L4 20l1.5-3.5A7.5 7.5 0 1 1 20 11.5z"/>
+
+                    <path d="M8 11h.01"/>
+
+                    <path d="M12 11h.01"/>
+
+                    <path d="M16 11h.01"/>
+
+                </svg>
+
+            </div>
+
+            <span>
+                Contact Us
+            </span>
+
+        </button>
+
+
+        <!-- SETTINGS -->
+
+        <button
+            type="button"
+            class="action-item"
+            id="quickSettingsBtn">
+
+            <div class="action-icon action-gray">
+
+                <svg viewBox="0 0 24 24">
+
+                    <circle
+                        cx="12"
+                        cy="12"
+                        r="3"/>
+
+                    <path
+                        d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-1.8 1.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.1h-2.6V20a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1-1.8-1.8.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.6-1H6.3v-2.6h.1a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1L9.4 6.6l.1.1a1.7 1.7 0 0 0 1.9.3 1.7 1.7 0 0 0 1-1.6v-.1H15v.1a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1 1.8 1.8-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.6 1h.1V14H21a1.7 1.7 0 0 0-1.6 1z"/>
+
+                </svg>
+
+            </div>
+
+            <span>
+                Settings
+            </span>
+
+        </button>
+
+    </section>
+
+
+    <!-- =====================================================
+         RECENT PAYMENTS
+    ====================================================== -->
+
+    <section class="recent-payments-card">
+
+
+        <div class="recent-header">
+
+            <h3>
+                Recent Payments
+            </h3>
+
+
+            <button
+                type="button"
+                id="viewAllPaymentsBtn">
+
+                View All →
+
+            </button>
+
+        </div>
+
+
+        <div class="payment-record">
+
+
+            <div class="payment-check">
+                ✓
+            </div>
+
+
+            <div class="payment-record-info">
+
+                <strong>
+                    Monthly Rent
+                </strong>
+
+                <span>
+                    September 5, 2026
+                </span>
+
+            </div>
+
+
+            <div class="payment-record-amount">
+
+                <strong>
+                    ₱ 2,500.00
+                </strong>
+
+                <span>
+                    Paid
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         PROMOTIONAL BANNER
+    ====================================================== -->
+
+    <section class="home-banner">
+
+
+        <div class="banner-text">
+
+            <strong>
+                Skip the hassle.
+            </strong>
+
+
+            <p>
+                Pay your rent anytime,
+                <br>
+                anywhere.
+            </p>
+
+
+            <small>
+                BoardingPay – Fast, Secure, and Convenient.
+            </small>
+
+        </div>
+
+
+        <div class="banner-phone">
+            📱
+        </div>
+
+
+        <div class="banner-check">
+            ✓
+        </div>
+
+    </section>
+
+
+
+
+    <!-- =====================================================
+         TENANT NOTIFICATION PANEL
+    ====================================================== -->
+    <div class="tenant-notification-panel" id="tenantNotificationPanel">
+        <div class="tenant-notification-head">
+            <strong>Notifications</strong>
+            <button type="button" id="markTenantNotificationsRead">
+                Mark all as read
+            </button>
+        </div>
+        <div id="tenantNotificationList"></div>
+    </div>
+
+
+    <!-- =====================================================
+         COMPLAINT MODAL
+    ====================================================== -->
+
+    <div
+        class="complaint-modal"
+        id="complaintModal"
+        aria-hidden="true">
+
+        <div
+            class="complaint-box"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="complaintTitle">
+
+            <div class="complaint-head">
+
+                <div>
+                    <h3 id="complaintTitle">
+                        Report an Issue
+                    </h3>
+
+                    <p>
+                        Submit your complaint to the administrator.
+                    </p>
+                </div>
+
+                <button
+                    type="button"
+                    class="complaint-close"
+                    id="complaintCloseBtn"
+                    aria-label="Close">
+                    ×
+                </button>
+
+            </div>
+
+            <div
+                class="complaint-success"
+                id="complaintSuccess">
+                Your complaint has been submitted successfully.
+            </div>
+
+            <form id="complaintForm">
+
+                <div class="complaint-form-group">
+                    <label for="complaintComplainant">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="complaintComplainant"
+                        class="complaint-readonly"
+                        readonly>
+                </div>
+
+                <div class="complaint-form-group">
+                    <label for="complaintEmail">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="complaintEmail"
+                        class="complaint-readonly"
+                        readonly>
+                </div>
+
+                <div class="complaint-form-group">
+                    <label for="complaintRoom">
+                        Room / House
+                    </label>
+
+                    <input
+                        type="text"
+                        id="complaintRoom"
+                        class="complaint-readonly"
+                        readonly>
+                </div>
+
+                <div class="complaint-form-group">
+                    <label for="complaintAgainst">
+                        Complaint Against
+                    </label>
+
+                    <input
+                        type="text"
+                        id="complaintAgainst"
+                        placeholder="Enter landlord name"
+                        required>
+                </div>
+
+                <div class="complaint-form-group">
+                    <label for="complaintIssue">
+                        Complaint / Issue
+                    </label>
+
+                    <textarea
+                        id="complaintIssue"
+                        placeholder="Describe your complaint or issue..."
+                        required></textarea>
+                </div>
+
+                <button
+                    type="submit"
+                    class="complaint-submit">
+                    Submit Complaint
+                </button>
+
+                <div class="complaint-note">
+                    Your complaint will be sent to the administrator
+                    with a Pending status.
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+
+    <!-- =====================================================
+         BOTTOM NAVIGATION
+    ====================================================== -->
+
+    <nav class="bottom-navigation">
+
+
+        <!-- HOME -->
+
+        <button
+            type="button"
+            class="nav-item active"
+            id="navHome">
+
+            <span class="nav-icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <path d="M3 11l9-8 9 8"/>
+
+                    <path d="M5 10v10h14V10"/>
+
+                    <path d="M9 20v-6h6v6"/>
+
+                </svg>
+
+            </span>
+
+            <span class="nav-label">
+                Home
+            </span>
+
+        </button>
+
+
+        <!-- PAYMENT -->
+
+        <button
+            type="button"
+            class="nav-item"
+            id="navPayment">
+
+            <span class="nav-icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <rect
+                        x="3"
+                        y="5"
+                        width="18"
+                        height="14"
+                        rx="2"/>
+
+                    <path d="M3 9h18"/>
+
+                </svg>
+
+            </span>
+
+            <span class="nav-label">
+                Payment
+            </span>
+
+        </button>
+
+
+        <!-- HISTORY -->
+
+        <button
+            type="button"
+            class="nav-item"
+            id="navHistory">
+
+            <span class="nav-icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <circle
+                        cx="12"
+                        cy="12"
+                        r="8"/>
+
+                    <path d="M12 8v5l3 2"/>
+
+                </svg>
+
+            </span>
+
+            <span class="nav-label">
+                History
+            </span>
+
+        </button>
+
+
+        <!-- PROFILE -->
+
+        <button
+            type="button"
+            class="nav-item"
+            id="navProfile">
+
+            <span class="nav-icon">
+
+                <svg viewBox="0 0 24 24">
+
+                    <circle
+                        cx="12"
+                        cy="8"
+                        r="3.5"/>
+
+                    <path
+                        d="M5 20c.8-3.5 3.2-5.5 7-5.5s6.2 2 7 5.5"/>
+
+                </svg>
+
+            </span>
+
+            <span class="nav-label">
+                Profile
+            </span>
+
+        </button>
+
+    </nav>
+
+
+</main>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================== -->
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+
+        /* =====================================================
+           USER NAME
+        ===================================================== */
+
+        const userNameElement =
+            document.getElementById(
+                "dashboardUserName"
+            );
+
+
+        let fullName =
+            localStorage.getItem(
+                "profileFullName"
+            );
+
+
+        const currentUserType =
+            localStorage.getItem(
+                "currentUserType"
+            );
+
+
+        if (!fullName) {
+
+            if (
+                currentUserType ===
+                "tenant"
+            ) {
+
+                fullName =
+                    localStorage.getItem(
+                        "tenantName"
+                    );
+
+            }
+
+            else if (
+                currentUserType ===
+                "landlord"
+            ) {
+
+                fullName =
+                    localStorage.getItem(
+                        "landlordName"
+                    );
+
+            }
+
+            else if (
+                currentUserType ===
+                "admin"
+            ) {
+
+                fullName =
+                    localStorage.getItem(
+                        "adminName"
+                    );
+
+            }
+
+        }
+
+
+        if (!fullName) {
+
+            fullName = "User";
+
+        }
+
+
+        if (userNameElement) {
+
+            userNameElement.textContent =
+                fullName + "!";
+
+        }
+
+
+        /* =====================================================
+           NAVIGATION
+        ===================================================== */
+
+        function goTo(page) {
+
+            window.location.href = page;
+
+        }
+
+
+        /* HOME */
+
+        const navHome =
+            document.getElementById(
+                "navHome"
+            );
+
+        if (navHome) {
+
+            navHome.addEventListener(
+                "click",
+                function () {
+
+                    goTo(
+                        "dashboard.html"
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* PAYMENT */
+
+        const navPayment =
+            document.getElementById(
+                "navPayment"
+            );
+
+        if (navPayment) {
+
+            navPayment.addEventListener(
+                "click",
+                function () {
+
+                    goTo(
+                        "paymentmethod.html"
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* HISTORY */
+
+        const navHistory =
+            document.getElementById(
+                "navHistory"
+            );
+
+        if (navHistory) {
+
+            navHistory.addEventListener(
+                "click",
+                function () {
+
+                    goTo(
+                        "history.html"
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* PROFILE */
+
+        const navProfile =
+            document.getElementById(
+                "navProfile"
+            );
+
+        if (navProfile) {
+
+            navProfile.addEventListener(
+                "click",
+                function () {
+
+                    goTo(
+                        "profile.html"
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           PAY NOW
+        ===================================================== */
+
+        const homePayNowBtn =
+            document.getElementById(
+                "homePayNowBtn"
+            );
+
+        if (homePayNowBtn) {
+
+            homePayNowBtn.addEventListener(
+                "click",
+                function () {
+
+                    goTo(
+                        "paymentmethod.html"
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           MAKE PAYMENT
+        ===================================================== */
+
+        const quickPaymentBtn =
+            document.getElementById(
+                "quickPaymentBtn"
+            );
+
+        if (quickPaymentBtn) {
+
+            quickPaymentBtn.addEventListener(
+                "click",
+                function () {
+
+                    goTo(
+                        "paymentmethod.html"
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           PAYMENT HISTORY
+        ===================================================== */
+
+        const quickHistoryBtn =
+            document.getElementById(
+                "quickHistoryBtn"
+            );
+
+        if (quickHistoryBtn) {
+
+            quickHistoryBtn.addEventListener(
+                "click",
+                function () {
+
+                    goTo(
+                        "history.html"
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           MY BOARDING HOUSE
+        ===================================================== */
+
+        const quickBoardingBtn =
+            document.getElementById(
+                "quickBoardingBtn"
+            );
+
+        if (quickBoardingBtn) {
+
+            quickBoardingBtn.addEventListener(
+                "click",
+                function () {
+
+                    goTo(
+                        "profile.html"
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           BILLING
+        ===================================================== */
+
+        const quickBillingBtn =
+            document.getElementById(
+                "quickBillingBtn"
+            );
+
+        if (quickBillingBtn) {
+
+            quickBillingBtn.addEventListener(
+                "click",
+                function () {
+
+                    goTo(
+                        "paymentmethod.html"
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           MAINTENANCE
+        ===================================================== */
+
+        const quickMaintenanceBtn =
+            document.getElementById(
+                "quickMaintenanceBtn"
+            );
+
+        if (quickMaintenanceBtn) {
+
+            quickMaintenanceBtn.addEventListener(
+                "click",
+                function () {
+
+                    goTo(
+                        "maintenance.html"
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           ANNOUNCEMENTS
+        ===================================================== */
+
+        const quickAnnouncementBtn =
+            document.getElementById(
+                "quickAnnouncementBtn"
+            );
+
+        if (quickAnnouncementBtn) {
+
+            quickAnnouncementBtn.addEventListener(
+                "click",
+                function () {
+
+                    goTo(
+                        "announcements.html"
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           CONTACT
+        ===================================================== */
+
+        const quickContactBtn =
+            document.getElementById(
+                "quickContactBtn"
+            );
+
+        if (quickContactBtn) {
+
+            quickContactBtn.addEventListener(
+                "click",
+                function () {
+
+                    goTo(
+                        "contact.html"
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           SETTINGS
+        ===================================================== */
+
+        const quickSettingsBtn =
+            document.getElementById(
+                "quickSettingsBtn"
+            );
+
+        if (quickSettingsBtn) {
+
+            quickSettingsBtn.addEventListener(
+                "click",
+                function () {
+
+                    goTo(
+                        "settings.html"
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           VIEW ALL PAYMENTS
+        ===================================================== */
+
+        const viewAllPaymentsBtn =
+            document.getElementById(
+                "viewAllPaymentsBtn"
+            );
+
+        if (viewAllPaymentsBtn) {
+
+            viewAllPaymentsBtn.addEventListener(
+                "click",
+                function () {
+
+                    goTo(
+                        "history.html"
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           HEADER PROFILE
+        ===================================================== */
+
+        const heroProfile =
+            document.getElementById(
+                "heroProfile"
+            );
+
+        if (heroProfile) {
+
+            heroProfile.addEventListener(
+                "click",
+                function () {
+
+                    goTo(
+                        "profile.html"
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           NOTIFICATION
+        ===================================================== */
+
+        const heroNotification =
+            document.getElementById(
+                "heroNotification"
+            );
+
+        if (heroNotification) {
+
+            heroNotification.addEventListener(
+                "click",
+                function () {
+
+                    goTo(
+                        "announcements.html"
+                    );
+
+                }
+            );
+
+        }
+
+        /* =====================================================
+           COMPLAINTS
+        ===================================================== */
+
+        const quickComplaintBtn =
+            document.getElementById(
+                "quickComplaintBtn"
+            );
+
+        const complaintModal =
+            document.getElementById(
+                "complaintModal"
+            );
+
+        const complaintCloseBtn =
+            document.getElementById(
+                "complaintCloseBtn"
+            );
+
+        const complaintForm =
+            document.getElementById(
+                "complaintForm"
+            );
+
+        const complaintSuccess =
+            document.getElementById(
+                "complaintSuccess"
+            );
+
+        const complaintComplainant =
+            document.getElementById(
+                "complaintComplainant"
+            );
+
+        const complaintEmail =
+            document.getElementById(
+                "complaintEmail"
+            );
+
+        const complaintRoom =
+            document.getElementById(
+                "complaintRoom"
+            );
+
+        const complaintAgainst =
+            document.getElementById(
+                "complaintAgainst"
+            );
+
+        const complaintIssue =
+            document.getElementById(
+                "complaintIssue"
+            );
+
+
+        function readJSON(key, fallback) {
+
+            try {
+
+                const value =
+                    localStorage.getItem(key);
+
+                return value
+                    ? JSON.parse(value)
+                    : fallback;
+
+            } catch (error) {
+
+                return fallback;
+
+            }
+
+        }
+
+
+        function getTenantRecords() {
+
+            const rows =
+                readJSON(
+                    "boardingPay_tenants",
+                    []
+                );
+
+            return Array.isArray(rows)
+                ? rows
+                : [];
+
+        }
+
+
+        function getCurrentTenant() {
+
+            const tenants =
+                getTenantRecords();
+
+            const currentTenantId =
+                localStorage.getItem(
+                    "currentTenantId"
+                ) ||
+                localStorage.getItem(
+                    "currentUserId"
+                ) ||
+                localStorage.getItem(
+                    "tenantId"
+                );
+
+            const currentEmail =
+                localStorage.getItem(
+                    "currentUserEmail"
+                ) ||
+                localStorage.getItem(
+                    "tenantEmail"
+                ) ||
+                localStorage.getItem(
+                    "profileEmail"
+                );
+
+            let tenant = null;
+
+
+            if (currentTenantId) {
+
+                tenant =
+                    tenants.find(function (t) {
+
+                        return String(
+                            t.id ||
+                            t.tenantId ||
+                            t.userId ||
+                            ""
+                        ) === String(
+                            currentTenantId
+                        );
+
+                    });
+
+            }
+
+
+            if (!tenant && currentEmail) {
+
+                tenant =
+                    tenants.find(function (t) {
+
+                        return String(
+                            t.email || ""
+                        ).toLowerCase() ===
+                        String(
+                            currentEmail
+                        ).toLowerCase();
+
+                    });
+
+            }
+
+
+            return tenant || {};
+
+        }
+
+
+        function currentTenantInfo() {
+
+            const tenant =
+                getCurrentTenant();
+
+
+            const fullName =
+                tenant.fullName ||
+                tenant.name ||
+                tenant.tenantName ||
+                localStorage.getItem(
+                    "profileFullName"
+                ) ||
+                localStorage.getItem(
+                    "tenantName"
+                ) ||
+                "Tenant";
+
+
+            const email =
+                tenant.email ||
+                tenant.emailAddress ||
+                localStorage.getItem(
+                    "profileEmail"
+                ) ||
+                localStorage.getItem(
+                    "tenantEmail"
+                ) ||
+                "";
+
+
+            const room =
+                tenant.room ||
+                tenant.roomName ||
+                tenant.roomNumber ||
+                tenant.house ||
+                tenant.houseName ||
+                localStorage.getItem(
+                    "tenantRoom"
+                ) ||
+                localStorage.getItem(
+                    "room"
+                ) ||
+                "";
+
+
+            const landlord =
+                tenant.landlord ||
+                tenant.landlordName ||
+                tenant.ownerName ||
+                localStorage.getItem(
+                    "landlordName"
+                ) ||
+                "";
+
+
+            return {
+                tenant: tenant,
+                fullName: fullName,
+                email: email,
+                room: room,
+                landlord: landlord
+            };
+
+        }
+
+
+        function loadComplaintTenantInfo() {
+
+            const info =
+                currentTenantInfo();
+
+
+            if (complaintComplainant) {
+
+                complaintComplainant.value =
+                    info.fullName;
+
+            }
+
+
+            if (complaintEmail) {
+
+                complaintEmail.value =
+                    info.email;
+
+            }
+
+
+            if (complaintRoom) {
+
+                complaintRoom.value =
+                    info.room;
+
+            }
+
+
+            if (
+                complaintAgainst &&
+                !complaintAgainst.value
+            ) {
+
+                complaintAgainst.value =
+                    info.landlord;
+
+            }
+
+        }
+
+
+        function openComplaintModal() {
+
+            loadComplaintTenantInfo();
+
+            if (complaintSuccess) {
+
+                complaintSuccess.classList.remove(
+                    "show"
+                );
+
+            }
+
+            if (complaintModal) {
+
+                complaintModal.classList.add(
+                    "show"
+                );
+
+                complaintModal.setAttribute(
+                    "aria-hidden",
+                    "false"
+                );
+
+            }
+
+            setTimeout(function () {
+
+                if (complaintAgainst) {
+
+                    complaintAgainst.focus();
+
+                }
+
+            }, 50);
+
+        }
+
+
+        function closeComplaintModal() {
+
+            if (complaintModal) {
+
+                complaintModal.classList.remove(
+                    "show"
+                );
+
+                complaintModal.setAttribute(
+                    "aria-hidden",
+                    "true"
+                );
+
+            }
+
+        }
+
+
+        function saveComplaintRecord(data) {
+
+            const key =
+                "boardingPay_complaints";
+
+
+            let rows =
+                readJSON(key, []);
+
+
+            if (!Array.isArray(rows)) {
+
+                rows = [];
+
+            }
+
+
+            const record = {
+
+                id:
+                    "CMP-" +
+                    Date.now() +
+                    "-" +
+                    Math.random()
+                        .toString(36)
+                        .slice(2, 7)
+                        .toUpperCase(),
+
+                complainant:
+                    data.complainant || "",
+
+                name:
+                    data.complainant || "",
+
+                fullName:
+                    data.complainant || "",
+
+                email:
+                    data.email || "",
+
+                userType:
+                    "Tenant",
+
+                type:
+                    "Tenant",
+
+                room:
+                    data.room || "",
+
+                roomNumber:
+                    data.room || "",
+
+                against:
+                    data.against || "",
+
+                againstName:
+                    data.against || "",
+
+                landlord:
+                    data.against || "",
+
+                landlordName:
+                    data.against || "",
+
+                complaint:
+                    data.complaint || "",
+
+                issue:
+                    data.complaint || "",
+
+                status:
+                    "Pending",
+
+                date:
+                    new Date().toISOString(),
+
+                createdAt:
+                    new Date().toISOString()
+
+            };
+
+
+            rows.unshift(record);
+
+            localStorage.setItem(
+                key,
+                JSON.stringify(rows)
+            );
+
+            localStorage.setItem(
+                "boardingPay_lastUpdate",
+                Date.now().toString()
+            );
+
+
+            /* Shared activity log */
+            let activities =
+                readJSON(
+                    "boardingPay_activities",
+                    []
+                );
+
+            if (!Array.isArray(activities)) {
+
+                activities = [];
+
+            }
+
+
+            activities.unshift({
+
+                id:
+                    "ACT-" + Date.now(),
+
+                type:
+                    "New Complaint",
+
+                title:
+                    "New Complaint",
+
+                message:
+                    record.complainant +
+                    " submitted a complaint.",
+
+                icon:
+                    "⚠️",
+
+                date:
+                    record.createdAt,
+
+                createdAt:
+                    record.createdAt
+
+            });
+
+
+            localStorage.setItem(
+                "boardingPay_activities",
+                JSON.stringify(
+                    activities.slice(0, 200)
+                )
+            );
+
+
+            /* Shared admin notification */
+            let notifications =
+                readJSON(
+                    "boardingPay_adminNotifications",
+                    []
+                );
+
+
+            if (!Array.isArray(notifications)) {
+
+                notifications = [];
+
+            }
+
+
+            notifications.unshift({
+
+                id:
+                    "NOTIF-" + Date.now(),
+
+                title:
+                    "New Complaint",
+
+                message:
+                    record.complainant +
+                    " submitted a complaint.",
+
+                type:
+                    "complaint",
+
+                icon:
+                    "⚠️",
+
+                read:
+                    false,
+
+                date:
+                    record.createdAt,
+
+                createdAt:
+                    record.createdAt
+
+            });
+
+
+            localStorage.setItem(
+                "boardingPay_adminNotifications",
+                JSON.stringify(
+                    notifications.slice(0, 200)
+                )
+            );
+
+
+            return record;
+
+        }
+
+
+        if (quickComplaintBtn) {
+
+            quickComplaintBtn.addEventListener(
+                "click",
+                function () {
+
+                    openComplaintModal();
+
+                }
+            );
+
+        }
+
+
+        if (complaintCloseBtn) {
+
+            complaintCloseBtn.addEventListener(
+                "click",
+                function () {
+
+                    closeComplaintModal();
+
+                }
+            );
+
+        }
+
+
+        if (complaintModal) {
+
+            complaintModal.addEventListener(
+                "click",
+                function (event) {
+
+                    if (
+                        event.target ===
+                        complaintModal
+                    ) {
+
+                        closeComplaintModal();
+
+                    }
+
+                }
+            );
+
+        }
+
+
+        document.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (
+                    event.key === "Escape" &&
+                    complaintModal &&
+                    complaintModal.classList.contains(
+                        "show"
+                    )
+                ) {
+
+                    closeComplaintModal();
+
+                }
+
+            }
+        );
+
+
+        if (complaintForm) {
+
+            complaintForm.addEventListener(
+                "submit",
+                function (event) {
+
+                    event.preventDefault();
+
+
+                    const info =
+                        currentTenantInfo();
+
+
+                    const against =
+                        complaintAgainst
+                            ? complaintAgainst.value.trim()
+                            : "";
+
+
+                    const issue =
+                        complaintIssue
+                            ? complaintIssue.value.trim()
+                            : "";
+
+
+                    if (!against) {
+
+                        alert(
+                            "Please enter who the complaint is against."
+                        );
+
+                        if (complaintAgainst) {
+
+                            complaintAgainst.focus();
+
+                        }
+
+                        return;
+
+                    }
+
+
+                    if (!issue) {
+
+                        alert(
+                            "Please describe your complaint or issue."
+                        );
+
+                        if (complaintIssue) {
+
+                            complaintIssue.focus();
+
+                        }
+
+                        return;
+
+                    }
+
+
+                    saveComplaintRecord({
+
+                        complainant:
+                            info.fullName,
+
+                        email:
+                            info.email,
+
+                        room:
+                            info.room,
+
+                        against:
+                            against,
+
+                        complaint:
+                            issue
+
+                    });
+
+
+                    if (complaintSuccess) {
+
+                        complaintSuccess.textContent =
+                            "Your complaint has been submitted successfully.";
+
+                        complaintSuccess.classList.add(
+                            "show"
+                        );
+
+                    }
+
+
+                    complaintForm.reset();
+
+
+                    loadComplaintTenantInfo();
+
+
+                    setTimeout(
+                        function () {
+
+                            closeComplaintModal();
+
+                        },
+                        1200
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* Update badge when complaints are changed elsewhere */
+        function updateComplaintBadge() {
+
+            if (!quickComplaintBtn) {
+
+                return;
+
+            }
+
+
+            const rows =
+                readJSON(
+                    "boardingPay_complaints",
+                    []
+                );
+
+
+            const current =
+                currentTenantInfo();
+
+
+            const myRows =
+                Array.isArray(rows)
+                    ? rows.filter(
+                        function (r) {
+
+                            const sameEmail =
+                                current.email &&
+                                r.email &&
+                                String(
+                                    r.email
+                                ).toLowerCase() ===
+                                String(
+                                    current.email
+                                ).toLowerCase();
+
+                            const sameName =
+                                current.fullName &&
+                                String(
+                                    r.complainant ||
+                                    r.name ||
+                                    ""
+                                ).toLowerCase() ===
+                                String(
+                                    current.fullName
+                                ).toLowerCase();
+
+                            return (
+                                sameEmail ||
+                                sameName
+                            );
+
+                        }
+                    )
+                    : [];
+
+
+            const pendingCount =
+                myRows.filter(
+                    function (r) {
+
+                        return String(
+                            r.status ||
+                            "Pending"
+                        ).toLowerCase() ===
+                        "pending";
+
+                    }
+                ).length;
+
+
+            const badge =
+                document.getElementById(
+                    "complaintBadge"
+                );
+
+
+            if (badge) {
+
+                if (pendingCount > 0) {
+
+                    badge.textContent =
+                        pendingCount > 9
+                            ? "9+"
+                            : String(
+                                pendingCount
+                            );
+
+                    badge.style.display =
+                        "flex";
+
+                } else {
+
+                    badge.style.display =
+                        "none";
+
+                }
+
+            }
+
+        }
+
+
+        updateComplaintBadge();
+
+
+        window.addEventListener(
+            "storage",
+            function (event) {
+
+                if (
+                    event.key ===
+                    "boardingPay_complaints"
+                ) {
+
+                    updateComplaintBadge();
+
+                }
+
+            }
+        );
+
+
+    }
+
+);
+
+
+        /* =====================================================
+           TENANT NOTIFICATIONS
+           Reads shared payment/complaint status changes.
+        ===================================================== */
+
+        const heroNotification =
+            document.getElementById("heroNotification");
+
+        const tenantNotificationPanel =
+            document.getElementById("tenantNotificationPanel");
+
+        const tenantNotificationList =
+            document.getElementById("tenantNotificationList");
+
+        const tenantNotificationBadge =
+            document.getElementById("tenantNotificationBadge");
+
+        const markTenantNotificationsRead =
+            document.getElementById("markTenantNotificationsRead");
+
+
+        function tenantReadJSON(key, fallback = []) {
+            try {
+                const raw = localStorage.getItem(key);
+                const parsed = raw ? JSON.parse(raw) : fallback;
+                return parsed ?? fallback;
+            } catch (e) {
+                return fallback;
+            }
+        }
+
+
+        function tenantCurrentIdentity() {
+            const tenants = tenantReadJSON("boardingPay_tenants", []);
+            const currentId =
+                localStorage.getItem("currentTenantId") ||
+                localStorage.getItem("currentUserId") ||
+                localStorage.getItem("tenantId");
+
+            const currentEmail =
+                localStorage.getItem("currentUserEmail") ||
+                localStorage.getItem("tenantEmail") ||
+                localStorage.getItem("profileEmail");
+
+            let tenant = {};
+
+            if (Array.isArray(tenants) && currentId) {
+                tenant = tenants.find(t =>
+                    String(t.id || t.tenantId || t.userId || "") ===
+                    String(currentId)
+                ) || {};
+            }
+
+            if ((!tenant || !Object.keys(tenant).length) &&
+                Array.isArray(tenants) && currentEmail) {
+                tenant = tenants.find(t =>
+                    String(t.email || "").toLowerCase() ===
+                    String(currentEmail).toLowerCase()
+                ) || {};
+            }
+
+            const fullName =
+                tenant.fullName ||
+                tenant.name ||
+                tenant.tenantName ||
+                localStorage.getItem("profileFullName") ||
+                localStorage.getItem("tenantName") ||
+                "";
+
+            const email =
+                tenant.email ||
+                localStorage.getItem("profileEmail") ||
+                localStorage.getItem("tenantEmail") ||
+                "";
+
+            return {
+                id: currentId || tenant.id || tenant.tenantId || "",
+                fullName,
+                email
+            };
+        }
+
+
+        function tenantSamePerson(record, identity) {
+            const recordEmail = String(
+                record.email ||
+                record.tenantEmail ||
+                record.payerEmail ||
+                record.boarderEmail ||
+                ""
+            ).toLowerCase().trim();
+
+            const identityEmail =
+                String(identity.email || "").toLowerCase().trim();
+
+            if (identityEmail && recordEmail &&
+                identityEmail === recordEmail) {
+                return true;
+            }
+
+            const recordId = String(
+                record.tenantId ||
+                record.userId ||
+                record.payerId ||
+                record.boarderId ||
+                ""
+            ).trim();
+
+            if (identity.id && recordId &&
+                String(identity.id) === recordId) {
+                return true;
+            }
+
+            const recordName = String(
+                record.tenantName ||
+                record.payerName ||
+                record.boarderName ||
+                record.complainant ||
+                record.name ||
+                record.fullName ||
+                ""
+            ).toLowerCase().trim();
+
+            const identityName =
+                String(identity.fullName || "").toLowerCase().trim();
+
+            return !!(
+                identityName &&
+                recordName &&
+                identityName === recordName
+            );
+        }
+
+
+        function tenantFormatDate(value) {
+            if (!value) return "";
+            const d = new Date(value);
+            if (Number.isNaN(d.getTime())) return String(value);
+            return d.toLocaleString("en-PH", {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+                hour: "numeric",
+                minute: "2-digit"
+            });
+        }
+
+
+        /* =====================================================
+           HOME PAYMENT STATUS TOAST
+           Shows a temporary notification only when a payment
+           status changes. It automatically disappears.
+        ===================================================== */
+
+        let homePaymentToastTimer = null;
+        let homePaymentBaselineReady = false;
+        let homePaymentLastSignature = "";
+
+        function getLatestTenantPayment() {
+            const identity = tenantCurrentIdentity();
+            const payments =
+                tenantReadJSON("boardingPay_payments", []);
+
+            if (!Array.isArray(payments) || !payments.length) {
+                return null;
+            }
+
+            const myPayments = payments.filter(function(payment) {
+                return tenantSamePerson(payment, identity);
+            });
+
+            if (!myPayments.length) {
+                return null;
+            }
+
+            myPayments.sort(function(a, b) {
+                const dateA = new Date(
+                    a.updatedAt ||
+                    a.approvedAt ||
+                    a.rejectedAt ||
+                    a.processedAt ||
+                    a.createdAt ||
+                    a.date ||
+                    0
+                ).getTime();
+
+                const dateB = new Date(
+                    b.updatedAt ||
+                    b.approvedAt ||
+                    b.rejectedAt ||
+                    b.processedAt ||
+                    b.createdAt ||
+                    b.date ||
+                    0
+                ).getTime();
+
+                return dateB - dateA;
+            });
+
+            return myPayments[0];
+        }
+
+        function getPaymentStatusSignature(payment) {
+            if (!payment) return "";
+
+            return [
+                payment.id || payment.paymentId || payment.transactionId || "",
+                String(payment.status || "Pending").toLowerCase().trim(),
+                payment.updatedAt || "",
+                payment.approvedAt || "",
+                payment.rejectedAt || "",
+                payment.processedAt || ""
+            ].join("|");
+        }
+
+        function showHomePaymentToast(payment) {
+            if (!payment) return;
+
+            const status =
+                String(payment.status || "Pending").toLowerCase().trim();
+
+            let statusClass = "";
+            let title = "";
+            let message = "";
+
+            const amount =
+                payment.amount !== undefined &&
+                payment.amount !== null &&
+                payment.amount !== ""
+                    ? "₱" +
+                      Number(payment.amount).toLocaleString(
+                          "en-PH",
+                          {
+                              minimumFractionDigits: 2,
+                              maximumFractionDigits: 2
+                          }
+                      )
+                    : "your payment";
+
+            if (
+                status === "approved" ||
+                status === "paid" ||
+                status === "processed"
+            ) {
+                statusClass = "approved";
+                title = "✓ Payment Processed";
+                message =
+                    "Your payment of " +
+                    amount +
+                    " has been processed and approved by the admin.";
+            } else if (
+                status === "rejected" ||
+                status === "declined"
+            ) {
+                statusClass = "rejected";
+                title = "✕ Payment Rejected";
+                message =
+                    "Your payment of " +
+                    amount +
+                    " was rejected by the admin.";
+            } else if (
+                status === "pending" ||
+                status === "processing" ||
+                status === "for review" ||
+                status === "under review"
+            ) {
+                statusClass = "pending";
+                title = "⏳ Payment Under Review";
+                message =
+                    "Your payment of " +
+                    amount +
+                    " is currently being reviewed by the admin.";
+            } else {
+                return;
+            }
+
+            let toast =
+                document.getElementById("homePaymentToast");
+
+            if (!toast) {
+                toast = document.createElement("div");
+                toast.id = "homePaymentToast";
+                toast.className = "home-payment-toast";
+                toast.setAttribute("role", "status");
+                toast.setAttribute("aria-live", "polite");
+
+                document.body.appendChild(toast);
+            }
+
+            toast.className =
+                "home-payment-toast show " + statusClass;
+
+            toast.innerHTML =
+                "<strong>" +
+                title +
+                "</strong>" +
+                "<span>" +
+                message +
+                "</span>";
+
+            if (homePaymentToastTimer) {
+                clearTimeout(homePaymentToastTimer);
+            }
+
+            homePaymentToastTimer = setTimeout(function() {
+                toast.classList.remove("show");
+
+                setTimeout(function() {
+                    if (!toast.classList.contains("show")) {
+                        toast.innerHTML = "";
+                    }
+                }, 300);
+            }, 4000);
+        }
+
+        function checkHomePaymentStatusChange() {
+            const payment = getLatestTenantPayment();
+            const signature = getPaymentStatusSignature(payment);
+
+            /*
+             * First load only establishes the current state.
+             * This prevents an old approved payment from showing
+             * a notification every time the Home page opens.
+             */
+            if (!homePaymentBaselineReady) {
+                homePaymentLastSignature = signature;
+                homePaymentBaselineReady = true;
+                return;
+            }
+
+            if (
+                signature &&
+                signature !== homePaymentLastSignature
+            ) {
+                homePaymentLastSignature = signature;
+                showHomePaymentToast(payment);
+            }
+        }
+
+
+        function buildTenantNotifications() {
+            const identity = tenantCurrentIdentity();
+            const notifications = [];
+
+            const payments =
+                tenantReadJSON("boardingPay_payments", []);
+
+            if (Array.isArray(payments)) {
+                payments
+                    .filter(p => tenantSamePerson(p, identity))
+                    .forEach(p => {
+                        const status =
+                            String(p.status || "Pending").toLowerCase();
+
+                        const statusChanged =
+                            p.updatedAt ||
+                            p.approvedAt ||
+                            p.rejectedAt ||
+                            p.processedAt ||
+                            p.lastUpdatedAt ||
+                            p.createdAt ||
+                            p.date;
+
+                        if (status === "approved" ||
+                            status === "paid" ||
+                            status === "processed") {
+
+                            notifications.push({
+                                id: "payment-approved-" +
+                                    String(p.id || p.paymentId ||
+                                    p.transactionId || statusChanged),
+                                type: "payment",
+                                title: "Payment Processed",
+                                message:
+                                    "Your payment" +
+                                    (p.amount ? " of ₱" + p.amount : "") +
+                                    " has been processed and approved by the admin.",
+                                date: p.approvedAt || p.updatedAt ||
+                                    p.processedAt || p.createdAt || p.date,
+                                read: false
+                            });
+
+                        } else if (status === "rejected" ||
+                                   status === "declined") {
+
+                            notifications.push({
+                                id: "payment-rejected-" +
+                                    String(p.id || p.paymentId ||
+                                    p.transactionId || statusChanged),
+                                type: "payment",
+                                title: "Payment Rejected",
+                                message:
+                                    "Your payment" +
+                                    (p.amount ? " of ₱" + p.amount : "") +
+                                    " was rejected by the admin.",
+                                date: p.rejectedAt || p.updatedAt ||
+                                    p.createdAt || p.date,
+                                read: false
+                            });
+
+                        } else if (
+                            status === "pending" ||
+                            status === "processing" ||
+                            status === "for review" ||
+                            status === "under review"
+                        ) {
+
+                            notifications.push({
+                                id: "payment-pending-" +
+                                    String(p.id || p.paymentId ||
+                                    p.transactionId || statusChanged),
+                                type: "payment",
+                                title: "Payment Under Review",
+                                message:
+                                    "Your payment" +
+                                    (p.amount ? " of ₱" + p.amount : "") +
+                                    " is still being processed/reviewed by the admin.",
+                                date: p.updatedAt || p.createdAt || p.date,
+                                read: false
+                            });
+                        }
+                    });
+            }
+
+
+            const complaints =
+                tenantReadJSON("boardingPay_complaints", []);
+
+            if (Array.isArray(complaints)) {
+                complaints
+                    .filter(c => tenantSamePerson(c, identity))
+                    .forEach(c => {
+                        const status =
+                            String(c.status || "Pending").toLowerCase();
+
+                        const changedAt =
+                            c.updatedAt ||
+                            c.resolvedAt ||
+                            c.rejectedAt ||
+                            c.processedAt ||
+                            c.createdAt ||
+                            c.date;
+
+                        const complaintId =
+                            c.id ||
+                            c.complaintId ||
+                            changedAt ||
+                            Math.random();
+
+                        if (status === "resolved" ||
+                            status === "approved" ||
+                            status === "accepted" ||
+                            status === "resolved/accepted") {
+
+                            notifications.push({
+                                id: "complaint-approved-" + complaintId,
+                                type: "complaint",
+                                title: "Complaint Accepted",
+                                message:
+                                    "Your complaint has been accepted/resolved by the admin.",
+                                date: c.resolvedAt || c.updatedAt ||
+                                    c.processedAt || c.createdAt || c.date,
+                                read: false
+                            });
+
+                        } else if (
+                            status === "rejected" ||
+                            status === "declined"
+                        ) {
+
+                            notifications.push({
+                                id: "complaint-rejected-" + complaintId,
+                                type: "complaint",
+                                title: "Complaint Rejected",
+                                message:
+                                    "Your complaint was rejected by the admin.",
+                                date: c.rejectedAt || c.updatedAt ||
+                                    c.processedAt || c.createdAt || c.date,
+                                read: false
+                            });
+
+                        } else {
+
+                            notifications.push({
+                                id: "complaint-pending-" + complaintId,
+                                type: "complaint",
+                                title: "Complaint Under Review",
+                                message:
+                                    "Your complaint is still pending review by the admin.",
+                                date: c.updatedAt || c.createdAt || c.date,
+                                read: false
+                            });
+                        }
+                    });
+            }
+
+            return notifications
+                .sort((a, b) =>
+                    new Date(b.date || 0) -
+                    new Date(a.date || 0)
+                );
+        }
+
+
+        function tenantNotificationStateKey(item) {
+            return "tenantNotifRead_" + item.id;
+        }
+
+
+        function renderTenantNotifications() {
+            if (!tenantNotificationList) return;
+
+            const all = buildTenantNotifications();
+
+            if (!all.length) {
+                tenantNotificationList.innerHTML =
+                    '<div class="tenant-notification-empty">No notifications yet.</div>';
+
+                if (tenantNotificationBadge) {
+                    tenantNotificationBadge.style.display = "none";
+                }
+
+                return;
+            }
+
+            const list = all.slice(0, 30);
+
+            tenantNotificationList.innerHTML =
+                list.map(item => {
+                    const isRead =
+                        localStorage.getItem(
+                            tenantNotificationStateKey(item)
+                        ) === "1";
+
+                    return `
+                        <div class="tenant-notification-item ${isRead ? "" : "unread"}"
+                             data-notification-id="${String(item.id).replace(/"/g, "&quot;")}">
+                            <strong>${item.title}</strong>
+                            <p>${item.message}</p>
+                            <small>${tenantFormatDate(item.date)}</small>
+                        </div>
+                    `;
+                }).join("");
+
+            const unread =
+                list.filter(item =>
+                    localStorage.getItem(
+                        tenantNotificationStateKey(item)
+                    ) !== "1"
+                ).length;
+
+            if (tenantNotificationBadge) {
+                if (unread > 0) {
+                    tenantNotificationBadge.textContent =
+                        unread > 9 ? "9+" : String(unread);
+                    tenantNotificationBadge.style.display = "flex";
+                } else {
+                    tenantNotificationBadge.style.display = "none";
+                }
+            }
+        }
+
+
+        function markAllTenantNotificationsRead() {
+            buildTenantNotifications().forEach(item => {
+                localStorage.setItem(
+                    tenantNotificationStateKey(item),
+                    "1"
+                );
+            });
+
+            renderTenantNotifications();
+        }
+
+
+        if (heroNotification) {
+            heroNotification.addEventListener("click", function(event) {
+                event.stopPropagation();
+
+                if (tenantNotificationPanel) {
+                    tenantNotificationPanel.classList.toggle("show");
+                    renderTenantNotifications();
+                }
+            });
+        }
+
+
+        if (markTenantNotificationsRead) {
+            markTenantNotificationsRead.addEventListener(
+                "click",
+                function(event) {
+                    event.stopPropagation();
+                    markAllTenantNotificationsRead();
+                }
+            );
+        }
+
+
+        if (tenantNotificationList) {
+            tenantNotificationList.addEventListener(
+                "click",
+                function(event) {
+                    const item =
+                        event.target.closest(
+                            ".tenant-notification-item"
+                        );
+
+                    if (!item) return;
+
+                    const id =
+                        item.dataset.notificationId;
+
+                    if (id) {
+                        localStorage.setItem(
+                            "tenantNotifRead_" + id,
+                            "1"
+                        );
+                    }
+
+                    item.classList.remove("unread");
+                    renderTenantNotifications();
+                }
+            );
+        }
+
+
+        document.addEventListener("click", function(event) {
+            if (
+                tenantNotificationPanel &&
+                heroNotification &&
+                !tenantNotificationPanel.contains(event.target) &&
+                !heroNotification.contains(event.target)
+            ) {
+                tenantNotificationPanel.classList.remove("show");
+            }
+        });
+
+
+        window.addEventListener("storage", function(event) {
+            if (
+                event.key === "boardingPay_payments" ||
+                event.key === "boardingPay_complaints" ||
+                event.key === "boardingPay_lastUpdate"
+            ) {
+                checkHomePaymentStatusChange();
+                renderTenantNotifications();
+            }
+        });
+
+
+        checkHomePaymentStatusChange();
+        renderTenantNotifications();
+
+        setInterval(
+            function() {
+                checkHomePaymentStatusChange();
+                renderTenantNotifications();
+            },
+            2000
+        );
+
+
+</script>
+
+
+</body>
+
+</html>

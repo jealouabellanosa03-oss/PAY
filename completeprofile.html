@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Tenant Profile - BoardingPay</title>
+
+    <link
+        rel="stylesheet"
+        href="./style.css?v=29">
+
+</head>
+
+<body>
+
+<main class="app tenant-profile-page">
+
+    <!-- BACK BUTTON -->
+    <button
+        type="button"
+        id="profileBackBtn"
+        aria-label="Back to Verify Email"
+        style="
+            position: fixed;
+            top: 18px;
+            left: 18px;
+            width: 35px;
+            height: 35px;
+            padding: 0;
+            margin: 0;
+            border: none;
+            outline: none;
+            background: transparent;
+            color: #008bd0;
+            font-size: 34px;
+            font-weight: 500;
+            line-height: 30px;
+            text-align: center;
+            cursor: pointer;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        "
+    >
+        ‹
+    </button>
+
+
+    <section class="tenant-profile-container">
+
+        <!-- TITLE -->
+        <h1 class="tenant-profile-title">
+            Tenant Profile
+        </h1>
+
+
+        <!-- PROFILE PHOTO -->
+        <div class="profile-photo-wrapper">
+
+            <div class="profile-photo">
+
+                <span class="profile-person">
+                    👤
+                </span>
+
+            </div>
+
+            <!-- CAMERA BUTTON -->
+            <button
+                type="button"
+                class="camera-btn"
+                id="cameraBtn"
+                aria-label="Change profile photo">
+
+                📷
+
+            </button>
+
+        </div>
+
+
+        <!-- ERROR MESSAGE -->
+        <div
+            id="profileError"
+            class="profile-error">
+        </div>
+
+
+        <!-- FULL NAME -->
+        <div class="profile-field">
+
+            <label for="profileFullName">
+                Full Name
+            </label>
+
+            <input
+                type="text"
+                id="profileFullName"
+                placeholder="e.g. Juan Dela Cruz"
+                autocomplete="name">
+
+        </div>
+
+
+        <!-- ADDRESS -->
+        <div class="profile-field">
+
+            <label for="profileAddress">
+                Address <span>(Optional)</span>
+            </label>
+
+            <input
+                type="text"
+                id="profileAddress"
+                placeholder="Enter your address"
+                autocomplete="street-address">
+
+        </div>
+
+
+        <!-- ROOM / HOUSE NUMBER -->
+        <div class="profile-field">
+
+            <label for="profileRoomHouse">
+                Room / House No. <span>(Optional)</span>
+            </label>
+
+            <input
+                type="text"
+                id="profileRoomHouse"
+                placeholder="e.g. Room 101">
+
+        </div>
+
+
+        <!-- SAVE -->
+        <button
+            type="button"
+            class="save-profile-btn"
+            id="saveProfileBtn">
+
+            Save
+
+        </button>
+
+    </section>
+
+</main>
+
+
+<script src="./script.js?v=29"></script>
+
+<script>
+
+    /* =====================================================
+       BACK TO VERIFY EMAIL
+    ===================================================== */
+
+    const profileBackBtn =
+        document.getElementById("profileBackBtn");
+
+    if (profileBackBtn) {
+
+        profileBackBtn.addEventListener(
+            "click",
+            function () {
+
+                window.location.href =
+                    "verify-email.html";
+
+            }
+        );
+
+    }
+
+</script>
+
+</body>
+
+</html>

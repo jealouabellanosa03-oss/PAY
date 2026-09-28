@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Payment Method - BoardingPay</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #ffffff;
+            color: #173b63;
+        }
+
+        .payment-page {
+            width: 100%;
+            max-width: 430px;
+            min-height: 100vh;
+            margin: auto;
+            background: #ffffff;
+            padding-bottom: 75px;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .payment-header {
+            height: 58px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            position: relative;
+
+            border-bottom: 1px solid #edf1f4;
+        }
+
+        .payment-header h1 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #173b63;
+        }
+
+
+        /* BACK BUTTON */
+
+        .back-btn {
+            position: absolute;
+
+            left: 12px;
+            top: 15px;
+
+            width: 35px;
+            height: 35px;
+
+            border: none;
+            background: transparent;
+
+            color: #657786;
+
+            font-size: 28px;
+
+            cursor: pointer;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        /* =========================
+           PAYMENT LIST
+        ========================= */
+
+        .payment-list {
+            width: 100%;
+        }
+
+        .payment-method {
+            width: 100%;
+            min-height: 62px;
+
+            display: flex;
+            align-items: center;
+
+            padding: 8px 14px;
+
+            border: none;
+            border-bottom: 1px solid #edf1f4;
+
+            background: #ffffff;
+
+            cursor: pointer;
+
+            text-align: left;
+        }
+
+        .payment-method:hover {
+            background: #f6fbff;
+        }
+
+        .payment-method:active {
+            background: #edf8ff;
+        }
+
+
+        /* ICON */
+
+        .method-icon {
+            width: 34px;
+            height: 34px;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-right: 12px;
+
+            color: #ffffff;
+
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .gcash {
+            background: #087de0;
+        }
+
+        .paymaya {
+            background: #1687d8;
+        }
+
+        .bank {
+            background: #189da5;
+        }
+
+        .cash {
+            background: #159da8;
+        }
+
+
+        /* TEXT */
+
+        .method-info {
+            flex: 1;
+        }
+
+        .method-info strong {
+            color: #36556f;
+
+            font-size: 12px;
+
+            font-weight: 500;
+        }
+
+
+        /* ARROW */
+
+        .method-arrow {
+            color: #8293a0;
+
+            font-size: 22px;
+        }
+
+
+        /* =========================
+           BOTTOM NAVIGATION
+        ========================= */
+
+        .bottom-navigation {
+            position: fixed;
+
+            left: 50%;
+            bottom: 0;
+
+            transform: translateX(-50%);
+
+            width: 100%;
+            max-width: 430px;
+
+            height: 62px;
+
+            background: #ffffff;
+
+            border-top: 1px solid #dce6ed;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            z-index: 1000;
+        }
+
+        .nav-item {
+            border: none;
+
+            background: transparent;
+
+            display: flex;
+            flex-direction: column;
+
+            align-items: center;
+            justify-content: center;
+
+            gap: 3px;
+
+            color: #7c8b97;
+
+            cursor: pointer;
+        }
+
+        .nav-item.active {
+            color: #078bd0;
+
+            font-weight: bold;
+        }
+
+        .nav-icon {
+            font-size: 17px;
+        }
+
+        .nav-label {
+            font-size: 8px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<main class="payment-page">
+
+
+    <!-- =========================
+         HEADER
+    ========================= -->
+
+    <header class="payment-header">
+
+        <button
+            type="button"
+            class="back-btn"
+            id="paymentBackBtn"
+            aria-label="Back">
+
+            ‹
+
+        </button>
+
+        <h1>
+            Payment Method
+        </h1>
+
+    </header>
+
+
+    <!-- =========================
+         PAYMENT METHODS
+    ========================= -->
+
+    <section class="payment-list">
+
+
+        <!-- GCASH -->
+
+        <button
+            type="button"
+            class="payment-method"
+            data-method="GCash">
+
+            <div class="method-icon gcash">
+                G
+            </div>
+
+            <div class="method-info">
+
+                <strong>
+                    GCash
+                </strong>
+
+            </div>
+
+            <div class="method-arrow">
+                ›
+            </div>
+
+        </button>
+
+
+        <!-- PAYMAYA -->
+
+        <button
+            type="button"
+            class="payment-method"
+            data-method="PayMaya">
+
+            <div class="method-icon paymaya">
+                ◉
+            </div>
+
+            <div class="method-info">
+
+                <strong>
+                    PayMaya
+                </strong>
+
+            </div>
+
+            <div class="method-arrow">
+                ›
+            </div>
+
+        </button>
+
+
+        <!-- BANK TRANSFER -->
+
+        <button
+            type="button"
+            class="payment-method"
+            data-method="Bank Transfer">
+
+            <div class="method-icon bank">
+                ▥
+            </div>
+
+            <div class="method-info">
+
+                <strong>
+                    Bank Transfer
+                </strong>
+
+            </div>
+
+            <div class="method-arrow">
+                ›
+            </div>
+
+        </button>
+
+
+        <!-- CASH -->
+
+        <button
+            type="button"
+            class="payment-method"
+            data-method="Cash (On-site)">
+
+            <div class="method-icon cash">
+                ₱
+            </div>
+
+            <div class="method-info">
+
+                <strong>
+                    Cash (On-site)
+                </strong>
+
+            </div>
+
+            <div class="method-arrow">
+                ›
+            </div>
+
+        </button>
+
+
+    </section>
+
+
+</main>
+
+
+<!-- =========================
+     BOTTOM NAVIGATION
+========================= -->
+
+<nav class="bottom-navigation">
+
+
+    <button
+        type="button"
+        class="nav-item"
+        id="navHome">
+
+        <span class="nav-icon">
+            ⌂
+        </span>
+
+        <span class="nav-label">
+            Home
+        </span>
+
+    </button>
+
+
+    <button
+        type="button"
+        class="nav-item active"
+        id="navPayment">
+
+        <span class="nav-icon">
+            ▣
+        </span>
+
+        <span class="nav-label">
+            Payment
+        </span>
+
+    </button>
+
+
+    <button
+        type="button"
+        class="nav-item"
+        id="navHistory">
+
+        <span class="nav-icon">
+            ◷
+        </span>
+
+        <span class="nav-label">
+            History
+        </span>
+
+    </button>
+
+
+    <button
+        type="button"
+        class="nav-item"
+        id="navProfile">
+
+        <span class="nav-icon">
+            ♙
+        </span>
+
+        <span class="nav-label">
+            Profile
+        </span>
+
+    </button>
+
+
+</nav>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const isLandlord = String(localStorage.getItem('currentUserType') || '').toLowerCase() === 'landlord';
+    const homePage = isLandlord ? 'landlord-dashboard.html' : 'tenant-dashboard.html';
+    document.getElementById('paymentBackBtn').addEventListener('click', function(){ window.location.href = homePage; });
+
+    document.querySelectorAll('.payment-method').forEach(function(button){
+        button.addEventListener('click', function(){
+            localStorage.setItem('selectedPaymentMethod', this.dataset.method || 'GCash');
+            window.location.href = 'payment-details.html';
+        });
+    });
+
+    document.getElementById('navHome').onclick = function(){ window.location.href = homePage; };
+    document.getElementById('navPayment').onclick = function(){ window.location.href = 'paymentmethod.html'; };
+    document.getElementById('navHistory').onclick = function(){ window.location.href = 'history.html'; };
+    document.getElementById('navProfile').onclick = function(){ window.location.href = isLandlord ? 'landlord-dashboard.html#profile' : 'profile.html'; };
+});
+</script>
+
+
+</body>
+
+</html>

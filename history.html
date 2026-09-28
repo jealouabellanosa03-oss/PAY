@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Payment History - BoardingPay</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+
+            margin: 0;
+
+            padding: 0;
+        }
+
+
+        body {
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: #ffffff;
+
+            color: #173b63;
+        }
+
+
+        .history-page {
+
+            max-width: 430px;
+
+            min-height: 100vh;
+
+            margin: auto;
+
+            background: #ffffff;
+
+            padding-bottom: 80px;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .history-header {
+
+            height: 58px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            position: relative;
+
+            border-bottom:
+                1px solid #edf1f4;
+        }
+
+
+        .history-header h1 {
+
+            font-size: 15px;
+
+            color: #173b63;
+        }
+
+
+        /* BACK */
+
+        .back-btn {
+
+            position: absolute;
+
+            left: 12px;
+
+            width: 35px;
+
+            height: 35px;
+
+            border: none;
+
+            background: transparent;
+
+            color: #657786;
+
+            font-size: 28px;
+
+            cursor: pointer;
+        }
+
+
+        /* =========================
+           HISTORY LIST
+        ========================= */
+
+        .history-list {
+
+            padding: 12px;
+        }
+
+
+        /* PAYMENT */
+
+        .payment-card {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            padding:
+                13px 10px;
+
+            border:
+                1px solid #e5edf2;
+
+            border-radius: 8px;
+
+            margin-bottom: 8px;
+
+            box-shadow:
+                0 2px 6px #eef3f6;
+
+            cursor: pointer;
+
+            background: #ffffff;
+        }
+
+
+        .payment-card:hover {
+
+            background: #f8fcff;
+        }
+
+
+        /* CHECK */
+
+        .check {
+
+            width: 32px;
+
+            height: 32px;
+
+            border-radius: 50%;
+
+            background: #20b77a;
+
+            color: #ffffff;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-weight: bold;
+
+            flex-shrink: 0;
+        }
+
+
+        /* INFO */
+
+        .payment-info {
+
+            flex: 1;
+        }
+
+
+        .payment-info strong {
+
+            display: block;
+
+            font-size: 12px;
+        }
+
+
+        .payment-info span {
+
+            display: block;
+
+            font-size: 10px;
+
+            color: #84939d;
+
+            margin-top: 3px;
+        }
+
+
+        /* AMOUNT */
+
+        .amount {
+
+            text-align: right;
+        }
+
+
+        .amount strong {
+
+            display: block;
+
+            font-size: 12px;
+
+            color: #159c75;
+        }
+
+
+        .amount span {
+
+            font-size: 9px;
+
+            color: #20a97a;
+        }
+
+
+        /* =========================
+           RECEIPT
+        ========================= */
+
+        .receipt {
+
+            display: none;
+
+            margin-top: 16px;
+
+            padding: 18px;
+
+            border:
+                1px solid #dfe9ef;
+
+            border-radius: 8px;
+
+            box-shadow:
+                0 3px 10px #edf2f5;
+
+            background: #ffffff;
+        }
+
+
+        .receipt.show {
+
+            display: block;
+        }
+
+
+        .receipt-title {
+
+            text-align: center;
+
+            color: #20a97a;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            margin-bottom: 15px;
+        }
+
+
+        .receipt-row {
+
+            display: flex;
+
+            justify-content:
+                space-between;
+
+            gap: 10px;
+
+            padding: 10px 0;
+
+            border-bottom:
+                1px solid #edf1f4;
+
+            font-size: 11px;
+        }
+
+
+        .receipt-row span {
+
+            color: #71818c;
+        }
+
+
+        .receipt-row strong {
+
+            color: #173b63;
+
+            text-align: right;
+        }
+
+
+        .receipt-status {
+
+            color:
+                #20a97a !important;
+        }
+
+
+        /* EMPTY */
+
+        .empty {
+
+            text-align: center;
+
+            color: #84939d;
+
+            font-size: 12px;
+
+            padding: 45px 20px;
+        }
+
+
+        /* =========================
+           BOTTOM NAV
+        ========================= */
+
+        .bottom-navigation {
+
+            position: fixed;
+
+            left: 50%;
+
+            bottom: 0;
+
+            transform:
+                translateX(-50%);
+
+            width: 100%;
+
+            max-width: 430px;
+
+            height: 62px;
+
+            background: #ffffff;
+
+            border-top:
+                1px solid #dce6ed;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            z-index: 1000;
+        }
+
+
+        .nav-item {
+
+            border: none;
+
+            background: transparent;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 3px;
+
+            color: #7c8b97;
+
+            cursor: pointer;
+        }
+
+
+        .nav-item.active {
+
+            color: #078bd0;
+
+            font-weight: bold;
+        }
+
+
+        .nav-icon {
+
+            font-size: 17px;
+        }
+
+
+        .nav-label {
+
+            font-size: 8px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<main class="history-page">
+
+
+    <!-- HEADER -->
+
+    <header class="history-header">
+
+        <button
+            type="button"
+            class="back-btn"
+            id="historyBackBtn">
+
+            ‹
+
+        </button>
+
+        <h1>
+            Payment History
+        </h1>
+
+    </header>
+
+
+    <!-- HISTORY -->
+
+    <section
+        class="history-list"
+        id="historyList">
+
+    </section>
+
+
+</main>
+
+
+<!-- =========================
+     BOTTOM NAV
+========================= -->
+
+<nav class="bottom-navigation">
+
+
+    <!-- HOME -->
+
+    <button
+        type="button"
+        class="nav-item"
+        id="navHome">
+
+        <span class="nav-icon">
+            ⌂
+        </span>
+
+        <span class="nav-label">
+            Home
+        </span>
+
+    </button>
+
+
+    <!-- PAYMENT -->
+
+    <button
+        type="button"
+        class="nav-item"
+        id="navPayment">
+
+        <span class="nav-icon">
+            ▣
+        </span>
+
+        <span class="nav-label">
+            Payment
+        </span>
+
+    </button>
+
+
+    <!-- HISTORY -->
+
+    <button
+        type="button"
+        class="nav-item active"
+        id="navHistory">
+
+        <span class="nav-icon">
+            ◷
+        </span>
+
+        <span class="nav-label">
+            History
+        </span>
+
+    </button>
+
+
+    <!-- PROFILE -->
+
+    <button
+        type="button"
+        class="nav-item"
+        id="navProfile">
+
+        <span class="nav-icon">
+            ♙
+        </span>
+
+        <span class="nav-label">
+            Profile
+        </span>
+
+    </button>
+
+
+</nav>
+
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+
+        const historyList =
+            document.getElementById(
+                "historyList"
+            );
+
+
+        /* =====================================================
+           SHARED PAYMENT HISTORY
+           Uses boardingPay_payments so Admin approval/rejection
+           is reflected automatically in Tenant History.
+        ===================================================== */
+
+        function readJSON(key, fallback = []) {
+            try {
+                const raw = localStorage.getItem(key);
+                return raw ? JSON.parse(raw) : fallback;
+            } catch (e) {
+                return fallback;
+            }
+        }
+
+
+        function currentTenantIdentity() {
+            const tenants = readJSON("boardingPay_boarders", []);
+            const currentId =
+                localStorage.getItem("currentUserId") ||
+                localStorage.getItem("tenantId") ||
+                localStorage.getItem("currentTenantId") ||
+                "";
+            const currentEmail =
+                localStorage.getItem("currentUserEmail") ||
+                localStorage.getItem("tenantEmail") ||
+                localStorage.getItem("profileEmail") ||
+                "";
+            const currentName =
+                localStorage.getItem("profileFullName") ||
+                localStorage.getItem("tenantName") ||
+                "";
+
+            let tenant = {};
+
+            if (Array.isArray(tenants) && currentId) {
+                tenant = tenants.find(t =>
+                    String(t.id || t.tenantId || t.userId || "") === String(currentId)
+                ) || {};
+            }
+
+            if (!Object.keys(tenant).length && Array.isArray(tenants) && currentEmail) {
+                tenant = tenants.find(t =>
+                    String(t.email || "").toLowerCase() === String(currentEmail).toLowerCase()
+                ) || {};
+            }
+
+            return {
+                id: currentId || tenant.id || tenant.tenantId || tenant.userId || "",
+                email: currentEmail || tenant.email || "",
+                name: currentName || tenant.fullName || tenant.name || tenant.tenantName || ""
+            };
+        }
+
+
+        function belongsToCurrentTenant(payment, identity) {
+            const pEmail = String(
+                payment.email || payment.tenantEmail || payment.payerEmail || payment.boarderEmail || ""
+            ).trim().toLowerCase();
+            const pId = String(
+                payment.tenantId || payment.userId || payment.payerId || payment.boarderId || ""
+            ).trim();
+            const pName = String(
+                payment.tenantName || payment.payerName || payment.boarderName || payment.boarder || payment.name || payment.fullName || ""
+            ).trim().toLowerCase();
+
+            if (identity.email && pEmail && identity.email.toLowerCase() === pEmail) return true;
+            if (identity.id && pId && String(identity.id) === pId) return true;
+            if (identity.name && pName && identity.name.toLowerCase() === pName) return true;
+
+            return false;
+        }
+
+
+        function displayPaymentStatus(status) {
+            const s = String(status || "Pending").trim().toLowerCase();
+            if (["approved", "paid", "processed"].includes(s)) return "Paid";
+            if (["rejected", "declined"].includes(s)) return "Rejected";
+            return "Pending";
+        }
+
+
+        function statusClassForHistory(status) {
+            const s = String(status).toLowerCase();
+            if (s === "paid") return "status-paid";
+            if (s === "rejected") return "status-rejected";
+            return "status-pending";
+        }
+
+
+        function formatHistoryDate(value) {
+            if (!value) return "—";
+            const d = new Date(value);
+            if (Number.isNaN(d.getTime())) return String(value);
+            return d.toLocaleDateString("en-PH", {
+                year: "numeric",
+                month: "long",
+                day: "numeric"
+            });
+        }
+
+
+        function loadSharedPayments() {
+            const identity = currentTenantIdentity();
+            const shared = readJSON("boardingPay_payments", []);
+
+            if (Array.isArray(shared) && shared.length) {
+                const mine = shared.filter(p => belongsToCurrentTenant(p, identity));
+                return mine.length ? mine : [];
+            }
+
+            /* Legacy fallback only when no shared payment records exist. */
+            return readJSON("paymentHistory", []);
+        }
+
+
+        let currentPayments = [];
+
+
+        function renderHistory() {
+            currentPayments = loadSharedPayments();
+
+            if (!currentPayments.length) {
+                historyList.innerHTML = `
+                    <div class="empty">
+                        No Payment History yet.
+                    </div>
+                `;
+                return;
+            }
+
+            historyList.innerHTML = currentPayments.map(function (payment, index) {
+                const status = displayPaymentStatus(payment.status);
+                const statusClass = statusClassForHistory(status);
+                const description =
+                    payment.description ||
+                    payment.paymentType ||
+                    payment.type ||
+                    "Monthly Rent";
+                const date = formatHistoryDate(
+                    payment.approvedAt || payment.rejectedAt || payment.updatedAt ||
+                    payment.paymentDate || payment.createdAt || payment.date
+                );
+                const method = payment.method || payment.paymentMethod || "—";
+                const amount = Number(
+                    payment.amount || payment.total || payment.paid || 0
+                );
+
+                return `
+                    <div class="payment-card" data-index="${index}">
+                        <div class="check" style="background:${status === "Rejected" ? "#d84b59" : status === "Pending" ? "#e6aa35" : "#20b77a"}">
+                            ${status === "Rejected" ? "×" : status === "Pending" ? "!" : "✓"}
+                        </div>
+
+                        <div class="payment-info">
+                            <strong>${description}</strong>
+                            <span>${date} • ${method}</span>
+                        </div>
+
+                        <div class="amount">
+                            <strong>₱${amount.toLocaleString("en-PH", {minimumFractionDigits:2})}</strong>
+                            <span class="${statusClass}">${status}</span>
+                        </div>
+                    </div>
+                `;
+            }).join("");
+
+            document.querySelectorAll(".payment-card").forEach(function (card) {
+                card.addEventListener("click", function () {
+                    const index = Number(this.dataset.index);
+                    showReceipt(currentPayments[index]);
+                });
+            });
+        }
+
+
+        renderHistory();
+
+
+        /* Admin approval/rejection is stored in the same shared key. */
+        window.addEventListener("storage", function (event) {
+            if (
+                event.key === "boardingPay_payments" ||
+                event.key === "boardingPay_lastUpdate"
+            ) {
+                renderHistory();
+            }
+        });
+
+        /* Also refresh while this page is open. */
+        setInterval(renderHistory, 1500);
+
+
+        /* =========================
+           RECEIPT
+        ========================= */
+
+        function showReceipt(
+            payment
+        ) {
+
+
+            const oldReceipt =
+                document.getElementById(
+                    "paymentReceipt"
+                );
+
+
+            if (oldReceipt) {
+
+                oldReceipt.remove();
+
+            }
+
+            const status = displayPaymentStatus(payment.status);
+            const receiptStatusClass = statusClassForHistory(status);
+
+            const receipt =
+                document.createElement(
+                    "div"
+                );
+
+
+            receipt.id =
+                "paymentReceipt";
+
+
+            receipt.className =
+                "receipt show";
+
+
+            receipt.innerHTML = `
+
+                <div class="receipt-title" style="color:${status === "Rejected" ? "#d84b59" : status === "Pending" ? "#b47a12" : "#20a97a"}">
+
+                    ${status === "Rejected" ? "✕ Payment Rejected" : status === "Pending" ? "! Payment Under Review" : "✓ Payment Receipt"}
+
+                </div>
+
+
+                <div class="receipt-row">
+                    <span>Receipt No.</span>
+                    <strong>${payment.id || payment.paymentId || payment.transactionId || "—"}</strong>
+                </div>
+
+
+                <div class="receipt-row">
+                    <span>Room</span>
+                    <strong>${payment.room || payment.roomName || "—"}</strong>
+                </div>
+
+
+                <div class="receipt-row">
+                    <span>Payment</span>
+                    <strong>${payment.description || payment.paymentType || "Monthly Rent"}</strong>
+                </div>
+
+
+                <div class="receipt-row">
+                    <span>Payment Method</span>
+                    <strong>${payment.method || payment.paymentMethod || "—"}</strong>
+                </div>
+
+
+                <div class="receipt-row">
+                    <span>Amount</span>
+                    <strong>₱${Number(payment.amount || payment.total || payment.paid || 0).toLocaleString("en-PH", {minimumFractionDigits:2})}</strong>
+                </div>
+
+
+                <div class="receipt-row">
+                    <span>Due Date</span>
+                    <strong>${payment.dueDate || "—"}</strong>
+                </div>
+
+
+                <div class="receipt-row">
+                    <span>Date</span>
+                    <strong>${formatHistoryDate(payment.approvedAt || payment.rejectedAt || payment.updatedAt || payment.paymentDate || payment.createdAt || payment.date)}</strong>
+                </div>
+
+
+                <div class="receipt-row">
+                    <span>Status</span>
+                    <strong class="receipt-status ${receiptStatusClass}">${status}</strong>
+                </div>
+
+            `;
+
+
+            historyList.appendChild(
+                receipt
+            );
+
+
+            receipt.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        }
+
+
+        /* =========================
+           BACK TO DASHBOARD
+        ========================= */
+
+        document
+            .getElementById(
+                "historyBackBtn"
+            )
+            .onclick =
+            function () {
+
+                window.location.href =
+                    "tenant-dashboard.html";
+
+            };
+
+
+        /* =========================
+           NAVIGATION
+        ========================= */
+
+        document
+            .getElementById(
+                "navHome"
+            )
+            .onclick =
+            function () {
+
+                window.location.href =
+                    "tenant-dashboard.html";
+
+            };
+
+
+        document
+            .getElementById(
+                "navPayment"
+            )
+            .onclick =
+            function () {
+
+                window.location.href =
+                    "paymentmethod.html";
+
+            };
+
+
+        document
+            .getElementById(
+                "navHistory"
+            )
+            .onclick =
+            function () {
+
+                window.location.href =
+                    "history.html";
+
+            };
+
+
+        document
+            .getElementById(
+                "navProfile"
+            )
+            .onclick =
+            function () {
+
+                window.location.href =
+                    "profile.html";
+
+            };
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

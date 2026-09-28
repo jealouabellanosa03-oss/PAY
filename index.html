@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    >
+
+    <meta
+        name="theme-color"
+        content="#ffffff"
+    >
+
+    <title>BoardingPay</title>
+
+
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        html,body{width:100%;min-height:100%;font-family:Arial,Helvetica,sans-serif}
+        body{
+            background:linear-gradient(145deg,#eaf6ff 0%,#f8fcff 48%,#eef8ff 100%);
+            color:#073f78;
+            overflow-x:hidden;
+            -webkit-font-smoothing:antialiased;
+        }
+        .app{
+            width:100%;max-width:430px;min-height:100vh;margin:0 auto;
+            position:relative;overflow:hidden;
+            background:#fff;
+            box-shadow:0 0 40px rgba(7,63,120,.10);
+        }
+        .index-page{
+            min-height:100vh;position:relative;overflow:hidden;
+            background:
+              radial-gradient(circle at 85% 12%,rgba(19,157,222,.13),transparent 28%),
+              radial-gradient(circle at 10% 38%,rgba(88,183,235,.10),transparent 24%),
+              linear-gradient(180deg,#ffffff 0%,#fafdff 58%,#eef9ff 100%);
+        }
+        .index-page:before{
+            content:"";position:absolute;width:280px;height:280px;border-radius:50%;
+            right:-150px;top:145px;background:rgba(7,139,213,.055);
+        }
+        .index-page:after{
+            content:"";position:absolute;width:190px;height:190px;border-radius:50%;
+            left:-120px;top:230px;background:rgba(112,185,230,.08);
+        }
+
+        /* BRAND */
+        .index-brand{
+            position:absolute;top:30px;left:0;width:100%;
+            display:flex;flex-direction:column;align-items:center;text-align:center;
+            z-index:50;
+        }
+        .boarding-logo{
+            position:relative;width:130px;height:78px;margin-bottom:2px;
+            filter:drop-shadow(0 5px 8px rgba(7,75,136,.10));
+        }
+        .boarding-house{position:absolute;left:10px;top:3px;width:75px;height:64px}
+        .house-roof{
+            position:absolute;width:49px;height:49px;left:9px;top:2px;
+            border-left:6px solid #064b88;border-top:6px solid #064b88;
+            transform:rotate(45deg);border-radius:3px;
+        }
+        .house-body{
+            position:absolute;left:8px;top:27px;width:49px;height:36px;
+            background:#fff;border-left:6px solid #064b88;border-right:6px solid #064b88;
+            border-bottom:6px solid #064b88;border-radius:1px;
+        }
+        .house-window{
+            position:absolute;left:10px;top:8px;width:18px;height:18px;
+            display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:2px;
+        }
+        .house-window span{display:block;background:#159bdc;border-radius:2px}
+        .house-door{
+            position:absolute;right:5px;bottom:0;width:11px;height:20px;
+            background:#064b88;border-radius:3px 3px 0 0;
+        }
+        .boarding-card{
+            position:absolute;width:43px;height:28px;right:0;top:31px;
+            background:linear-gradient(135deg,#0b9de3,#087bc4);
+            border-radius:6px;transform:rotate(-6deg);
+            box-shadow:0 7px 14px rgba(7,139,213,.20);
+        }
+        .card-top-line{position:absolute;left:7px;top:7px;width:29px;height:3px;background:#fff;border-radius:3px}
+        .card-bottom-line{position:absolute;left:8px;bottom:6px;width:16px;height:3px;background:#fff;border-radius:3px}
+        .index-brand h1{
+            margin:0;font-size:30px;line-height:1;font-weight:800;
+            letter-spacing:-1.5px;color:#073f78;
+        }
+        .index-brand h1 span{color:#078bd5}
+        .index-brand p{
+            margin:11px 0 0;font-size:13px;line-height:1.2;font-weight:600;
+            letter-spacing:1.8px;color:#7893a5;text-transform:uppercase;
+        }
+
+        /* WELCOME TEXT */
+        .index-brand:after{
+            content:"Secure boarding payments made simple";
+            display:block;margin-top:13px;padding:6px 13px;border-radius:999px;
+            font-size:10px;font-weight:700;letter-spacing:.3px;
+            color:#087fc5;background:#eef8fe;border:1px solid #d7edf9;
+        }
+
+        /* BUTTON AREA */
+        .index-buttons{
+            position:absolute;left:50%;top:320px;width:300px;
+            max-width:calc(100% - 44px);transform:translateX(-50%);
+            display:flex;flex-direction:column;gap:13px;z-index:100;
+        }
+        .index-btn{
+            position:relative;display:flex;align-items:center;justify-content:center;
+            width:100%;height:58px;padding:0 48px 0 20px;border-radius:16px;
+            font-family:Arial,Helvetica,sans-serif;font-size:15px;font-weight:800;
+            letter-spacing:.2px;text-align:center;text-decoration:none;cursor:pointer;
+            outline:none;transition:transform .18s ease,box-shadow .18s ease,background .18s ease;
+            -webkit-tap-highlight-color:transparent;
+        }
+        .index-btn:after{
+            content:"→";position:absolute;right:17px;width:29px;height:29px;
+            display:flex;align-items:center;justify-content:center;border-radius:50%;
+            font-size:17px;font-weight:700;line-height:1;
+        }
+        .primary-btn{
+            border:1px solid #078bd5;
+            background:linear-gradient(135deg,#0aa0e8 0%,#087dc7 100%);
+            color:#fff;box-shadow:0 9px 20px rgba(7,139,213,.23);
+        }
+        .primary-btn:after{background:rgba(255,255,255,.18);color:#fff}
+        .primary-btn:hover{background:linear-gradient(135deg,#0b9fe3,#0677bf);transform:translateY(-2px);box-shadow:0 12px 23px rgba(7,139,213,.27)}
+        .secondary-btn{
+            border:1.5px solid #9bd3ee;background:rgba(255,255,255,.92);
+            color:#087fc5;box-shadow:0 7px 17px rgba(7,63,120,.08);
+        }
+        .secondary-btn:after{background:#eef8fe;color:#078bd5}
+        .secondary-btn:hover{background:#f4fbff;border-color:#078bd5;transform:translateY(-2px);box-shadow:0 10px 20px rgba(7,63,120,.10)}
+        .index-btn:active{transform:scale(.98)}
+
+        /* ILLUSTRATION */
+        .index-illustration{
+            position:absolute;left:0;bottom:0;width:100%;height:285px;overflow:hidden;
+            z-index:2;pointer-events:none;
+            background:linear-gradient(to bottom,rgba(255,255,255,0),rgba(244,251,255,.58) 35%,#e8f7fd 100%);
+        }
+        .index-illustration:before{
+            content:"";position:absolute;left:50%;top:34px;transform:translateX(-50%);
+            width:160px;height:160px;border-radius:50%;
+            background:radial-gradient(circle,#dff3fc 0%,rgba(223,243,252,.58) 42%,rgba(223,243,252,0) 72%);
+        }
+        .background-circle{
+            position:absolute;width:58px;height:58px;border-radius:50%;
+            background:#d7edf9;left:28%;top:25px;opacity:.72;
+        }
+        .city-building{
+            position:absolute;bottom:43px;background:linear-gradient(180deg,#dff3fc,#c9e9f8);
+            border-radius:5px 5px 0 0;box-shadow:0 3px 10px rgba(7,63,120,.035);
+        }
+        .city-one{width:36px;height:72px;left:39%;opacity:.72}
+        .city-two{width:34px;height:101px;left:48%;opacity:.80}
+        .city-three{width:41px;height:132px;left:60%;opacity:.90}
+        .city-four{width:45px;height:83px;right:-5px;opacity:.72}
+        .city-window{position:absolute;width:5px;height:8px;background:#b7e0f4;border-radius:2px}
+        .city-one .cw1{left:7px;top:14px}.city-one .cw2{left:22px;top:14px}.city-one .cw3{left:7px;top:32px}
+        .city-two .cw1{left:7px;top:14px}.city-two .cw2{left:21px;top:14px}.city-two .cw3{left:7px;top:33px}.city-two .cw4{left:21px;top:33px}
+        .city-three .cw1{left:8px;top:15px}.city-three .cw2{left:25px;top:15px}.city-three .cw3{left:8px;top:35px}.city-three .cw4{left:25px;top:35px}
+        .city-four .cw1{left:8px;top:14px}.city-four .cw2{left:23px;top:14px}
+
+        .main-house{position:absolute;left:-10px;bottom:-28px;width:166px;height:146px;z-index:18;filter:drop-shadow(0 5px 7px rgba(7,63,120,.05))}
+        .main-house-roof{
+            position:absolute;left:15px;top:8px;width:105px;height:105px;background:#fff;
+            border-left:8px solid #63b2e3;border-top:8px solid #63b2e3;
+            transform:rotate(45deg);border-radius:4px;
+        }
+        .main-house-body{
+            position:absolute;left:16px;top:61px;width:115px;height:85px;background:#fff;
+            border-left:7px solid #63b2e3;border-right:7px solid #63b2e3;
+            border-bottom:7px solid #63b2e3;border-radius:3px;
+        }
+        .main-window{
+            position:absolute;width:29px;height:29px;display:grid;
+            grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:2px;
+            border:3px solid #63b2e3;background:#fff;
+        }
+        .main-window span{display:block;background:#c1e6f7}
+        .main-window-left{left:15px;top:18px}.main-window-right{left:60px;top:18px}
+        .main-door{position:absolute;right:10px;bottom:0;width:23px;height:42px;background:#63b2e3;border-radius:4px 4px 0 0}
+
+        .small-house{position:absolute;left:108px;bottom:-18px;width:95px;height:77px;z-index:19;filter:drop-shadow(0 4px 6px rgba(7,63,120,.04))}
+        .small-house-roof{
+            position:absolute;left:8px;top:3px;width:61px;height:61px;background:#fff;
+            border-left:6px solid #7dc3e9;border-top:6px solid #7dc3e9;
+            transform:rotate(45deg);border-radius:3px;
+        }
+        .small-house-body{
+            position:absolute;left:9px;top:33px;width:69px;height:44px;background:#fff;
+            border-left:5px solid #7dc3e9;border-right:5px solid #7dc3e9;
+            border-bottom:5px solid #7dc3e9;border-radius:2px;
+        }
+        .small-house-window{
+            position:absolute;left:10px;top:9px;width:18px;height:18px;display:grid;
+            grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:2px;border:2px solid #7dc3e9;
+        }
+        .small-house-window span{background:#c8e9f8}
+        .small-house-door{position:absolute;right:7px;bottom:0;width:12px;height:23px;background:#7dc3e9;border-radius:2px 2px 0 0}
+        .bush{position:absolute;border-radius:50%;background:linear-gradient(145deg,#8acbed,#65b4df);z-index:20}
+        .bush-one{width:46px;height:46px;right:87px;bottom:-4px}
+        .bush-two{width:58px;height:58px;right:42px;bottom:-13px}
+        .bush-three{width:47px;height:47px;right:0;bottom:-5px}
+        .illustration-ground{
+            position:absolute;left:-12%;bottom:-40px;width:124%;height:90px;
+            background:linear-gradient(180deg,#d3edf9,#c3e5f5);
+            border-radius:50% 50% 0 0;z-index:16;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width:360px){
+            .index-brand{top:18px}
+            .boarding-logo{transform:scale(.90);transform-origin:center top;margin-bottom:-4px}
+            .index-brand h1{font-size:27px}
+            .index-brand p{font-size:11px;margin-top:9px;letter-spacing:1.4px}
+            .index-brand:after{margin-top:11px;font-size:9px}
+            .index-buttons{top:292px;width:calc(100% - 40px);gap:11px}
+            .index-btn{height:55px;font-size:14px;border-radius:15px}
+            .index-illustration{height:245px}
+            .main-house{bottom:-21px;transform:scale(.90);transform-origin:left bottom}
+            .small-house{bottom:-12px;transform:scale(.90);transform-origin:left bottom}
+        }
+        @media (max-height:650px){
+            .index-brand{top:12px}
+            .boarding-logo{transform:scale(.82);transform-origin:center top;margin-bottom:-8px}
+            .index-brand h1{font-size:25px}
+            .index-brand p{margin-top:7px}
+            .index-brand:after{margin-top:8px;padding:5px 10px}
+            .index-buttons{top:240px;gap:9px}
+            .index-btn{height:50px}
+            .index-illustration{height:220px}
+            .main-house{bottom:-25px;transform:scale(.80);transform-origin:left bottom}
+            .small-house{bottom:-15px;transform:scale(.80);transform-origin:left bottom}
+        }
+        @media (min-width:431px){
+            .app{min-height:100vh;border-radius:0;box-shadow:0 0 45px rgba(7,63,120,.10)}
+        }
+        @media (prefers-reduced-motion:reduce){
+            .index-btn{transition:none}
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+
+<main class="app index-page">
+
+
+    <!-- =====================================================
+         BRAND
+    ===================================================== -->
+
+    <section class="index-brand">
+
+
+        <div class="boarding-logo">
+
+
+            <!-- HOUSE LOGO -->
+
+            <div class="boarding-house">
+
+                <div class="house-roof"></div>
+
+                <div class="house-body">
+
+
+                    <div class="house-window">
+
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+
+                    </div>
+
+
+                    <div class="house-door"></div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- PAYMENT CARD -->
+
+            <div class="boarding-card">
+
+                <div class="card-top-line"></div>
+
+                <div class="card-bottom-line"></div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- BRAND NAME -->
+
+        <h1>
+            Boarding<span>Pay</span>
+        </h1>
+
+
+
+        <!-- SLOGAN -->
+
+        <p>
+            Manage. Pay. Stay.
+        </p>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         BUTTONS
+         NO JAVASCRIPT
+    ===================================================== -->
+
+    <section class="index-buttons">
+
+
+        <!-- GET STARTED -->
+
+        <a
+            href="create-account.html"
+            class="index-btn primary-btn"
+        >
+            Get Started
+        </a>
+
+
+
+        <!-- LOG IN -->
+
+        <a
+            href="login.html"
+            class="index-btn secondary-btn"
+        >
+            Log In
+        </a>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         LOWER ILLUSTRATION
+    ===================================================== -->
+
+    <section
+        class="index-illustration"
+        aria-hidden="true"
+    >
+
+
+        <!-- CITY 1 -->
+
+        <div class="city-building city-one">
+
+            <span class="city-window cw1"></span>
+            <span class="city-window cw2"></span>
+            <span class="city-window cw3"></span>
+
+        </div>
+
+
+
+        <!-- CITY 2 -->
+
+        <div class="city-building city-two">
+
+            <span class="city-window cw1"></span>
+            <span class="city-window cw2"></span>
+            <span class="city-window cw3"></span>
+            <span class="city-window cw4"></span>
+
+        </div>
+
+
+
+        <!-- CITY 3 -->
+
+        <div class="city-building city-three">
+
+            <span class="city-window cw1"></span>
+            <span class="city-window cw2"></span>
+            <span class="city-window cw3"></span>
+            <span class="city-window cw4"></span>
+
+        </div>
+
+
+
+        <!-- CITY 4 -->
+
+        <div class="city-building city-four">
+
+            <span class="city-window cw1"></span>
+            <span class="city-window cw2"></span>
+
+        </div>
+
+
+
+        <!-- BACKGROUND CIRCLE -->
+
+        <div class="background-circle"></div>
+
+
+
+        <!-- =================================================
+             MAIN HOUSE
+        ================================================== -->
+
+        <div class="main-house">
+
+            <div class="main-house-roof"></div>
+
+            <div class="main-house-body">
+
+
+                <div class="main-window main-window-left">
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </div>
+
+
+                <div class="main-window main-window-right">
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </div>
+
+
+                <div class="main-door"></div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             SMALL HOUSE
+        ================================================== -->
+
+        <div class="small-house">
+
+            <div class="small-house-roof"></div>
+
+            <div class="small-house-body">
+
+
+                <div class="small-house-window">
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </div>
+
+
+                <div class="small-house-door"></div>
+
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             BUSHES
+        ================================================== -->
+
+        <div class="bush bush-one"></div>
+
+        <div class="bush bush-two"></div>
+
+        <div class="bush bush-three"></div>
+
+
+
+        <!-- =================================================
+             GROUND
+        ================================================== -->
+
+        <div class="illustration-ground"></div>
+
+
+    </section>
+
+
+</main>
+
+
+</body>
+
+</html>

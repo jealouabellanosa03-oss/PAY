@@ -1,0 +1,6256 @@
+/* =========================================================
+   BOARDINGPAY - LANDING PAGE DESIGN
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #ffffff;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* =========================================================
+   MAIN APP
+   ========================================================= */
+
+.app {
+    width: 100%;
+    max-width: 430px;
+    min-height: 100vh;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+/* =========================================================
+   BRAND
+   ========================================================= */
+
+.index-brand {
+    width: 100%;
+    text-align: center;
+    padding-top: 32px;
+    position: relative;
+    z-index: 5;
+}
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.boarding-logo {
+    width: 74px;
+    height: 62px;
+    margin: 0 auto 8px;
+    position: relative;
+}
+
+/* ---------------- HOUSE ---------------- */
+
+.boarding-house {
+    width: 45px;
+    height: 43px;
+    position: absolute;
+    left: 7px;
+    top: 8px;
+}
+
+/* Roof */
+
+.house-roof {
+    position: absolute;
+    left: 1px;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-left: 22px solid transparent;
+    border-right: 22px solid transparent;
+    border-bottom: 22px solid #123f73;
+}
+
+/* Roof inner */
+
+.house-roof::after {
+    content: "";
+    position: absolute;
+    left: -15px;
+    top: 5px;
+    width: 30px;
+    height: 12px;
+    background: #ffffff;
+    transform: skewY(-45deg);
+    opacity: 0.9;
+}
+
+/* House body */
+
+.house-body {
+    position: absolute;
+    left: 7px;
+    top: 19px;
+    width: 31px;
+    height: 24px;
+    background: #ffffff;
+    border: 3px solid #123f73;
+    border-top: none;
+}
+
+/* Windows */
+
+.house-window {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: #2d91d1;
+    top: 5px;
+}
+
+.house-window.left {
+    left: 4px;
+}
+
+.house-window.right {
+    right: 4px;
+}
+
+/* Door */
+
+.house-door {
+    position: absolute;
+    width: 7px;
+    height: 12px;
+    background: #123f73;
+    bottom: 0;
+    left: 9px;
+}
+
+/* =========================================================
+   PAYMENT CARD
+   ========================================================= */
+
+.boarding-card {
+    position: absolute;
+    right: 0;
+    top: 24px;
+    width: 30px;
+    height: 21px;
+    background: #1688d1;
+    border-radius: 4px;
+    border: 2px solid #123f73;
+    transform: rotate(-2deg);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.boarding-card::before {
+    content: "";
+    position: absolute;
+    left: 3px;
+    top: 4px;
+    width: 7px;
+    height: 4px;
+    background: #ffffff;
+    border-radius: 1px;
+}
+
+.boarding-card span {
+    position: absolute;
+    width: 7px;
+    height: 2px;
+    background: #ffffff;
+    border-radius: 2px;
+    right: 3px;
+}
+
+.boarding-card span:first-child {
+    bottom: 6px;
+}
+
+.boarding-card span:last-child {
+    bottom: 3px;
+}
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+.index-brand h1 {
+    font-size: 27px;
+    line-height: 1;
+    font-weight: 800;
+    letter-spacing: -0.7px;
+    color: #123f73;
+}
+
+.index-brand h1 span {
+    color: #1688d1;
+}
+
+.index-brand p {
+    margin-top: 7px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #65768a;
+    letter-spacing: 0.1px;
+}
+
+/* =========================================================
+   ILLUSTRATION
+   ========================================================= */
+
+.index-illustration {
+    position: relative;
+    width: 100%;
+    height: 260px;
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+/* =========================================================
+   BACKGROUND SKY
+   ========================================================= */
+
+.index-illustration::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 48px;
+    height: 145px;
+    background: linear-gradient(
+        to bottom,
+        #f3faff 0%,
+        #e8f6ff 100%
+    );
+    clip-path: polygon(
+        0 45%,
+        12% 38%,
+        24% 44%,
+        35% 27%,
+        47% 38%,
+        58% 20%,
+        70% 34%,
+        82% 25%,
+        100% 39%,
+        100% 100%,
+        0 100%
+    );
+}
+
+/* =========================================================
+   CITY BUILDINGS
+   ========================================================= */
+
+.index-building {
+    position: absolute;
+    bottom: 48px;
+    background: #b7dcf5;
+    opacity: 0.85;
+}
+
+/* Building A */
+
+.building-a {
+    width: 38px;
+    height: 83px;
+    left: 1%;
+}
+
+.building-a::before,
+.building-a::after {
+    content: "";
+    position: absolute;
+    width: 6px;
+    height: 7px;
+    background: #ffffff;
+    top: 12px;
+    box-shadow:
+        14px 0 #ffffff,
+        0 17px #ffffff,
+        14px 17px #ffffff,
+        0 34px #ffffff,
+        14px 34px #ffffff;
+}
+
+/* Building B */
+
+.building-b {
+    width: 52px;
+    height: 108px;
+    left: 13%;
+}
+
+.building-b::before {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #ffffff;
+    left: 10px;
+    top: 15px;
+    box-shadow:
+        20px 0 #ffffff,
+        0 20px #ffffff,
+        20px 20px #ffffff,
+        0 40px #ffffff,
+        20px 40px #ffffff;
+}
+
+/* Building C */
+
+.building-c {
+    width: 45px;
+    height: 91px;
+    right: 13%;
+}
+
+.building-c::before {
+    content: "";
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    background: #ffffff;
+    left: 9px;
+    top: 14px;
+    box-shadow:
+        17px 0 #ffffff,
+        0 19px #ffffff,
+        17px 19px #ffffff,
+        0 38px #ffffff,
+        17px 38px #ffffff;
+}
+
+/* Building D */
+
+.building-d {
+    width: 38px;
+    height: 70px;
+    right: 1%;
+}
+
+/* =========================================================
+   MAIN HOUSE
+   ========================================================= */
+
+.index-main-house {
+    position: absolute;
+    left: 50%;
+    bottom: 48px;
+    width: 150px;
+    height: 125px;
+    transform: translateX(-50%);
+    z-index: 3;
+}
+
+/* Main roof */
+
+.index-roof {
+    position: absolute;
+    left: 4px;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-left: 71px solid transparent;
+    border-right: 71px solid transparent;
+    border-bottom: 62px solid #59afe2;
+}
+
+.index-roof::after {
+    content: "";
+    position: absolute;
+    left: -61px;
+    top: 12px;
+    width: 122px;
+    height: 6px;
+    background: #1688d1;
+    transform: rotate(0deg);
+    border-radius: 5px;
+}
+
+/* Main house body */
+
+.index-house-body {
+    position: absolute;
+    left: 18px;
+    top: 49px;
+    width: 114px;
+    height: 76px;
+    background: #ffffff;
+    border: 3px solid #2d91d1;
+    border-top: none;
+}
+
+/* Windows */
+
+.index-window {
+    position: absolute;
+    width: 27px;
+    height: 27px;
+    top: 13px;
+    background: #bde5fa;
+    border: 3px solid #2d91d1;
+}
+
+.index-window::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #2d91d1;
+    transform: translateX(-50%);
+}
+
+.index-window::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #2d91d1;
+    transform: translateY(-50%);
+}
+
+.index-window.left {
+    left: 12px;
+}
+
+.index-window.right {
+    right: 12px;
+}
+
+/* Door */
+
+.index-door {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 27px;
+    height: 48px;
+    background: #8ac7eb;
+    border: 3px solid #2d91d1;
+}
+
+.index-door::after {
+    content: "";
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #123f73;
+    right: 4px;
+    top: 24px;
+}
+
+/* =========================================================
+   SMALL HOUSE
+   ========================================================= */
+
+.index-small-house {
+    position: absolute;
+    left: 7%;
+    bottom: 48px;
+    width: 86px;
+    height: 76px;
+    z-index: 2;
+}
+
+.small-roof {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-left: 43px solid transparent;
+    border-right: 43px solid transparent;
+    border-bottom: 38px solid #8bcdf0;
+}
+
+.small-body {
+    position: absolute;
+    left: 12px;
+    top: 31px;
+    width: 62px;
+    height: 45px;
+    background: #d8effb;
+    border: 2px solid #70b8df;
+}
+
+/* =========================================================
+   GROUND
+   ========================================================= */
+
+.index-ground {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 49px;
+    background: linear-gradient(
+        to bottom,
+        #d7effc 0%,
+        #c4e7fa 100%
+    );
+    border-top-left-radius: 50% 12px;
+    border-top-right-radius: 50% 12px;
+}
+
+/* Small decorative ground shape */
+
+.index-ground::before {
+    content: "";
+    position: absolute;
+    left: 7%;
+    top: 12px;
+    width: 75px;
+    height: 25px;
+    border-radius: 50%;
+    background: #b3def5;
+}
+
+.index-ground::after {
+    content: "";
+    position: absolute;
+    right: 7%;
+    top: 18px;
+    width: 90px;
+    height: 22px;
+    border-radius: 50%;
+    background: #b3def5;
+}
+
+/* =========================================================
+   BUTTON AREA
+   ========================================================= */
+
+.index-buttons {
+    width: 100%;
+    padding: 0 18px 22px;
+    margin-top: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    position: relative;
+    z-index: 10;
+}
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.index-btn {
+    width: 100%;
+    height: 38px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 700;
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+/* Get Started */
+
+.index-primary {
+    border: 1px solid #1688d1;
+    background: #1688d1;
+    color: #ffffff;
+    box-shadow: 0 2px 5px rgba(22, 136, 209, 0.2);
+}
+
+.index-primary:hover {
+    background: #1179bd;
+}
+
+.index-primary:active {
+    transform: scale(0.98);
+}
+
+/* Log In */
+
+.index-secondary {
+    border: 1px solid #1688d1;
+    background: #ffffff;
+    color: #123f73;
+}
+
+.index-secondary:hover {
+    background: #f2faff;
+}
+
+.index-secondary:active {
+    transform: scale(0.98);
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 430px) {
+
+    .app {
+        min-height: 100vh;
+    }
+
+    .index-brand {
+        padding-top: 28px;
+    }
+
+    .index-brand h1 {
+        font-size: 26px;
+    }
+
+    .index-illustration {
+        height: 255px;
+        margin-top: 18px;
+    }
+
+    .index-buttons {
+        padding-left: 16px;
+        padding-right: 16px;
+        padding-bottom: 18px;
+    }
+}
+
+/* =========================================================
+   SMALL PHONES
+   ========================================================= */
+
+@media (max-height: 650px) {
+
+    .index-brand {
+        padding-top: 18px;
+    }
+
+    .index-brand h1 {
+        font-size: 24px;
+    }
+
+    .index-brand p {
+        margin-top: 5px;
+    }
+
+    .index-illustration {
+        height: 205px;
+        margin-top: 10px;
+    }
+
+    .index-main-house {
+        transform: translateX(-50%) scale(0.82);
+        transform-origin: bottom center;
+    }
+
+    .index-small-house {
+        transform: scale(0.82);
+        transform-origin: bottom left;
+    }
+
+    .index-buttons {
+        padding-bottom: 12px;
+    }
+
+    .index-btn {
+        height: 34px;
+    }
+}
+/* =========================================================
+   BOARDINGPAY - GLOBAL
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #edf5f9;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   APP CONTAINER
+   ========================================================= */
+
+.app {
+    width: 100%;
+    max-width: 390px;
+    min-height: 100vh;
+
+    background: #ffffff;
+
+    overflow: hidden;
+
+    position: relative;
+}
+
+
+/* =========================================================
+   CREATE ACCOUNT PAGE
+   ========================================================= */
+
+.registration-page {
+    width: 100%;
+    max-width: 390px;
+
+    min-height: 100vh;
+
+    background: #ffffff;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.registration-header {
+    width: 100%;
+    height: 58px;
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #ffffff;
+
+    border-bottom: 1px solid #e4edf2;
+}
+
+
+/* =========================================================
+   BACK BUTTON
+   ========================================================= */
+
+.back-btn {
+    position: absolute;
+
+    left: 10px;
+    top: 14px;
+
+    width: 28px;
+    height: 28px;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: #6f8795;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 25px;
+    font-weight: 300;
+
+    line-height: 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    padding: 0;
+}
+
+.back-btn:hover {
+    color: #1688d1;
+}
+
+
+/* =========================================================
+   HEADER TITLE
+   ========================================================= */
+
+.header-title {
+    width: 100%;
+
+    text-align: center;
+
+    padding: 0 40px;
+}
+
+.header-title h1 {
+    color: #123f73;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    line-height: 16px;
+
+    margin: 0;
+}
+
+.header-title p {
+    color: #7e929e;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 7px;
+    font-weight: 400;
+
+    line-height: 9px;
+
+    margin-top: 1px;
+}
+
+
+/* =========================================================
+   ACCOUNT LIST
+   ========================================================= */
+
+.account-types {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 6px;
+
+    padding: 8px 8px 0;
+}
+
+
+/* =========================================================
+   ACCOUNT CARD
+   ========================================================= */
+
+.account-card {
+    width: 100%;
+    height: 65px;
+
+    display: flex;
+    align-items: center;
+
+    position: relative;
+
+    background: #ffffff;
+
+    border: 1px solid #d7e7ee;
+
+    border-radius: 7px;
+
+    padding: 7px 9px;
+
+    outline: none;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    box-shadow: 0 1px 3px rgba(30, 80, 110, 0.04);
+
+    transition: all 0.15s ease;
+}
+
+
+/* HOVER */
+
+.account-card:hover {
+    background: #f8fcfe;
+    border-color: #b9dbea;
+}
+
+
+/* CLICK */
+
+.account-card:active {
+    background: #eef8fd;
+    transform: scale(0.99);
+}
+
+
+/* =========================================================
+   ICON CIRCLE
+   ========================================================= */
+
+.account-icon {
+    width: 38px;
+    height: 38px;
+
+    min-width: 38px;
+
+    border-radius: 50%;
+
+    background: #1688d1;
+
+    color: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-right: 10px;
+}
+
+
+/* =========================================================
+   TENANT ICON
+   ========================================================= */
+
+.tenant-icon span {
+    position: relative;
+
+    width: 21px;
+    height: 21px;
+
+    font-size: 0;
+}
+
+
+/* HEAD */
+
+.tenant-icon span::before {
+    content: "";
+
+    position: absolute;
+
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    left: 7px;
+    top: 0;
+}
+
+
+/* BODY */
+
+.tenant-icon span::after {
+    content: "";
+
+    position: absolute;
+
+    width: 19px;
+    height: 10px;
+
+    border-radius: 10px 10px 3px 3px;
+
+    background: #ffffff;
+
+    left: 1px;
+    bottom: 0;
+}
+
+
+/* =========================================================
+   LANDLORD ICON
+   ========================================================= */
+
+.landlord-icon span {
+    color: #ffffff;
+
+    font-size: 23px;
+    font-weight: bold;
+
+    line-height: 1;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   ADMIN ICON
+   ========================================================= */
+
+.admin-icon span {
+    color: #ffffff;
+
+    font-size: 18px;
+
+    line-height: 1;
+}
+
+
+/* =========================================================
+   ACCOUNT INFORMATION
+   ========================================================= */
+
+.account-info {
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 0;
+}
+
+.account-info h2 {
+    color: #123f73;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    line-height: 11px;
+
+    margin: 0 0 2px;
+}
+
+.account-info p {
+    color: #758b98;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 6.5px;
+    font-weight: 400;
+
+    line-height: 8px;
+
+    margin: 0;
+
+    max-width: 220px;
+}
+
+
+/* =========================================================
+   RIGHT ARROW
+   ========================================================= */
+
+.arrow {
+    width: 15px;
+
+    flex-shrink: 0;
+
+    color: #91a5b0;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 18px;
+    font-weight: 300;
+
+    line-height: 1;
+
+    text-align: center;
+
+    margin-left: 4px;
+}
+
+
+/* =========================================================
+   DESKTOP / LARGE SCREEN
+   ========================================================= */
+
+@media (min-width: 501px) {
+
+    body {
+        padding: 20px;
+    }
+
+    .registration-page {
+        min-height: 700px;
+        height: 760px;
+
+        border: 1px solid #d4e2e9;
+
+        border-radius: 20px;
+
+        box-shadow:
+            0 5px 25px rgba(30, 80, 110, 0.12);
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 500px) {
+
+    body {
+        background: #ffffff;
+
+        padding: 0;
+
+        align-items: flex-start;
+    }
+
+    .registration-page {
+        width: 100%;
+        max-width: 390px;
+
+        min-height: 100vh;
+
+        border: none;
+
+        border-radius: 0;
+
+        box-shadow: none;
+    }
+}
+
+
+/* =========================================================
+   SMALL PHONE
+   ========================================================= */
+
+@media (max-width: 360px) {
+
+    .registration-header {
+        height: 55px;
+    }
+
+    .header-title h1 {
+        font-size: 12px;
+    }
+
+    .header-title p {
+        font-size: 6px;
+    }
+
+    .account-types {
+        padding: 7px 7px 0;
+        gap: 5px;
+    }
+
+    .account-card {
+        height: 62px;
+        padding: 6px 8px;
+    }
+
+    .account-icon {
+        width: 36px;
+        height: 36px;
+        min-width: 36px;
+        margin-right: 9px;
+    }
+
+    .account-info h2 {
+        font-size: 8.5px;
+    }
+
+    .account-info p {
+        font-size: 6px;
+        line-height: 7.5px;
+    }
+
+    .arrow {
+        font-size: 17px;
+    }
+}
+/* =========================================================
+   TENANT REGISTRATION FORM
+   ========================================================= */
+
+.registration-form {
+    width: 100%;
+
+    padding: 15px 12px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 11px;
+}
+
+
+.form-group {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+
+.form-group label {
+    color: #123f73;
+
+    font-size: 8px;
+    font-weight: 700;
+
+    line-height: 10px;
+}
+
+
+.form-group input {
+    width: 100%;
+
+    height: 34px;
+
+    padding: 0 10px;
+
+    border: 1px solid #d5e5ed;
+
+    border-radius: 5px;
+
+    outline: none;
+
+    background: #ffffff;
+
+    color: #123f73;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 8px;
+}
+
+
+.form-group input::placeholder {
+    color: #9aabb5;
+}
+
+
+.form-group input:focus {
+    border-color: #1688d1;
+
+    box-shadow:
+        0 0 0 2px rgba(22, 136, 209, 0.08);
+}
+
+
+/* CREATE ACCOUNT BUTTON */
+
+.register-submit-btn {
+    width: 100%;
+
+    height: 36px;
+
+    margin-top: 5px;
+
+    border: none;
+
+    border-radius: 5px;
+
+    background: #1688d1;
+
+    color: #ffffff;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+.register-submit-btn:hover {
+    background: #117bbb;
+}
+
+
+.register-submit-btn:active {
+    transform: scale(0.99);
+}
+/* =========================================================
+   FIX ACCOUNT CARD CLICK AREA
+   ========================================================= */
+
+.account-types {
+    position: relative;
+    z-index: 10;
+}
+
+.account-card {
+    position: relative;
+    z-index: 20;
+
+    width: 100%;
+
+    pointer-events: auto;
+
+    cursor: pointer;
+}
+
+.account-card * {
+    pointer-events: none;
+}
+
+.account-card:hover {
+    cursor: pointer;
+}
+/* =========================================================
+   BACK BUTTON CLICK FIX
+   ========================================================= */
+
+.registration-header {
+    position: relative;
+    z-index: 100;
+}
+
+.back-btn {
+    position: absolute;
+
+    z-index: 9999;
+
+    pointer-events: auto;
+
+    cursor: pointer;
+}
+/* =========================================================
+   ADMIN PASSWORD SHOW / HIDE
+   ========================================================= */
+
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding-right: 36px;
+}
+
+.password-toggle {
+    position: absolute;
+
+    right: 7px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 25px;
+    height: 25px;
+
+    padding: 0;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+    color: #718896;
+
+    z-index: 20;
+}
+
+.password-toggle:hover {
+    color: #1688d1;
+}
+
+.password-toggle:active {
+    transform: translateY(-50%) scale(0.9);
+}
+
+/* =========================================================
+   PASSWORD SHOW / HIDE
+   ========================================================= */
+
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding-right: 36px;
+}
+
+.password-toggle {
+    position: absolute;
+
+    right: 7px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 25px;
+    height: 25px;
+
+    padding: 0;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+    color: #718896;
+
+    z-index: 20;
+}
+
+.password-toggle:hover {
+    color: #1688d1;
+}
+
+.password-toggle:active {
+    transform: translateY(-50%) scale(0.9);
+}
+/* =========================================
+   PASSWORD SHOW / HIDE
+========================================= */
+
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding-right: 36px;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 7px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 25px;
+    height: 25px;
+
+    padding: 0;
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    font-size: 13px;
+    color: #718896;
+
+    z-index: 20;
+}
+
+.password-toggle:hover {
+    color: #1688d1;
+}
+
+.password-toggle:active {
+    transform: translateY(-50%) scale(.9);
+}
+/* =========================================
+   VERIFY EMAIL POPUP
+========================================= */
+
+.verify-modal {
+    position: fixed;
+
+    inset: 0;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255, 255, 255, 0.92);
+
+    z-index: 9999;
+}
+
+.verify-modal.show {
+    display: flex;
+}
+
+
+/* POPUP BOX */
+
+.verify-modal-box {
+    width: 300px;
+
+    padding: 24px 20px 20px;
+
+    text-align: center;
+
+    background: #ffffff;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 8px 30px rgba(20, 75, 110, 0.15);
+}
+
+
+/* =========================================
+   EMAIL ICON
+========================================= */
+
+.verify-email-icon {
+    position: relative;
+
+    width: 55px;
+    height: 55px;
+
+    margin: 0 auto 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.email-icon {
+    width: 39px;
+    height: 29px;
+
+    border: 2px solid #1688d1;
+
+    border-radius: 3px;
+
+    color: #1688d1;
+
+    font-size: 25px;
+
+    line-height: 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transform: translateY(-2px);
+}
+
+
+/* GREEN CHECK */
+
+.check-icon {
+    position: absolute;
+
+    right: 1px;
+    bottom: 4px;
+
+    width: 18px;
+    height: 18px;
+
+    border-radius: 50%;
+
+    background: #35b879;
+
+    color: #ffffff;
+
+    font-size: 11px;
+    font-weight: bold;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 2px solid #ffffff;
+}
+
+
+/* =========================================
+   TITLE
+========================================= */
+
+.verify-modal-box h2 {
+    margin: 0 0 6px;
+
+    color: #123f73;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+/* =========================================
+   DESCRIPTION
+========================================= */
+
+.verify-text {
+    margin: 0 0 7px;
+
+    color: #718896;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 7px;
+
+    line-height: 11px;
+}
+
+
+/* =========================================
+   EMAIL ADDRESS
+========================================= */
+
+.verify-email-address {
+    width: 100%;
+
+    margin-bottom: 10px;
+
+    color: #123f73;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 7px;
+    font-weight: 600;
+
+    word-break: break-word;
+}
+
+
+/* =========================================
+   OPEN EMAIL BUTTON
+========================================= */
+
+.open-email-btn {
+    width: 100%;
+
+    height: 28px;
+
+    border: none;
+
+    border-radius: 5px;
+
+    background: #1688d1;
+
+    color: #ffffff;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 7px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.open-email-btn:hover {
+    background: #1178ba;
+}
+
+
+/* =========================================
+   RESEND
+========================================= */
+
+.resend-verification-btn {
+    margin-top: 9px;
+
+    padding: 0;
+
+    border: none;
+
+    background: transparent;
+
+    color: #1688d1;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 6px;
+
+    cursor: pointer;
+}
+
+.resend-verification-btn:hover {
+    text-decoration: underline;
+}
+/* =========================================
+   VERIFY EMAIL POPUP
+========================================= */
+
+.verify-modal {
+    position: fixed;
+    inset: 0;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(0, 0, 0, 0.25);
+
+    z-index: 99999;
+}
+
+.verify-modal.show {
+    display: flex;
+}
+
+
+/* POPUP */
+
+.verify-modal-box {
+    width: 245px;
+
+    padding: 14px 13px 12px;
+
+    background: #ffffff;
+
+    border-radius: 7px;
+
+    text-align: center;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.15);
+
+    animation: verifyPopupIn 0.2s ease;
+}
+
+
+@keyframes verifyPopupIn {
+
+    from {
+        opacity: 0;
+        transform: scale(0.92);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+}
+
+
+/* =========================================
+   EMAIL ICON
+========================================= */
+
+.verify-email-icon {
+    position: relative;
+
+    width: 48px;
+    height: 43px;
+
+    margin: 0 auto 5px;
+}
+
+
+.email-icon {
+    position: absolute;
+
+    left: 4px;
+    top: 5px;
+
+    width: 35px;
+    height: 25px;
+
+    border: 2px solid #1688d1;
+
+    border-radius: 3px;
+
+    color: transparent;
+
+    background: white;
+}
+
+
+/* Envelope lines */
+
+.email-icon::before {
+    content: "";
+
+    position: absolute;
+
+    left: 3px;
+    top: 3px;
+
+    width: 24px;
+    height: 15px;
+
+    border-left: 2px solid #1688d1;
+    border-bottom: 2px solid #1688d1;
+
+    transform: rotate(-45deg);
+
+    opacity: 0.9;
+}
+
+
+.email-icon::after {
+    content: "";
+
+    position: absolute;
+
+    right: 3px;
+    top: 3px;
+
+    width: 24px;
+    height: 15px;
+
+    border-right: 2px solid #1688d1;
+    border-bottom: 2px solid #1688d1;
+
+    transform: rotate(45deg);
+
+    opacity: 0.9;
+}
+
+
+/* GREEN CHECK */
+
+.check-icon {
+    position: absolute;
+
+    right: 1px;
+    bottom: 1px;
+
+    width: 17px;
+    height: 17px;
+
+    border-radius: 50%;
+
+    background: #35b879;
+
+    color: white;
+
+    border: 2px solid white;
+
+    font-size: 10px;
+    font-weight: bold;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* =========================================
+   TITLE
+========================================= */
+
+.verify-modal-box h2 {
+    margin: 0 0 4px;
+
+    color: #123f73;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    text-transform: none;
+}
+
+
+/* =========================================
+   TEXT
+========================================= */
+
+.verify-text {
+    margin: 0 0 5px;
+
+    color: #718896;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 6px;
+
+    line-height: 9px;
+}
+
+
+/* =========================================
+   EMAIL
+========================================= */
+
+.verify-email-address {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    margin-bottom: 7px;
+
+    padding: 3px 5px;
+
+    background: #f3f9fc;
+
+    border-radius: 3px;
+
+    color: #123f73;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 5.5px;
+
+    word-break: break-all;
+}
+
+
+/* =========================================
+   OPEN EMAIL APP
+========================================= */
+
+.open-email-btn {
+    width: 100%;
+
+    height: 22px;
+
+    border: none;
+
+    border-radius: 4px;
+
+    background: #1688d1;
+
+    color: #ffffff;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 6px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.open-email-btn:hover {
+    background: #1178ba;
+}
+
+
+/* =========================================
+   RESEND
+========================================= */
+
+.resend-verification-btn {
+    margin-top: 6px;
+
+    padding: 0;
+
+    border: none;
+
+    background: transparent;
+
+    color: #1688d1;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 5.5px;
+
+    cursor: pointer;
+}
+
+.resend-verification-btn:hover {
+    text-decoration: underline;
+}
+/* =========================================
+   FORM ERROR
+========================================= */
+
+.form-error {
+    width: 100%;
+    box-sizing: border-box;
+
+    margin-bottom: 15px;
+    padding: 12px 14px;
+
+    border-radius: 10px;
+
+    background: #fff1f1;
+    border: 1px solid #e7a4a4;
+
+    color: #c62828;
+
+    font-size: 13px;
+    line-height: 1.4;
+
+    text-align: left;
+}
+
+
+/* =========================================
+   INVALID INPUT
+========================================= */
+
+.input-error {
+    border: 1.5px solid #d9534f !important;
+    outline: none;
+}
+
+
+/* =========================================
+   REMOVE ERROR WHEN USER TYPES
+========================================= */
+
+input.input-error:focus,
+select.input-error:focus,
+textarea.input-error:focus {
+    border-color: #d9534f !important;
+}
+/* =========================================================
+   VERIFY YOUR EMAIL PAGE
+   ========================================================= */
+
+.verify-page {
+    min-height: 100vh;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #eef8fc;
+
+    box-sizing: border-box;
+    padding: 24px;
+}
+
+
+/* =========================================================
+   VERIFY CONTAINER
+   ========================================================= */
+
+.verify-container {
+    width: 100%;
+    max-width: 390px;
+
+    background: #ffffff;
+
+    border-radius: 22px;
+
+    padding: 34px 28px 30px;
+
+    box-sizing: border-box;
+
+    text-align: center;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.08);
+
+}
+
+
+/* =========================================================
+   EMAIL ICON
+   ========================================================= */
+
+.verify-icon {
+    position: relative;
+
+    width: 90px;
+    height: 90px;
+
+    margin: 0 auto 22px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* =========================================================
+   ENVELOPE
+   ========================================================= */
+
+.envelope {
+    position: relative;
+
+    width: 62px;
+    height: 44px;
+
+    border: 3px solid #168bd1;
+
+    border-radius: 5px;
+
+    background: #ffffff;
+
+    box-sizing: border-box;
+}
+
+
+/* Envelope diagonal lines */
+
+.envelope::before,
+.envelope::after {
+    content: "";
+
+    position: absolute;
+
+    top: 8px;
+
+    width: 35px;
+    height: 3px;
+
+    background: #168bd1;
+
+    border-radius: 3px;
+}
+
+
+.envelope::before {
+    left: 2px;
+
+    transform: rotate(31deg);
+}
+
+
+.envelope::after {
+    right: 2px;
+
+    transform: rotate(-31deg);
+}
+
+
+/* =========================================================
+   SUCCESS CHECK
+   ========================================================= */
+
+.success-check {
+    position: absolute;
+
+    right: 2px;
+    bottom: 8px;
+
+    width: 27px;
+    height: 27px;
+
+    border-radius: 50%;
+
+    background: #36b86b;
+
+    color: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 17px;
+    font-weight: 700;
+
+    border: 3px solid #ffffff;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+.verify-container h1 {
+    margin: 0 0 12px;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 28px;
+    font-weight: 700;
+
+    line-height: 1.2;
+
+    color: #173b56;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+.verify-description {
+    margin: 0 0 18px;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 15px;
+
+    line-height: 1.5;
+
+    color: #667b8a;
+}
+
+
+/* =========================================================
+   EMAIL ADDRESS
+   ========================================================= */
+
+.verify-email {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 12px 15px;
+
+    margin-bottom: 18px;
+
+    border-radius: 9px;
+
+    background: #edf8ff;
+
+    color: #177fc0;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   OPEN EMAIL APP BUTTON
+   ========================================================= */
+
+.open-email-btn {
+    width: 100%;
+
+    min-height: 45px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: #168bd1;
+
+    color: #ffffff;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+
+    margin-bottom: 12px;
+}
+
+
+.open-email-btn:hover {
+    background: #1178b7;
+}
+
+
+.open-email-btn:active {
+    transform: scale(0.98);
+}
+
+
+/* =========================================================
+   RESEND BUTTON
+   ========================================================= */
+
+.resend-btn {
+    width: 100%;
+
+    min-height: 42px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #168bd1;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    padding: 8px;
+
+    border-radius: 8px;
+
+    transition: 0.2s ease;
+}
+
+
+.resend-btn:hover {
+    background: #edf8ff;
+}
+
+
+.resend-btn:disabled {
+    color: #8da5b4;
+
+    cursor: not-allowed;
+
+    background: transparent;
+}
+
+
+/* =========================================================
+   INLINE ERROR
+   ========================================================= */
+
+.form-error {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    margin-bottom: 15px;
+
+    padding: 11px 13px;
+
+    border-radius: 9px;
+
+    background: #fff1f1;
+
+    border: 1px solid #efb0b0;
+
+    color: #c62828;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 13px;
+
+    line-height: 1.4;
+
+    text-align: left;
+}
+
+
+/* =========================================================
+   INVALID INPUT
+   ========================================================= */
+
+.input-error {
+    border-color: #d9534f !important;
+
+    outline: none !important;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+    .verify-page {
+        padding: 18px;
+    }
+
+    .verify-container {
+        max-width: 100%;
+
+        padding: 30px 22px 26px;
+
+        border-radius: 20px;
+    }
+
+    .verify-container h1 {
+        font-size: 26px;
+    }
+
+}
+/* =========================================================
+   VERIFY EMAIL BUTTON
+========================================================= */
+
+.verify-email-btn {
+    width: 100%;
+    min-height: 45px;
+
+    border: none;
+    border-radius: 9px;
+
+    background: #168bd1;
+    color: #ffffff;
+
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.verify-email-btn:hover {
+    background: #1178b7;
+}
+
+
+.verify-email-btn:active {
+    transform: scale(0.98);
+}
+/* =====================================================
+   TENANT PROFILE PAGE
+===================================================== */
+
+.tenant-profile-page {
+    min-height: 100vh;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #ffffff;
+
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+
+/* =====================================================
+   PROFILE CONTAINER
+===================================================== */
+
+.tenant-profile-container {
+    width: 100%;
+    max-width: 360px;
+
+    background: #ffffff;
+
+    padding: 18px 20px 20px;
+
+    box-sizing: border-box;
+
+    text-align: left;
+}
+
+
+/* =====================================================
+   TITLE
+===================================================== */
+
+.tenant-profile-title {
+    margin: 0 0 12px;
+
+    text-align: center;
+
+    font-size: 18px;
+    font-weight: 700;
+
+    color: #006fb9;
+}
+
+
+/* =====================================================
+   PROFILE PHOTO
+===================================================== */
+
+.profile-photo-wrapper {
+    position: relative;
+
+    width: 76px;
+    height: 76px;
+
+    margin: 0 auto 18px;
+}
+
+
+/* CIRCLE */
+
+.profile-photo {
+    width: 76px;
+    height: 76px;
+
+    border-radius: 50%;
+
+    background: #dff2ff;
+
+    border: 2px solid #b8e3ff;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+}
+
+
+/* PERSON ICON */
+
+.profile-person {
+    font-size: 38px;
+
+    line-height: 1;
+
+    color: #087fc1;
+}
+
+
+/* =====================================================
+   CAMERA BUTTON
+===================================================== */
+
+.camera-btn {
+    position: absolute;
+
+    right: -2px;
+    bottom: -1px;
+
+    width: 25px;
+    height: 25px;
+
+    border-radius: 50%;
+
+    border: 2px solid #ffffff;
+
+    background: #087fc1;
+
+    color: #ffffff;
+
+    font-size: 12px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+
+    padding: 0;
+}
+
+
+/* =====================================================
+   PROFILE ERROR
+===================================================== */
+
+.profile-error {
+    display: none;
+
+    width: 100%;
+
+    margin-bottom: 10px;
+
+    padding: 8px 10px;
+
+    box-sizing: border-box;
+
+    border-radius: 6px;
+
+    background: #ffecec;
+
+    color: #d93025;
+
+    font-size: 11px;
+
+    text-align: center;
+}
+
+
+/* =====================================================
+   PROFILE FIELD
+===================================================== */
+
+.profile-field {
+    width: 100%;
+
+    margin-bottom: 10px;
+}
+
+
+/* LABEL */
+
+.profile-field label {
+    display: block;
+
+    margin-bottom: 4px;
+
+    font-size: 9px;
+    font-weight: 600;
+
+    color: #555555;
+}
+
+
+/* OPTIONAL */
+
+.profile-field label span {
+    font-weight: 400;
+
+    color: #999999;
+}
+
+
+/* INPUT */
+
+.profile-field input {
+    width: 100%;
+
+    height: 34px;
+
+    padding: 0 10px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #d8e2e8;
+
+    border-radius: 6px;
+
+    background: #ffffff;
+
+    color: #333333;
+
+    font-family: inherit;
+
+    font-size: 10px;
+
+    outline: none;
+
+    transition: 0.2s ease;
+}
+
+
+/* PLACEHOLDER */
+
+.profile-field input::placeholder {
+    color: #a8b0b5;
+}
+
+
+/* FOCUS */
+
+.profile-field input:focus {
+    border-color: #0795d3;
+
+    box-shadow:
+        0 0 0 2px rgba(7, 149, 211, 0.08);
+}
+
+
+/* =====================================================
+   SAVE BUTTON
+===================================================== */
+
+.save-profile-btn {
+    width: 100%;
+
+    height: 34px;
+
+    margin-top: 3px;
+
+    border: none;
+
+    border-radius: 5px;
+
+    background: #008bd0;
+
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.save-profile-btn:hover {
+    background: #0077b5;
+}
+
+
+.save-profile-btn:active {
+    transform: scale(0.99);
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 480px) {
+
+    .tenant-profile-page {
+        padding: 15px;
+    }
+
+    .tenant-profile-container {
+        max-width: 340px;
+
+        padding: 15px 16px 18px;
+    }
+
+}
+/* =====================================================
+   BLUE BACK BUTTON
+===================================================== */
+
+.profile-back-btn {
+    position: absolute;
+
+    top: 18px;
+    left: 18px;
+
+    width: 30px;
+    height: 32px;
+
+    padding: 0;
+
+    border: none;
+    background: transparent;
+
+    color: #008bd0;
+
+    font-size: 32px;
+    font-weight: 500;
+
+    line-height: 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    z-index: 10;
+}
+
+.profile-back-btn:hover {
+    color: #0077b5;
+}
+
+.profile-back-btn:active {
+    transform: scale(0.92);
+}
+/* =====================================================
+   WELCOME / SUCCESS PAGE
+===================================================== */
+
+.welcome-page {
+    min-height: 100vh;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #ffffff;
+
+    padding: 20px;
+
+    box-sizing: border-box;
+}
+
+
+.welcome-container {
+    width: 100%;
+    max-width: 330px;
+
+    text-align: center;
+}
+
+
+/* =====================================================
+   SUCCESS CIRCLE
+===================================================== */
+
+.success-circle {
+    width: 62px;
+    height: 62px;
+
+    margin: 0 auto 12px;
+
+    border-radius: 50%;
+
+    background: #35b979;
+
+    color: #ffffff;
+
+    font-size: 42px;
+    font-weight: 700;
+
+    line-height: 62px;
+
+    box-shadow:
+        0 4px 12px rgba(53, 185, 121, 0.20);
+}
+
+
+/* =====================================================
+   TITLE
+===================================================== */
+
+.welcome-container h1 {
+    margin: 0 0 8px;
+
+    color: #006fba;
+
+    font-size: 17px;
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+.welcome-message {
+    margin: 0;
+
+    color: #555555;
+
+    font-size: 10px;
+
+    line-height: 1.5;
+}
+
+
+/* =====================================================
+   BOARDING NAME
+===================================================== */
+
+.boarding-name {
+    margin-top: 8px;
+
+    color: #008bd0;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   BOARDING HOUSE ICON
+===================================================== */
+
+.boarding-icon {
+    margin: 18px auto 15px;
+
+    font-size: 55px;
+
+    line-height: 1;
+}
+
+
+/* =====================================================
+   DASHBOARD BUTTON
+===================================================== */
+
+.dashboard-btn {
+    width: 100%;
+
+    height: 34px;
+
+    border: none;
+
+    border-radius: 5px;
+
+    background: #008bd0;
+
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 10px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.dashboard-btn:hover {
+    background: #0077b5;
+}
+
+
+.dashboard-btn:active {
+    transform: scale(0.98);
+}
+/* =====================================================
+   WELCOME PAGE
+===================================================== */
+
+.welcome-page {
+
+    min-height: 100vh;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #ffffff;
+
+    padding: 15px;
+
+    box-sizing: border-box;
+
+    overflow: hidden;
+}
+
+
+.welcome-container {
+
+    width: 100%;
+    max-width: 360px;
+
+    text-align: center;
+
+}
+
+
+/* =====================================================
+   SUCCESS ICON
+===================================================== */
+
+.success-icon-area {
+
+    position: relative;
+
+    width: 78px;
+    height: 78px;
+
+    margin: 0 auto 7px;
+
+}
+
+
+.success-circle {
+
+    position: absolute;
+
+    top: 7px;
+    left: 7px;
+
+    width: 64px;
+    height: 64px;
+
+    border-radius: 50%;
+
+    background: #32b978;
+
+    color: #ffffff;
+
+    font-size: 43px;
+    font-weight: 700;
+
+    line-height: 64px;
+
+    text-align: center;
+
+}
+
+
+/* =====================================================
+   SUCCESS RAYS
+===================================================== */
+
+.ray {
+
+    position: absolute;
+
+    width: 7px;
+    height: 2px;
+
+    border-radius: 10px;
+
+    background: #32b978;
+
+}
+
+
+.ray-1 {
+
+    top: 14px;
+    left: 0;
+
+    transform: rotate(-35deg);
+
+}
+
+
+.ray-2 {
+
+    top: 34px;
+    left: -5px;
+
+}
+
+
+.ray-3 {
+
+    top: 52px;
+    left: 1px;
+
+    transform: rotate(35deg);
+
+}
+
+
+.ray-4 {
+
+    top: 14px;
+    right: 0;
+
+    transform: rotate(35deg);
+
+}
+
+
+.ray-5 {
+
+    top: 34px;
+    right: -5px;
+
+}
+
+
+.ray-6 {
+
+    top: 52px;
+    right: 1px;
+
+    transform: rotate(-35deg);
+
+}
+
+
+/* =====================================================
+   WELCOME TITLE
+===================================================== */
+
+.welcome-container h1 {
+
+    margin: 0 0 8px;
+
+    color: #123b78;
+
+    font-size: 19px;
+
+    line-height: 1.25;
+
+    font-weight: 700;
+
+}
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+.welcome-message {
+
+    margin: 0;
+
+    color: #547da6;
+
+    font-size: 10px;
+
+    line-height: 1.55;
+
+}
+
+
+/* =====================================================
+   DASHBOARD BUTTON
+===================================================== */
+
+.dashboard-btn {
+
+    width: 100%;
+
+    height: 34px;
+
+    margin-top: 9px;
+
+    border: none;
+
+    border-radius: 5px;
+
+    background: #078bd0;
+
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+}
+
+
+.dashboard-btn:hover {
+
+    background: #0077b5;
+
+}
+
+
+.dashboard-btn:active {
+
+    transform: scale(0.98);
+
+}
+
+
+/* =====================================================
+   PROPERTY ILLUSTRATION
+===================================================== */
+
+.property-illustration {
+
+    position: relative;
+
+    width: 100%;
+
+    height: 170px;
+
+    margin-top: 7px;
+
+    overflow: hidden;
+
+}
+
+
+/* =====================================================
+   BACKGROUND BUILDINGS
+===================================================== */
+
+.building {
+
+    position: absolute;
+
+    bottom: 20px;
+
+    background: #cceeff;
+
+    border-radius: 3px 3px 0 0;
+
+    z-index: 1;
+
+}
+
+
+/* LEFT BUILDING */
+
+.building-left {
+
+    left: 34px;
+
+    width: 53px;
+    height: 105px;
+
+}
+
+
+/* FAR LEFT */
+
+.building-small-left {
+
+    left: 8px;
+
+    width: 37px;
+    height: 70px;
+
+}
+
+
+/* RIGHT BUILDING */
+
+.building-right {
+
+    right: 35px;
+
+    width: 57px;
+    height: 118px;
+
+}
+
+
+/* FAR RIGHT */
+
+.building-small-right {
+
+    right: 7px;
+
+    width: 39px;
+    height: 82px;
+
+}
+
+
+/* BUILDING WINDOWS */
+
+.building-window {
+
+    width: 12px;
+    height: 8px;
+
+    margin: 10px auto 0;
+
+    background: #ffffff;
+
+    border-radius: 1px;
+
+    opacity: 0.85;
+
+}
+
+
+/* =====================================================
+   MAIN HOUSE
+===================================================== */
+
+.main-house {
+
+    position: absolute;
+
+    left: 50%;
+
+    bottom: 18px;
+
+    width: 185px;
+    height: 120px;
+
+    transform: translateX(-50%);
+
+    z-index: 4;
+
+}
+
+
+/* HOUSE BODY */
+
+.house-body {
+
+    position: absolute;
+
+    left: 17px;
+    bottom: 0;
+
+    width: 151px;
+    height: 88px;
+
+    background: #ffffff;
+
+    border: 4px solid #078bd0;
+
+    border-top: none;
+
+    box-sizing: border-box;
+
+}
+
+
+/* =====================================================
+   ROOF
+===================================================== */
+
+.house-roof {
+
+    position: absolute;
+
+    left: 9px;
+    top: 8px;
+
+    width: 166px;
+    height: 85px;
+
+    background: #ffffff;
+
+    border-left: 8px solid #087fc4;
+    border-top: 8px solid #087fc4;
+
+    transform: rotate(45deg) scale(0.7);
+
+    transform-origin: center;
+
+    z-index: 5;
+
+}
+
+
+/* =====================================================
+   HOUSE WINDOWS
+===================================================== */
+
+.house-window {
+
+    position: absolute;
+
+    top: 25px;
+
+    width: 30px;
+    height: 25px;
+
+    background: #bce9ff;
+
+    border: 3px solid #078bd0;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    grid-template-rows: 1fr 1fr;
+
+}
+
+
+.house-window span {
+
+    border: 1px solid #078bd0;
+
+}
+
+
+.window-left {
+
+    left: 12px;
+
+}
+
+
+.window-right {
+
+    right: 12px;
+
+}
+
+
+/* =====================================================
+   HOUSE DOOR
+===================================================== */
+
+.house-door {
+
+    position: absolute;
+
+    left: 59px;
+    bottom: 0;
+
+    width: 30px;
+    height: 48px;
+
+    background: #bce9ff;
+
+    border: 3px solid #078bd0;
+
+    box-sizing: border-box;
+
+}
+
+
+.door-knob {
+
+    position: absolute;
+
+    right: 4px;
+    top: 23px;
+
+    width: 4px;
+    height: 4px;
+
+    border-radius: 50%;
+
+    background: #078bd0;
+
+}
+
+
+/* =====================================================
+   TREES
+===================================================== */
+
+.tree {
+
+    position: absolute;
+
+    bottom: 18px;
+
+    z-index: 6;
+
+}
+
+
+/* TREE TOP */
+
+.tree-top {
+
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    background: #62b9ec;
+
+}
+
+
+/* TREE TRUNK */
+
+.tree-trunk {
+
+    width: 6px;
+    height: 28px;
+
+    margin: -2px auto 0;
+
+    background: #168fd1;
+
+}
+
+
+/* LEFT TREE */
+
+.tree-left {
+
+    left: 27px;
+
+}
+
+
+/* LEFT SMALL TREE */
+
+.tree-left-small {
+
+    left: 73px;
+
+    transform: scale(0.75);
+
+    transform-origin: bottom;
+
+}
+
+
+/* RIGHT TREE */
+
+.tree-right {
+
+    right: 25px;
+
+}
+
+
+/* RIGHT SMALL TREE */
+
+.tree-right-small {
+
+    right: 75px;
+
+    transform: scale(0.75);
+
+    transform-origin: bottom;
+
+}
+
+
+/* =====================================================
+   BLUE GROUND CLOUDS
+===================================================== */
+
+.ground-cloud {
+
+    position: absolute;
+
+    background: #dff4ff;
+
+    border-radius: 50%;
+
+    z-index: 8;
+
+}
+
+
+.cloud-1 {
+
+    width: 80px;
+    height: 45px;
+
+    left: -10px;
+    bottom: -25px;
+
+}
+
+
+.cloud-2 {
+
+    width: 110px;
+    height: 58px;
+
+    left: 45px;
+    bottom: -35px;
+
+}
+
+
+.cloud-3 {
+
+    width: 90px;
+    height: 48px;
+
+    left: 135px;
+    bottom: -30px;
+
+}
+
+
+.cloud-4 {
+
+    width: 100px;
+    height: 55px;
+
+    right: 40px;
+    bottom: -34px;
+
+}
+
+
+.cloud-5 {
+
+    width: 75px;
+    height: 42px;
+
+    right: -10px;
+    bottom: -25px;
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 480px) {
+
+    .welcome-page {
+
+        padding: 12px;
+
+    }
+
+
+    .welcome-container {
+
+        max-width: 330px;
+
+    }
+
+
+    .welcome-container h1 {
+
+        font-size: 17px;
+
+    }
+
+
+    .welcome-message {
+
+        font-size: 9px;
+
+    }
+
+
+    .property-illustration {
+
+        height: 155px;
+
+    }
+
+}
+/* =====================================================
+   DASHBOARD
+===================================================== */
+
+.dashboard-page {
+
+    min-height: 100vh;
+
+    width: 100%;
+
+    background: #f7fbff;
+
+    box-sizing: border-box;
+
+    padding-bottom: 72px;
+
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.dashboard-header {
+
+    width: 100%;
+
+    background: #ffffff;
+
+    padding: 22px 20px 18px;
+
+    box-sizing: border-box;
+
+    border-bottom: 1px solid #edf2f5;
+
+}
+
+
+.user-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+}
+
+
+.user-avatar {
+
+    width: 45px;
+
+    height: 45px;
+
+    border-radius: 50%;
+
+    background: #dff3ff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 23px;
+
+}
+
+
+.user-greeting p {
+
+    margin: 0;
+
+    font-size: 10px;
+
+    color: #7b8b98;
+
+}
+
+
+.user-greeting h1 {
+
+    margin: 2px 0 0;
+
+    font-size: 17px;
+
+    color: #123b78;
+
+}
+
+
+/* =====================================================
+   CONTENT
+===================================================== */
+
+.dashboard-content {
+
+    padding: 17px;
+
+    box-sizing: border-box;
+
+}
+
+
+.dashboard-section-hidden {
+
+    display: none;
+
+}
+
+
+/* =====================================================
+   ROOM CARD
+===================================================== */
+
+.room-card {
+
+    width: 100%;
+
+    min-height: 83px;
+
+    padding: 16px;
+
+    box-sizing: border-box;
+
+    border-radius: 9px;
+
+    background: linear-gradient(
+        135deg,
+        #078bd0,
+        #0aa2e8
+    );
+
+    color: #ffffff;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    box-shadow:
+        0 5px 15px rgba(0, 139, 208, 0.15);
+
+}
+
+
+.room-info h2 {
+
+    margin: 0;
+
+    font-size: 15px;
+
+}
+
+
+.room-info p {
+
+    margin: 5px 0 0;
+
+    font-size: 9px;
+
+    opacity: 0.9;
+
+}
+
+
+.room-arrow {
+
+    font-size: 28px;
+
+}
+
+
+/* =====================================================
+   PAYMENT CARD
+===================================================== */
+
+.payment-card {
+
+    margin-top: 12px;
+
+    padding: 14px;
+
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    border: 1px solid #e6edf2;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 10px;
+
+}
+
+
+.payment-card h3 {
+
+    margin: 0;
+
+    color: #173b70;
+
+    font-size: 12px;
+
+}
+
+
+.payment-card p {
+
+    margin: 4px 0 0;
+
+    color: #8293a0;
+
+    font-size: 8px;
+
+}
+
+
+.pay-now-btn {
+
+    border: none;
+
+    background: #078bd0;
+
+    color: #ffffff;
+
+    padding: 9px 13px;
+
+    border-radius: 5px;
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+}
+
+
+/* =====================================================
+   QUICK ACCESS
+===================================================== */
+
+.section-title {
+
+    margin: 18px 0 9px;
+
+    color: #173b70;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+}
+
+
+.quick-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 8px;
+
+}
+
+
+.quick-card {
+
+    border: 1px solid #e6edf2;
+
+    background: #ffffff;
+
+    border-radius: 8px;
+
+    padding: 12px 5px;
+
+    color: #526a7b;
+
+    font-size: 9px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 6px;
+
+    cursor: pointer;
+
+}
+
+
+.quick-icon {
+
+    font-size: 19px;
+
+}
+
+
+/* =====================================================
+   SECTION TITLE
+===================================================== */
+
+.page-section-title {
+
+    margin: 0 0 15px;
+
+    color: #123b78;
+
+    font-size: 17px;
+
+}
+
+
+/* =====================================================
+   PAYMENT SUMMARY
+===================================================== */
+
+.payment-summary-card {
+
+    background: #ffffff;
+
+    border-radius: 9px;
+
+    padding: 15px;
+
+    border: 1px solid #e6edf2;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+}
+
+
+.payment-summary-icon {
+
+    width: 42px;
+
+    height: 42px;
+
+    border-radius: 50%;
+
+    background: #e0f4ff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 20px;
+
+}
+
+
+.payment-summary-card h3 {
+
+    margin: 0;
+
+    font-size: 11px;
+
+    color: #173b70;
+
+}
+
+
+.payment-summary-card p {
+
+    margin: 4px 0 0;
+
+    font-size: 8px;
+
+    color: #8493a0;
+
+}
+
+
+.payment-summary-card strong {
+
+    margin-left: auto;
+
+    color: #078bd0;
+
+    font-size: 12px;
+
+}
+
+
+.large-pay-btn {
+
+    width: 100%;
+
+    height: 35px;
+
+    margin-top: 12px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background: #078bd0;
+
+    color: #ffffff;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+}
+
+
+/* =====================================================
+   HISTORY
+===================================================== */
+
+.empty-history {
+
+    background: #ffffff;
+
+    border-radius: 10px;
+
+    border: 1px solid #e6edf2;
+
+    padding: 35px 15px;
+
+    text-align: center;
+
+}
+
+
+.empty-history-icon {
+
+    font-size: 35px;
+
+}
+
+
+.empty-history h3 {
+
+    margin: 10px 0 4px;
+
+    color: #173b70;
+
+    font-size: 12px;
+
+}
+
+
+.empty-history p {
+
+    margin: 0;
+
+    color: #8797a4;
+
+    font-size: 9px;
+
+}
+
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+.profile-card {
+
+    background: #ffffff;
+
+    border: 1px solid #e6edf2;
+
+    border-radius: 10px;
+
+    padding: 17px;
+
+}
+
+
+.profile-large-avatar {
+
+    width: 62px;
+
+    height: 62px;
+
+    margin: 0 auto 17px;
+
+    border-radius: 50%;
+
+    background: #dff3ff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 30px;
+
+}
+
+
+.credential-field {
+
+    margin-bottom: 10px;
+
+}
+
+
+.credential-field label {
+
+    display: block;
+
+    margin-bottom: 4px;
+
+    font-size: 8px;
+
+    color: #7d8c97;
+
+}
+
+
+.credential-value {
+
+    min-height: 33px;
+
+    padding: 9px 10px;
+
+    box-sizing: border-box;
+
+    border-radius: 5px;
+
+    background: #f7fbfd;
+
+    border: 1px solid #e3ebef;
+
+    color: #344d5d;
+
+    font-size: 9px;
+
+}
+
+
+/* =====================================================
+   BOTTOM NAVIGATION
+===================================================== */
+
+.bottom-navigation {
+
+    position: fixed;
+
+    left: 0;
+
+    bottom: 0;
+
+    width: 100%;
+
+    height: 64px;
+
+    background: #ffffff;
+
+    border-top: 1px solid #e5edf2;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    z-index: 1000;
+
+}
+
+
+.nav-item {
+
+    border: none;
+
+    background: transparent;
+
+    color: #80909c;
+
+    font-family: inherit;
+
+    font-size: 8px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 3px;
+
+    cursor: pointer;
+
+}
+
+
+.nav-icon {
+
+    font-size: 18px;
+
+    line-height: 1;
+
+}
+
+
+.nav-item.active {
+
+    color: #078bd0;
+
+    font-weight: 600;
+
+}
+/* =====================================================
+   BOTTOM NAVIGATION
+===================================================== */
+
+.bottom-navigation {
+
+    position: fixed;
+
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 62px;
+
+    background: #ffffff;
+
+    border-top: 1px solid #dfeaf0;
+
+    box-shadow:
+        0 -3px 12px rgba(0, 70, 110, 0.08);
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    z-index: 9999;
+
+}
+
+
+/* =====================================================
+   NAV ITEM
+===================================================== */
+
+.nav-item {
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    color: #7d8d98;
+
+    font-family: inherit;
+
+    font-size: 8px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 4px;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+
+}
+
+
+/* =====================================================
+   ICON
+===================================================== */
+
+.nav-icon {
+
+    width: 25px;
+    height: 25px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 18px;
+
+    line-height: 1;
+
+}
+
+
+/* =====================================================
+   LABEL
+===================================================== */
+
+.nav-label {
+
+    font-size: 8px;
+
+    line-height: 1;
+
+}
+
+
+/* =====================================================
+   ACTIVE
+===================================================== */
+
+.nav-item.active {
+
+    color: #078bd0;
+
+    font-weight: 700;
+
+}
+
+
+.nav-item.active .nav-icon {
+
+    color: #078bd0;
+
+}
+
+
+/* =====================================================
+   CLICK EFFECT
+===================================================== */
+
+.nav-item:active {
+
+    transform: scale(.94);
+
+}
+
+
+/* =====================================================
+   PAGE SPACE FOR NAV
+===================================================== */
+
+.dashboard-page,
+.inner-page {
+
+    padding-bottom: 75px;
+
+}
+/* =====================================================
+   JNJC BOARDING HOUSE - HOME DASHBOARD
+===================================================== */
+
+.boarding-dashboard {
+
+    width: 100%;
+
+    min-height: 100vh;
+
+    background: #f7fbfe;
+
+    padding-bottom: 72px;
+
+    box-sizing: border-box;
+
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.home-header {
+
+    width: 100%;
+
+    min-height: 70px;
+
+    padding: 14px 16px;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    border-bottom: 1px solid #e8f0f4;
+
+}
+
+
+.user-avatar {
+
+    width: 38px;
+
+    height: 38px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: #dff3ff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 20px;
+
+}
+
+
+.welcome-text {
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+}
+
+
+.welcome-text p {
+
+    margin: 0;
+
+    color: #80919d;
+
+    font-size: 8px;
+
+    line-height: 1.2;
+
+}
+
+
+.welcome-text h1 {
+
+    margin: 2px 0 0;
+
+    color: #173b70;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    line-height: 1.2;
+
+}
+
+
+.welcome-text h1 span {
+
+    color: #078bd0;
+
+}
+
+
+/* =====================================================
+   HOME CONTENT
+===================================================== */
+
+.home-content {
+
+    padding: 11px;
+
+    box-sizing: border-box;
+
+}
+
+
+/* =====================================================
+   SMALL LABEL
+===================================================== */
+
+.small-label {
+
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #ffffff;
+
+    opacity: .78;
+
+    font-size: 6px;
+
+    font-weight: 700;
+
+    letter-spacing: .3px;
+
+}
+
+
+/* =====================================================
+   ROOM CARD
+===================================================== */
+
+.room-card {
+
+    width: 100%;
+
+    padding: 12px;
+
+    box-sizing: border-box;
+
+    border-radius: 7px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #078bd0,
+            #0b9ddd
+        );
+
+    color: #ffffff;
+
+    box-shadow:
+        0 3px 9px rgba(0, 139, 208, .12);
+
+}
+
+
+.room-card-top {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+}
+
+
+.room-card h2 {
+
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 14px;
+
+    line-height: 1.2;
+
+}
+
+
+.occupied-badge {
+
+    padding: 4px 7px;
+
+    border-radius: 10px;
+
+    background: rgba(255,255,255,.18);
+
+    color: #ffffff;
+
+    font-size: 7px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 4px;
+
+}
+
+
+.status-dot {
+
+    width: 5px;
+
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: #61e69b;
+
+}
+
+
+.room-status-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-top: 8px;
+
+    padding-top: 7px;
+
+    border-top: 1px solid rgba(255,255,255,.2);
+
+    font-size: 7px;
+
+}
+
+
+.room-status-row strong {
+
+    color: #ffffff;
+
+}
+
+
+/* =====================================================
+   RENT CARD
+===================================================== */
+
+.rent-card {
+
+    margin-top: 8px;
+
+    padding: 12px;
+
+    box-sizing: border-box;
+
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    border: 1px solid #e2ebf0;
+
+    box-shadow:
+        0 2px 8px rgba(0,70,110,.04);
+
+}
+
+
+.rent-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 10px;
+
+}
+
+
+.rent-card .small-label {
+
+    color: #84949f;
+
+    opacity: 1;
+
+}
+
+
+.rent-card h2 {
+
+    margin: 1px 0 0;
+
+    color: #123b78;
+
+    font-size: 20px;
+
+    line-height: 1.1;
+
+}
+
+
+.rent-card p {
+
+    margin: 2px 0 0;
+
+    color: #84949f;
+
+    font-size: 7px;
+
+}
+
+
+.due-date {
+
+    text-align: right;
+
+}
+
+
+.due-date span {
+
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #84949f;
+
+    font-size: 7px;
+
+}
+
+
+.due-date strong {
+
+    display: block;
+
+    color: #173b70;
+
+    font-size: 8px;
+
+}
+
+
+.pay-now-button {
+
+    width: 100%;
+
+    height: 29px;
+
+    margin-top: 9px;
+
+    border: none;
+
+    border-radius: 5px;
+
+    background: #078bd0;
+
+    color: #ffffff;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+}
+
+
+.pay-now-button:active {
+
+    transform: scale(.98);
+
+}
+
+
+/* =====================================================
+   ANNOUNCEMENT
+===================================================== */
+
+.announcement-card {
+
+    margin-top: 8px;
+
+    padding: 11px;
+
+    box-sizing: border-box;
+
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    border: 1px solid #e2ebf0;
+
+}
+
+
+.announcement-title {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+}
+
+
+.announcement-icon {
+
+    width: 27px;
+
+    height: 27px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: #fff1d9;
+
+    color: #e7a32d;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+}
+
+
+.announcement-title .small-label {
+
+    margin-bottom: 2px;
+
+    color: #84949f;
+
+    opacity: 1;
+
+}
+
+
+.announcement-title h3 {
+
+    margin: 0;
+
+    color: #173b70;
+
+    font-size: 9px;
+
+}
+
+
+.announcement-message {
+
+    margin-top: 8px;
+
+    padding: 8px;
+
+    border-radius: 5px;
+
+    background: #f5fafc;
+
+    color: #526a7b;
+
+    font-size: 8px;
+
+    line-height: 1.4;
+
+}
+
+
+/* =====================================================
+   QUICK ROOM STATUS
+===================================================== */
+
+.quick-status-card {
+
+    margin-top: 8px;
+
+    padding: 11px;
+
+    box-sizing: border-box;
+
+    border-radius: 7px;
+
+    background: #ffffff;
+
+    border: 1px solid #e2ebf0;
+
+}
+
+
+.quick-status-card h3 {
+
+    margin: 0 0 9px;
+
+    color: #173b70;
+
+    font-size: 10px;
+
+}
+
+
+.quick-status-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 5px;
+
+}
+
+
+.quick-status-item {
+
+    min-width: 0;
+
+    padding: 8px 4px;
+
+    text-align: center;
+
+    border-radius: 5px;
+
+    background: #f5fafc;
+
+}
+
+
+.quick-status-item span {
+
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #8a99a4;
+
+    font-size: 6px;
+
+}
+
+
+.quick-status-item strong {
+
+    display: block;
+
+    color: #123b78;
+
+    font-size: 8px;
+
+    white-space: nowrap;
+
+}
+
+
+/* =====================================================
+   BOTTOM NAVIGATION
+===================================================== */
+
+.bottom-navigation {
+
+    position: fixed;
+
+    left: 0;
+
+    bottom: 0;
+
+    width: 100%;
+
+    height: 58px;
+
+    background: #ffffff;
+
+    border-top: 1px solid #dfe9ee;
+
+    box-shadow:
+        0 -2px 8px rgba(0,60,100,.08);
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    z-index: 9999;
+
+}
+
+
+.nav-item {
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    color: #7c8d99;
+
+    padding: 3px 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 2px;
+
+    font-family: inherit;
+
+    cursor: pointer;
+
+}
+
+
+.nav-icon {
+
+    width: 21px;
+
+    height: 21px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 16px;
+
+    line-height: 1;
+
+}
+
+
+.nav-label {
+
+    font-size: 7px;
+
+    line-height: 1;
+
+}
+
+
+.nav-item.active {
+
+    color: #078bd0;
+
+}
+
+
+.nav-item.active .nav-icon {
+
+    color: #078bd0;
+
+}
+
+
+.nav-item:active {
+
+    transform: scale(.94);
+
+}
+
+
+/* =====================================================
+   MOBILE SIZE
+===================================================== */
+
+@media (max-width: 480px) {
+
+    .home-content {
+
+        padding: 10px;
+
+    }
+
+}
+/* =====================================================
+   BOARDINGPAY DASHBOARD
+   CLEAN MOBILE DESIGN
+===================================================== */
+
+
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+
+body {
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #eaf2f6;
+
+    color: #18365d;
+}
+
+
+/* =====================================================
+   MAIN APP
+===================================================== */
+
+.boarding-dashboard {
+
+    position: relative;
+
+    width: 100%;
+
+    max-width: 500px;
+
+    min-height: 100vh;
+
+    margin: 0 auto;
+
+    background: #f7fafc;
+
+    padding-bottom: 75px;
+
+    overflow-x: hidden;
+}
+
+
+/* =====================================================
+   BLUE HEADER
+===================================================== */
+
+.home-hero {
+
+    position: relative;
+
+    height: 190px;
+
+    width: 100%;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            #1778c9 0%,
+            #2995df 100%
+        );
+
+    color: white;
+}
+
+
+/* =====================================================
+   CLOUDS
+===================================================== */
+
+.cloud {
+
+    position: absolute;
+
+    background:
+        rgba(156, 211, 239, .78);
+
+    border-radius: 50%;
+
+    z-index: 1;
+}
+
+
+.cloud-1 {
+
+    width: 64px;
+    height: 31px;
+
+    top: 79px;
+    right: 122px;
+}
+
+
+.cloud-1::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 30px;
+    height: 30px;
+
+    left: 12px;
+    top: -13px;
+
+    background:
+        rgba(156, 211, 239, .78);
+
+    border-radius: 50%;
+}
+
+
+.cloud-2 {
+
+    width: 82px;
+    height: 37px;
+
+    top: 99px;
+    right: -15px;
+}
+
+
+.cloud-2::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 39px;
+    height: 39px;
+
+    left: 13px;
+    top: -17px;
+
+    background:
+        rgba(156, 211, 239, .78);
+
+    border-radius: 50%;
+}
+
+
+.cloud-3 {
+
+    width: 55px;
+    height: 27px;
+
+    top: 124px;
+    right: 45px;
+
+    opacity: .7;
+}
+
+
+/* =====================================================
+   TREES
+===================================================== */
+
+.tree {
+
+    position: absolute;
+
+    bottom: -13px;
+
+    width: 72px;
+    height: 72px;
+
+    z-index: 4;
+}
+
+
+/* tree trunk */
+
+.tree::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 12px;
+    height: 30px;
+
+    bottom: 0;
+    left: 30px;
+
+    background: #76503c;
+
+    border-radius: 5px;
+}
+
+
+/* tree leaves */
+
+.tree::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 54px;
+    height: 54px;
+
+    left: 9px;
+    top: 4px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 30% 30%,
+            #77c95b 0 25%,
+            #43ad4e 26% 60%,
+            #299b50 61%
+        );
+
+    box-shadow:
+        20px 8px 0 -4px #4db34d,
+        -13px 14px 0 -7px #70c85b;
+}
+
+
+.tree-left {
+
+    left: 125px;
+
+    transform: scale(.85);
+}
+
+
+.tree-right {
+
+    right: -7px;
+
+    transform: scale(1.1);
+}
+
+
+/* =====================================================
+   BRAND
+===================================================== */
+
+.hero-brand {
+
+    position: absolute;
+
+    left: 18px;
+    top: 17px;
+
+    z-index: 20;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+.boarding-logo {
+
+    width: 44px;
+    height: 44px;
+
+    border-radius: 11px;
+
+    background:
+        rgba(255,255,255,.16);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 27px;
+
+    box-shadow:
+        0 3px 8px
+        rgba(0,0,0,.10);
+}
+
+
+.boarding-brand-text h1 {
+
+    color: white;
+
+    font-size: 22px;
+
+    line-height: 1;
+
+    font-weight: 700;
+}
+
+
+.boarding-brand-text p {
+
+    margin-top: 4px;
+
+    color:
+        rgba(255,255,255,.9);
+
+    font-size: 8px;
+}
+
+
+/* =====================================================
+   NOTIFICATION
+===================================================== */
+
+.hero-notification {
+
+    position: absolute;
+
+    top: 18px;
+    right: 57px;
+
+    width: 32px;
+    height: 32px;
+
+    border: 0;
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    z-index: 30;
+}
+
+
+.notification-dot {
+
+    position: absolute;
+
+    right: 3px;
+    top: 2px;
+
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #ff5d59;
+
+    border: 1px solid white;
+}
+
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+.hero-profile {
+
+    position: absolute;
+
+    right: 15px;
+    top: 13px;
+
+    width: 39px;
+    height: 39px;
+
+    border-radius: 50%;
+
+    border: 2px solid white;
+
+    background: white;
+
+    color: #513d7d;
+
+    font-size: 19px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    z-index: 30;
+}
+
+
+/* =====================================================
+   GREETING
+===================================================== */
+
+.hero-greeting {
+
+    position: absolute;
+
+    left: 20px;
+    top: 84px;
+
+    z-index: 20;
+}
+
+
+.hero-greeting h2 {
+
+    color: white;
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+    line-height: 1.2;
+}
+
+
+.hero-greeting p {
+
+    margin-top: 5px;
+
+    color:
+        rgba(255,255,255,.94);
+
+    font-size: 8px;
+}
+
+
+/* =====================================================
+   BALANCE CARD
+===================================================== */
+
+.balance-card {
+
+    position: relative;
+
+    z-index: 100;
+
+    width: calc(100% - 20px);
+
+    min-height: 74px;
+
+    margin:
+        -9px
+        10px
+        10px;
+
+    padding:
+        10px
+        12px;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #087ed0,
+            #268fdb
+        );
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    box-shadow:
+        0 4px 12px
+        rgba(0,90,150,.18);
+}
+
+
+.balance-icon {
+
+    width: 39px;
+    height: 39px;
+
+    flex-shrink: 0;
+
+    border-radius: 8px;
+
+    background:
+        rgba(255,255,255,.18);
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 19px;
+}
+
+
+.balance-information {
+
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+.balance-information span {
+
+    display: block;
+
+    color:
+        rgba(255,255,255,.92);
+
+    font-size: 8px;
+
+    margin-bottom: 2px;
+}
+
+
+.balance-information h2 {
+
+    color: white;
+
+    font-size: 22px;
+
+    line-height: 1;
+
+    font-weight: 700;
+}
+
+
+.balance-pay-btn {
+
+    min-width: 96px;
+
+    height: 34px;
+
+    padding:
+        0
+        10px;
+
+    border: 0;
+
+    border-radius: 20px;
+
+    background: white;
+
+    color: #183b70;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+.balance-pay-btn span {
+
+    margin-left: 5px;
+
+    font-size: 13px;
+}
+
+
+/* =====================================================
+   QUICK ACTIONS
+===================================================== */
+
+.quick-actions-card {
+
+    width: calc(100% - 20px);
+
+    margin:
+        0
+        10px
+        10px;
+
+    padding:
+        13px
+        5px;
+
+    border-radius: 12px;
+
+    background: white;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    row-gap: 15px;
+
+    column-gap: 2px;
+
+    box-shadow:
+        0 2px 10px
+        rgba(0,70,110,.05);
+}
+
+
+.action-item {
+
+    border: 0;
+
+    background: transparent;
+
+    min-width: 0;
+
+    color: #233d60;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    font-size: 7px;
+
+    line-height: 1.15;
+
+    text-align: center;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 5px;
+
+    cursor: pointer;
+}
+
+
+.action-icon {
+
+    width: 43px;
+    height: 43px;
+
+    border-radius: 11px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 19px;
+}
+
+
+.action-blue {
+
+    background: #dff2ff;
+    color: #168bd2;
+}
+
+
+.action-green {
+
+    background: #dff7ed;
+    color: #12a678;
+}
+
+
+.action-purple {
+
+    background: #e7e3ff;
+    color: #6654d7;
+}
+
+
+.action-red {
+
+    background: #ffe2e3;
+    color: #e45259;
+}
+
+
+.action-yellow {
+
+    background: #fff0c9;
+    color: #eaa52b;
+}
+
+
+.action-lightblue {
+
+    background: #dff2ff;
+    color: #268fcf;
+}
+
+
+.action-violet {
+
+    background: #e5e1ff;
+    color: #6655d7;
+}
+
+
+.action-gray {
+
+    background: #e4edf3;
+    color: #506c82;
+}
+
+
+/* =====================================================
+   RECENT PAYMENTS
+===================================================== */
+
+.recent-payments-card {
+
+    width: calc(100% - 20px);
+
+    margin:
+        0
+        10px
+        10px;
+
+    padding: 11px;
+
+    border-radius: 12px;
+
+    background: white;
+
+    box-shadow:
+        0 2px 10px
+        rgba(0,70,110,.05);
+}
+
+
+.recent-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 8px;
+}
+
+
+.recent-header h3 {
+
+    color: #173c70;
+
+    font-size: 12px;
+}
+
+
+.recent-header button {
+
+    border: 0;
+
+    background: transparent;
+
+    color: #168bd1;
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+.payment-record {
+
+    min-height: 47px;
+
+    padding: 6px;
+
+    border:
+        1px solid
+        #edf2f5;
+
+    border-radius: 8px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+.payment-check {
+
+    width: 29px;
+    height: 29px;
+
+    border-radius: 50%;
+
+    flex-shrink: 0;
+
+    background: #3bb78a;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 14px;
+}
+
+
+.payment-record-info {
+
+    flex: 1;
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.payment-record-info strong {
+
+    color: #243e5d;
+
+    font-size: 8px;
+}
+
+
+.payment-record-info span {
+
+    color: #8a9aa6;
+
+    font-size: 6px;
+
+    margin-top: 2px;
+}
+
+
+.payment-record-amount {
+
+    text-align: right;
+}
+
+
+.payment-record-amount strong {
+
+    display: block;
+
+    color: #1ea878;
+
+    font-size: 8px;
+}
+
+
+.payment-record-amount span {
+
+    display: inline-block;
+
+    margin-top: 2px;
+
+    padding:
+        2px
+        5px;
+
+    border-radius: 5px;
+
+    background: #dff7ed;
+
+    color: #20a879;
+
+    font-size: 6px;
+}
+
+
+/* =====================================================
+   PROMOTIONAL BANNER
+===================================================== */
+
+.home-banner {
+
+    position: relative;
+
+    width: calc(100% - 20px);
+
+    height: 78px;
+
+    margin:
+        0
+        10px
+        10px;
+
+    padding:
+        9px
+        12px;
+
+    overflow: hidden;
+
+    border-radius: 11px;
+
+    background:
+        linear-gradient(
+            110deg,
+            #dff4ff,
+            #c8eafb
+        );
+}
+
+
+.banner-text {
+
+    position: relative;
+
+    z-index: 5;
+}
+
+
+.banner-text strong {
+
+    display: block;
+
+    color: #173b70;
+
+    font-size: 10px;
+}
+
+
+.banner-text p {
+
+    margin-top: 2px;
+
+    color: #173b70;
+
+    font-size: 8px;
+
+    font-weight: 600;
+
+    line-height: 1.15;
+}
+
+
+.banner-text small {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color: #69859b;
+
+    font-size: 5px;
+}
+
+
+.banner-phone {
+
+    position: absolute;
+
+    right: 54px;
+    bottom: -13px;
+
+    font-size: 50px;
+
+    transform: rotate(-10deg);
+
+    z-index: 3;
+}
+
+
+.banner-check {
+
+    position: absolute;
+
+    right: 13px;
+    bottom: 15px;
+
+    color: #168bd1;
+
+    font-size: 19px;
+}
+
+
+/* =====================================================
+   BOTTOM NAVIGATION
+===================================================== */
+
+.bottom-navigation {
+
+    position: fixed;
+
+    left: 50%;
+
+    bottom: 0;
+
+    transform:
+        translateX(-50%);
+
+    width: 100%;
+
+    max-width: 500px;
+
+    height: 61px;
+
+    background: white;
+
+    border-top:
+        1px solid
+        #dce6ed;
+
+    box-shadow:
+        0 -3px 12px
+        rgba(0,60,100,.08);
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    z-index: 9999;
+}
+
+
+.nav-item {
+
+    border: 0;
+
+    background: transparent;
+
+    color: #718493;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 3px;
+
+    cursor: pointer;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+}
+
+
+.nav-icon {
+
+    width: 24px;
+    height: 24px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 17px;
+}
+
+
+.nav-label {
+
+    font-size: 7px;
+}
+
+
+.nav-item.active {
+
+    color: #078bd0;
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   RESPONSIVE MOBILE
+===================================================== */
+
+@media (max-width: 380px) {
+
+    .home-hero {
+
+        height: 185px;
+    }
+
+
+    .hero-brand {
+
+        left: 14px;
+    }
+
+
+    .boarding-brand-text h1 {
+
+        font-size: 20px;
+    }
+
+
+    .hero-greeting {
+
+        left: 16px;
+        top: 83px;
+    }
+
+
+    .hero-greeting h2 {
+
+        font-size: 17px;
+    }
+
+
+    .tree-left {
+
+        left: 110px;
+
+        transform:
+            scale(.75);
+    }
+
+
+    .balance-information h2 {
+
+        font-size: 20px;
+    }
+
+
+    .balance-pay-btn {
+
+        min-width: 88px;
+    }
+
+
+    .action-icon {
+
+        width: 40px;
+        height: 40px;
+    }
+
+}
+
+
+/* =====================================================
+   TABLET / DESKTOP
+===================================================== */
+
+@media (min-width: 501px) {
+
+    .boarding-dashboard {
+
+        box-shadow:
+            0 0 30px
+            rgba(0,50,90,.12);
+    }
+
+}
+/* BACK BUTTON */
+
+.back-btn {
+    position: absolute;
+    left: 10px;
+    top: 11px;
+
+    width: 38px;
+    height: 38px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: transparent;
+
+    color: #657786;
+
+    font-size: 30px;
+    line-height: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+}
+
+.back-btn:hover {
+    background: #f1f8fc;
+}
+
+.back-btn:active {
+    background: #e4f3fc;
+}

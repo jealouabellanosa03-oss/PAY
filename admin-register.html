@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Registration - BoardingPay</title>
+
+    <link
+        rel="stylesheet"
+        href="./style.css?v=21">
+
+    <style>
+
+        .registration-message {
+            display: none;
+            margin-top: 12px;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 14px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .registration-message.show {
+            display: block;
+        }
+
+        .registration-message.error {
+            background: #ffeaea;
+            color: #c62828;
+        }
+
+        .registration-message.success {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .register-submit-btn:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+        }
+
+        /* =========================================
+           LARGER REGISTRATION CONTAINER
+           Keeps the existing design unchanged while
+           making the form easier to see in a mobile app.
+        ========================================== */
+        .registration-page {
+            width: 100%;
+            min-height: 100vh;
+            background: linear-gradient(180deg, #eef7ff 0%, #ffffff 38%, #ffffff 100%);
+        }
+
+        .registration-header {
+            background: linear-gradient(135deg, #0d8bdc, #1677c8);
+            color: #ffffff;
+            border-bottom: 3px solid #0b6fb8;
+            box-shadow: 0 4px 14px rgba(13, 139, 220, 0.18);
+        }
+
+        .registration-header .header-title h1,
+        .registration-header .header-title p {
+            color: #ffffff;
+        }
+
+        .registration-header .back-btn {
+            color: #ffffff;
+        }
+
+        .registration-form {
+            width: min(94%, 760px);
+            max-width: 760px;
+            margin: 22px auto 0;
+            padding: 32px 26px 46px;
+            background: #ffffff;
+            border: 1px solid #cfe7f8;
+            border-top: 5px solid #168bd2;
+            border-radius: 16px;
+            box-shadow: 0 8px 28px rgba(18, 116, 175, 0.12);
+        }
+
+        .registration-form .form-group {
+            width: 100%;
+            margin-bottom: 21px;
+        }
+
+        .registration-form .form-group label {
+            color: #064f86;
+            font-weight: 700;
+        }
+
+        .registration-form .form-group input {
+            width: 100%;
+            min-height: 60px;
+            padding: 0 16px;
+            font-size: 16px;
+            border-radius: 10px;
+            border: 1px solid #bddcf2;
+            background: #fbfdff;
+            color: #123b5d;
+            box-sizing: border-box;
+            transition: border-color .2s, box-shadow .2s, background .2s;
+        }
+
+        .registration-form .form-group input:focus {
+            outline: none;
+            border-color: #168bd2;
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(22, 139, 210, 0.12);
+        }
+
+        .registration-form .form-group input::placeholder {
+            color: #8aa4b8;
+        }
+
+        .registration-form .password-wrapper {
+            width: 100%;
+            position: relative;
+        }
+
+        .registration-form .password-wrapper input {
+            width: 100%;
+            min-height: 60px;
+            padding-right: 54px;
+        }
+
+        /* Keeps the eye INSIDE the password field */
+        .registration-form .password-wrapper .password-toggle {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 34px;
+            height: 34px;
+            min-width: 34px;
+            padding: 0;
+            margin: 0;
+            border: 0;
+            background: transparent;
+            color: #5f7f96;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 5;
+            border-radius: 50%;
+        }
+
+        .registration-form .password-wrapper .password-toggle:hover {
+            color: #168bd2;
+            background: #eaf6ff;
+        }
+
+        .register-submit-btn {
+            width: 100%;
+            min-height: 60px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #168bd2, #0878c1);
+            border: none;
+            color: #ffffff;
+            box-shadow: 0 5px 14px rgba(22, 139, 210, 0.20);
+            cursor: pointer;
+        }
+
+        .register-submit-btn:hover {
+            background: linear-gradient(135deg, #087fc8, #066cae);
+        }
+
+        @media (max-width: 600px) {
+            .registration-form {
+                width: calc(100% - 20px);
+                max-width: none;
+                margin-top: 16px;
+                padding: 28px 18px 40px;
+                border-radius: 14px;
+            }
+
+            .registration-form .form-group {
+                margin-bottom: 22px;
+            }
+
+            .registration-form .form-group input,
+            .registration-form .password-wrapper input,
+            .register-submit-btn {
+                min-height: 62px;
+                font-size: 16px;
+            }
+
+            .registration-form .password-wrapper .password-toggle {
+                right: 12px;
+                width: 36px;
+                height: 36px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<main class="app registration-page">
+
+
+    <!-- =========================================
+         HEADER
+    ========================================== -->
+
+    <header class="registration-header">
+
+        <button
+            type="button"
+            id="adminBackBtn"
+            class="back-btn"
+            aria-label="Back">
+
+            ‹
+
+        </button>
+
+
+        <div class="header-title">
+
+            <h1>
+                Create Admin Account
+            </h1>
+
+            <p>
+                Enter your information
+            </p>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =========================================
+         ADMIN REGISTRATION FORM
+    ========================================== -->
+
+    <form
+        id="adminRegistrationForm"
+        class="registration-form">
+
+
+        <!-- FULL NAME -->
+
+        <div class="form-group">
+
+            <label for="adminName">
+                Full Name
+            </label>
+
+            <input
+                type="text"
+                id="adminName"
+                name="fullName"
+                placeholder="Enter your full name"
+                autocomplete="name"
+                required>
+
+        </div>
+
+
+
+        <!-- EMAIL -->
+
+        <div class="form-group">
+
+            <label for="adminEmail">
+                Gmail Address
+            </label>
+
+            <input
+                type="email"
+                id="adminEmail"
+                name="email"
+                placeholder="example@gmail.com"
+                autocomplete="email"
+                required>
+
+        </div>
+
+
+
+        <!-- USERNAME -->
+
+        <div class="form-group">
+
+            <label for="adminUsername">
+                Username
+            </label>
+
+            <input
+                type="text"
+                id="adminUsername"
+                name="username"
+                placeholder="Enter your username"
+                autocomplete="username"
+                required>
+
+        </div>
+
+
+
+        <!-- PASSWORD -->
+
+        <div class="form-group">
+
+            <label for="adminPassword">
+                Password
+            </label>
+
+
+            <div class="password-wrapper">
+
+                <input
+                    type="password"
+                    id="adminPassword"
+                    name="password"
+                    placeholder="Create a password"
+                    autocomplete="new-password"
+                    minlength="6"
+                    required>
+
+
+                <button
+                    type="button"
+                    class="password-toggle"
+                    data-target="adminPassword"
+                    aria-label="Show password">
+
+                    <span aria-hidden="true">👁</span>
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- CONFIRM PASSWORD -->
+
+        <div class="form-group">
+
+            <label for="adminConfirmPassword">
+                Confirm Password
+            </label>
+
+
+            <div class="password-wrapper">
+
+                <input
+                    type="password"
+                    id="adminConfirmPassword"
+                    name="confirmPassword"
+                    placeholder="Confirm your password"
+                    autocomplete="new-password"
+                    minlength="6"
+                    required>
+
+
+                <button
+                    type="button"
+                    class="password-toggle"
+                    data-target="adminConfirmPassword"
+                    aria-label="Show password">
+
+                    <span aria-hidden="true">👁</span>
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- MESSAGE -->
+
+        <div
+            id="adminRegisterMessage"
+            class="registration-message">
+        </div>
+
+
+
+        <!-- CREATE ACCOUNT -->
+
+        <button
+            type="submit"
+            id="adminRegisterBtn"
+            class="register-submit-btn">
+
+            Create Account
+
+        </button>
+
+
+    </form>
+
+
+</main>
+
+
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+
+        /* =====================================================
+           ELEMENTS
+        ===================================================== */
+
+        const form =
+            document.getElementById(
+                "adminRegistrationForm"
+            );
+
+        const nameInput =
+            document.getElementById(
+                "adminName"
+            );
+
+        const emailInput =
+            document.getElementById(
+                "adminEmail"
+            );
+
+        const usernameInput =
+            document.getElementById(
+                "adminUsername"
+            );
+
+        const passwordInput =
+            document.getElementById(
+                "adminPassword"
+            );
+
+        const confirmPasswordInput =
+            document.getElementById(
+                "adminConfirmPassword"
+            );
+
+        const registerBtn =
+            document.getElementById(
+                "adminRegisterBtn"
+            );
+
+        const backBtn =
+            document.getElementById(
+                "adminBackBtn"
+            );
+
+        const message =
+            document.getElementById(
+                "adminRegisterMessage"
+            );
+
+
+        /* =====================================================
+           PASSWORD SHOW / HIDE
+        ===================================================== */
+
+        document
+            .querySelectorAll(".password-toggle")
+            .forEach(
+                function (button) {
+
+                    button.addEventListener(
+                        "click",
+                        function () {
+
+                            const targetId =
+                                button.getAttribute(
+                                    "data-target"
+                                );
+
+                            const target =
+                                document.getElementById(
+                                    targetId
+                                );
+
+
+                            if (!target) {
+                                return;
+                            }
+
+
+                            if (
+                                target.type ===
+                                "password"
+                            ) {
+
+                                target.type =
+                                    "text";
+
+                                button.textContent =
+                                    "🙈";
+
+                                button.setAttribute(
+                                    "aria-label",
+                                    "Hide password"
+                                );
+
+                            }
+
+                            else {
+
+                                target.type =
+                                    "password";
+
+                                button.textContent =
+                                    "👁";
+
+                                button.setAttribute(
+                                    "aria-label",
+                                    "Show password"
+                                );
+
+                            }
+
+                        }
+                    );
+
+                }
+            );
+
+
+        /* =====================================================
+           PASSWORD MATCH
+        ===================================================== */
+
+        function checkPasswordMatch() {
+
+            if (
+                passwordInput.value !==
+                confirmPasswordInput.value
+            ) {
+
+                confirmPasswordInput.setCustomValidity(
+                    "Passwords do not match."
+                );
+
+                return false;
+
+            }
+
+
+            confirmPasswordInput.setCustomValidity("");
+
+            return true;
+
+        }
+
+
+        passwordInput.addEventListener(
+            "input",
+            checkPasswordMatch
+        );
+
+
+        confirmPasswordInput.addEventListener(
+            "input",
+            checkPasswordMatch
+        );
+
+
+        /* =====================================================
+           BACK BUTTON → LOGIN
+        ===================================================== */
+
+        if (backBtn) {
+
+            backBtn.addEventListener(
+                "click",
+                function () {
+
+                    window.location.href =
+                        "create-account.html";
+
+                }
+            );
+
+        }
+
+
+        /* =====================================================
+           FORM SUBMIT
+        ===================================================== */
+
+        form.addEventListener(
+            "submit",
+            function (event) {
+
+                event.preventDefault();
+
+
+                /* ---------------------------------------------
+                   CLEAR MESSAGE
+                --------------------------------------------- */
+
+                message.textContent = "";
+
+                message.className =
+                    "registration-message";
+
+
+                /* ---------------------------------------------
+                   CHECK REQUIRED FIELDS
+                --------------------------------------------- */
+
+                if (!form.checkValidity()) {
+
+                    form.reportValidity();
+
+                    return;
+
+                }
+
+
+                /* ---------------------------------------------
+                   CHECK PASSWORD
+                --------------------------------------------- */
+
+                if (!checkPasswordMatch()) {
+
+                    confirmPasswordInput.reportValidity();
+
+                    confirmPasswordInput.focus();
+
+                    return;
+
+                }
+
+
+                /* ---------------------------------------------
+                   GET VALUES
+                --------------------------------------------- */
+
+                const fullName =
+                    nameInput.value.trim();
+
+                const email =
+                    emailInput.value
+                        .trim()
+                        .toLowerCase();
+
+                const username =
+                    usernameInput.value.trim();
+
+                const password =
+                    passwordInput.value;
+
+
+                /* ---------------------------------------------
+                   GMAIL ONLY
+                --------------------------------------------- */
+
+                const gmailPattern =
+                    /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+
+
+                if (
+                    !gmailPattern.test(email)
+                ) {
+
+                    message.textContent =
+                        "Please enter a valid Gmail address.";
+
+                    message.classList.add(
+                        "show",
+                        "error"
+                    );
+
+                    emailInput.focus();
+
+                    return;
+
+                }
+
+
+                /* ---------------------------------------------
+                   GET ACCOUNTS
+                --------------------------------------------- */
+
+                let accounts = [];
+
+                try {
+
+                    accounts =
+                        JSON.parse(
+                            localStorage.getItem(
+                                "boardingPayAccounts"
+                            ) || "[]"
+                        );
+
+
+                    if (
+                        !Array.isArray(accounts)
+                    ) {
+
+                        accounts = [];
+
+                    }
+
+                }
+
+                catch (error) {
+
+                    accounts = [];
+
+                }
+
+
+                /* ---------------------------------------------
+                   DUPLICATE EMAIL
+                --------------------------------------------- */
+
+                const emailExists =
+                    accounts.some(
+                        function (account) {
+
+                            const existingEmail =
+                                String(
+                                    account.email ||
+                                    account.identifier ||
+                                    ""
+                                )
+                                .trim()
+                                .toLowerCase();
+
+
+                            return (
+                                existingEmail ===
+                                email
+                            );
+
+                        }
+                    );
+
+
+                if (emailExists) {
+
+                    message.textContent =
+                        "This Gmail is already registered.";
+
+                    message.classList.add(
+                        "show",
+                        "error"
+                    );
+
+                    emailInput.focus();
+
+                    return;
+
+                }
+
+
+                /* ---------------------------------------------
+                   DUPLICATE USERNAME
+                --------------------------------------------- */
+
+                const usernameExists =
+                    accounts.some(
+                        function (account) {
+
+                            return (
+                                String(
+                                    account.username ||
+                                    ""
+                                )
+                                .trim()
+                                .toLowerCase()
+                                ===
+                                username
+                                    .toLowerCase()
+                            );
+
+                        }
+                    );
+
+
+                if (usernameExists) {
+
+                    message.textContent =
+                        "This username is already registered.";
+
+                    message.classList.add(
+                        "show",
+                        "error"
+                    );
+
+                    usernameInput.focus();
+
+                    return;
+
+                }
+
+
+                /* =================================================
+                   CREATE ACCOUNT
+                ================================================= */
+
+                const adminAccount = {
+
+                    id:
+                        "ADMIN-" +
+                        Date.now(),
+
+                    fullName:
+                        fullName,
+
+                    username:
+                        username,
+
+                    identifier:
+                        email,
+
+                    email:
+                        email,
+
+                    password:
+                        password,
+
+                    role:
+                        "admin",
+
+                    accountType:
+                        "Admin",
+
+                    createdAt:
+                        new Date().toISOString()
+
+                };
+
+
+                /* =================================================
+                   SAVE COMMON ACCOUNT
+                ================================================= */
+
+                accounts.push(
+                    adminAccount
+                );
+
+
+                localStorage.setItem(
+                    "boardingPayAccounts",
+                    JSON.stringify(accounts)
+                );
+
+
+                /* =================================================
+                   SAVE CURRENT ADMIN
+                ================================================= */
+
+                localStorage.setItem(
+                    "currentAdmin",
+                    JSON.stringify(
+                        adminAccount
+                    )
+                );
+
+
+                /* =================================================
+                   LOGIN PREFILL
+                ================================================= */
+
+                localStorage.setItem(
+                    "pendingLoginRole",
+                    "admin"
+                );
+
+                localStorage.setItem(
+                    "pendingLoginIdentifier",
+                    email
+                );
+
+
+                /* =================================================
+                   BUTTON
+                ================================================= */
+
+                registerBtn.disabled = true;
+
+                registerBtn.textContent =
+                    "Account Created!";
+
+
+                /* =================================================
+                   GO TO LOGIN
+                ================================================= */
+
+                setTimeout(
+                    function () {
+
+                        window.location.href =
+                            "login.html";
+
+                    },
+                    500
+                );
+
+            }
+        );
+
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

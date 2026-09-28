@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Tenant Registration - BoardingPay</title>
+
+    <link
+        rel="stylesheet"
+        href="./style.css?v=15">
+
+
+    <style>
+        /* =========================================
+           BLUE MOBILE REGISTRATION DESIGN
+           Same design as Admin and Landlord
+        ========================================== */
+
+        .registration-page {
+            width: 100%;
+            min-height: 100vh;
+            background: linear-gradient(180deg, #eef7ff 0%, #ffffff 38%, #ffffff 100%);
+        }
+
+        .registration-header {
+            background: linear-gradient(135deg, #0d8bdc, #1677c8);
+            color: #ffffff;
+            border-bottom: 3px solid #0b6fb8;
+            box-shadow: 0 4px 14px rgba(13, 139, 220, 0.18);
+        }
+
+        .registration-header .header-title h1,
+        .registration-header .header-title p {
+            color: #ffffff;
+        }
+
+        .registration-header .back-btn {
+            color: #ffffff;
+        }
+
+        .registration-form {
+            width: min(94%, 760px);
+            max-width: 760px;
+            margin: 22px auto 0;
+            padding: 32px 26px 46px;
+            background: #ffffff;
+            border: 1px solid #cfe7f8;
+            border-top: 5px solid #168bd2;
+            border-radius: 16px;
+            box-shadow: 0 8px 28px rgba(18, 116, 175, 0.12);
+            box-sizing: border-box;
+        }
+
+        .registration-form .form-group {
+            width: 100%;
+            margin-bottom: 21px;
+        }
+
+        .registration-form .form-group label {
+            color: #064f86;
+            font-weight: 700;
+        }
+
+        .registration-form .form-group input {
+            width: 100%;
+            min-height: 60px;
+            padding: 0 16px;
+            font-size: 16px;
+            border-radius: 10px;
+            border: 1px solid #bddcf2;
+            background: #fbfdff;
+            color: #123b5d;
+            box-sizing: border-box;
+            transition: border-color .2s, box-shadow .2s, background .2s;
+        }
+
+        .registration-form .form-group input:focus {
+            outline: none;
+            border-color: #168bd2;
+            background: #ffffff;
+            box-shadow: 0 0 0 3px rgba(22, 139, 210, 0.12);
+        }
+
+        .registration-form .form-group input::placeholder {
+            color: #8aa4b8;
+        }
+
+        .registration-form .password-wrapper {
+            width: 100%;
+            position: relative;
+        }
+
+        .registration-form .password-wrapper input {
+            width: 100%;
+            min-height: 60px;
+            padding-right: 54px;
+        }
+
+        /* Eye icon stays INSIDE the password field */
+        .registration-form .password-wrapper .password-toggle {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 34px;
+            height: 34px;
+            min-width: 34px;
+            padding: 0;
+            margin: 0;
+            border: 0;
+            background: transparent;
+            color: #5f7f96;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 5;
+            border-radius: 50%;
+        }
+
+        .registration-form .password-wrapper .password-toggle:hover {
+            color: #168bd2;
+            background: #eaf6ff;
+        }
+
+        .register-submit-btn {
+            width: 100%;
+            min-height: 60px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #168bd2, #0878c1);
+            border: none;
+            color: #ffffff;
+            box-shadow: 0 5px 14px rgba(22, 139, 210, 0.20);
+            cursor: pointer;
+        }
+
+        .register-submit-btn:hover {
+            background: linear-gradient(135deg, #087fc8, #066cae);
+        }
+
+        .register-message.success {
+            background: #e8f5ff;
+            color: #0878c1;
+            border: 1px solid #b9def7;
+        }
+
+        @media (max-width: 600px) {
+            .registration-form {
+                width: calc(100% - 20px);
+                max-width: none;
+                margin-top: 16px;
+                padding: 28px 18px 40px;
+                border-radius: 14px;
+            }
+
+            .registration-form .form-group {
+                margin-bottom: 22px;
+            }
+
+            .registration-form .form-group input,
+            .registration-form .password-wrapper input,
+            .register-submit-btn {
+                min-height: 62px;
+                font-size: 16px;
+            }
+
+            .registration-form .password-wrapper .password-toggle {
+                right: 12px;
+                width: 36px;
+                height: 36px;
+            }
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+<main class="app registration-page">
+
+
+    <!-- =========================================
+         HEADER
+    ========================================== -->
+
+    <header class="registration-header">
+
+        <button
+            type="button"
+            class="back-btn"
+            id="tenantBackBtn"
+            aria-label="Back">
+
+            ‹
+
+        </button>
+
+
+        <div class="header-title">
+
+            <h1>Create Tenant Account</h1>
+
+            <p>Enter your information</p>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =========================================
+         TENANT REGISTRATION FORM
+    ========================================== -->
+
+    <form
+        id="tenantRegistrationForm"
+        class="registration-form">
+
+
+        <!-- =====================================
+             FULL NAME
+        ====================================== -->
+
+        <div class="form-group">
+
+            <label for="tenantName">
+                Full Name
+            </label>
+
+            <input
+                type="text"
+                id="tenantName"
+                name="fullName"
+                placeholder="Enter your full name"
+                autocomplete="name"
+                required>
+
+        </div>
+
+
+
+        <!-- =====================================
+             EMAIL
+        ====================================== -->
+
+        <div class="form-group">
+
+            <label for="tenantEmail">
+                Email Address
+            </label>
+
+            <input
+                type="email"
+                id="tenantEmail"
+                name="email"
+                placeholder="Enter your email"
+                autocomplete="email"
+                required>
+
+        </div>
+
+
+
+        <!-- =====================================
+             PHONE
+        ====================================== -->
+
+        <div class="form-group">
+
+            <label for="tenantPhone">
+                Phone Number
+            </label>
+
+            <input
+                type="tel"
+                id="tenantPhone"
+                name="phone"
+                placeholder="Enter your 11-digit phone number"
+                autocomplete="tel"
+                inputmode="numeric"
+                pattern="09[0-9]{9}"
+                maxlength="11"
+                required>
+
+        </div>
+
+
+
+        <!-- =====================================
+             PASSWORD
+        ====================================== -->
+
+        <div class="form-group">
+
+            <label for="tenantPassword">
+                Password
+            </label>
+
+            <div class="password-wrapper">
+
+                <input
+                    type="password"
+                    id="tenantPassword"
+                    name="password"
+                    placeholder="Create a password"
+                    autocomplete="new-password"
+                    minlength="6"
+                    required>
+
+                <button
+                    type="button"
+                    class="password-toggle"
+                    data-target="tenantPassword"
+                    aria-label="Show password">
+
+                    👁
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =====================================
+             CONFIRM PASSWORD
+        ====================================== -->
+
+        <div class="form-group">
+
+            <label for="tenantConfirmPassword">
+                Confirm Password
+            </label>
+
+            <div class="password-wrapper">
+
+                <input
+                    type="password"
+                    id="tenantConfirmPassword"
+                    name="confirmPassword"
+                    placeholder="Confirm your password"
+                    autocomplete="new-password"
+                    minlength="6"
+                    required>
+
+                <button
+                    type="button"
+                    class="password-toggle"
+                    data-target="tenantConfirmPassword"
+                    aria-label="Show password">
+
+                    👁
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =====================================
+             MESSAGE
+        ====================================== -->
+
+        <div
+            id="tenantRegisterMessage"
+            class="register-message"
+            aria-live="polite">
+        </div>
+
+
+
+        <!-- =====================================
+             CREATE ACCOUNT
+        ====================================== -->
+
+        <button
+            type="submit"
+            class="register-submit-btn"
+            id="tenantRegisterBtn">
+
+            Next
+
+        </button>
+
+
+    </form>
+
+
+</main>
+
+
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+
+        /* =========================================
+           GET ELEMENTS
+        ========================================== */
+
+        const form =
+            document.getElementById(
+                "tenantRegistrationForm"
+            );
+
+        const nameInput =
+            document.getElementById(
+                "tenantName"
+            );
+
+        const emailInput =
+            document.getElementById(
+                "tenantEmail"
+            );
+
+        const phoneInput =
+            document.getElementById(
+                "tenantPhone"
+            );
+
+        const passwordInput =
+            document.getElementById(
+                "tenantPassword"
+            );
+
+        const confirmPasswordInput =
+            document.getElementById(
+                "tenantConfirmPassword"
+            );
+
+        const registerBtn =
+            document.getElementById(
+                "tenantRegisterBtn"
+            );
+
+        const message =
+            document.getElementById(
+                "tenantRegisterMessage"
+            );
+
+        const backBtn =
+            document.getElementById(
+                "tenantBackBtn"
+            );
+
+
+
+        /* =========================================
+           PASSWORD SHOW / HIDE
+        ========================================== */
+
+        document
+            .querySelectorAll(".password-toggle")
+            .forEach(
+                function (button) {
+
+                    button.addEventListener(
+                        "click",
+                        function () {
+
+                            const targetId =
+                                button.getAttribute(
+                                    "data-target"
+                                );
+
+                            const target =
+                                document.getElementById(
+                                    targetId
+                                );
+
+
+                            if (!target) {
+                                return;
+                            }
+
+
+                            if (
+                                target.type ===
+                                "password"
+                            ) {
+
+                                target.type =
+                                    "text";
+
+                                button.textContent =
+                                    "🙈";
+
+                                button.setAttribute(
+                                    "aria-label",
+                                    "Hide password"
+                                );
+
+                            }
+
+                            else {
+
+                                target.type =
+                                    "password";
+
+                                button.textContent =
+                                    "👁";
+
+                                button.setAttribute(
+                                    "aria-label",
+                                    "Show password"
+                                );
+
+                            }
+
+                        }
+                    );
+
+                }
+            );
+
+
+
+        /* =========================================
+           PHONE NUMBER
+           
+           RULE:
+           - NUMBERS ONLY
+           - MUST START WITH 09
+           - EXACTLY 11 DIGITS
+        ========================================== */
+
+        phoneInput.addEventListener(
+            "input",
+            function () {
+
+                /* Remove letters and symbols */
+                let value =
+                    phoneInput.value
+                        .replace(/\D/g, "")
+                        .slice(0, 11);
+
+
+                /*
+                 * If the user starts with something
+                 * other than 09, keep the input
+                 * restricted to the correct format.
+                 */
+
+                if (
+                    value.length >= 1 &&
+                    value.charAt(0) !== "0"
+                ) {
+
+                    value = "";
+
+                }
+
+
+                if (
+                    value.length >= 2 &&
+                    value.substring(0, 2) !== "09"
+                ) {
+
+                    value = value.substring(0, 1);
+
+                }
+
+
+                phoneInput.value = value;
+
+
+                /* Clear old custom error */
+                phoneInput.setCustomValidity("");
+
+            }
+        );
+
+
+
+        /* =========================================
+           PASSWORD MATCH
+        ========================================== */
+
+        function validatePasswordMatch() {
+
+            const password =
+                passwordInput.value;
+
+            const confirmPassword =
+                confirmPasswordInput.value;
+
+
+            if (
+                confirmPassword !== "" &&
+                password !== confirmPassword
+            ) {
+
+                confirmPasswordInput.setCustomValidity(
+                    "Passwords do not match."
+                );
+
+                return false;
+
+            }
+
+
+            confirmPasswordInput.setCustomValidity("");
+
+            return true;
+
+        }
+
+
+
+        /* =========================================
+           CLEAR PASSWORD MATCH ERROR
+        ========================================== */
+
+        passwordInput.addEventListener(
+            "input",
+            function () {
+
+                confirmPasswordInput.setCustomValidity("");
+
+            }
+        );
+
+
+        confirmPasswordInput.addEventListener(
+            "input",
+            function () {
+
+                confirmPasswordInput.setCustomValidity("");
+
+            }
+        );
+
+
+
+        /* =========================================
+           FORM SUBMIT
+        ========================================== */
+
+        form.addEventListener(
+            "submit",
+            function (event) {
+
+                event.preventDefault();
+
+
+                message.textContent = "";
+
+                message.className =
+                    "register-message";
+
+
+                /* =================================
+                   NATIVE VALIDATION
+                ================================= */
+
+                if (!form.checkValidity()) {
+
+                    form.reportValidity();
+
+                    return;
+
+                }
+
+
+
+                /* =================================
+                   PASSWORD MATCH
+                ================================= */
+
+                if (!validatePasswordMatch()) {
+
+                    confirmPasswordInput.reportValidity();
+
+                    confirmPasswordInput.focus();
+
+                    return;
+
+                }
+
+
+
+                /* =================================
+                   GET EXISTING ACCOUNTS
+                ================================= */
+
+                let accounts = [];
+
+
+                try {
+
+                    accounts =
+                        JSON.parse(
+                            localStorage.getItem(
+                                "boardingPayAccounts"
+                            ) || "[]"
+                        );
+
+
+                    if (
+                        !Array.isArray(
+                            accounts
+                        )
+                    ) {
+
+                        accounts = [];
+
+                    }
+
+                }
+
+                catch (error) {
+
+                    accounts = [];
+
+                }
+
+
+
+                /* =================================
+                   GET USER DATA
+                ================================= */
+
+                const fullName =
+                    nameInput.value.trim();
+
+                const email =
+                    emailInput.value
+                        .trim()
+                        .toLowerCase();
+
+                const phone =
+                    phoneInput.value.trim();
+
+                const password =
+                    passwordInput.value;
+
+
+
+                /* =================================
+                   CHECK DUPLICATE EMAIL
+                ================================= */
+
+                const emailExists =
+                    accounts.some(
+                        function (account) {
+
+                            return String(
+                                account.identifier ||
+                                account.email ||
+                                ""
+                            )
+                            .trim()
+                            .toLowerCase()
+                            === email;
+
+                        }
+                    );
+
+
+                if (emailExists) {
+
+                    emailInput.setCustomValidity(
+                        "This email is already registered."
+                    );
+
+                    emailInput.reportValidity();
+
+                    emailInput.focus();
+
+                    return;
+
+                }
+
+
+
+                /* =================================
+                   CHECK DUPLICATE PHONE
+                   
+                   A DIFFERENT 11-DIGIT 09 NUMBER
+                   IS ALLOWED.
+                ================================== */
+
+                const phoneExists =
+                    accounts.some(
+                        function (account) {
+
+                            const savedPhone =
+                                String(
+                                    account.phone ||
+                                    ""
+                                )
+                                .replace(
+                                    /\D/g,
+                                    ""
+                                );
+
+                            return (
+                                savedPhone !== "" &&
+                                savedPhone === phone
+                            );
+
+                        }
+                    );
+
+
+                if (phoneExists) {
+
+                    phoneInput.setCustomValidity(
+                        "This phone number is already registered."
+                    );
+
+                    phoneInput.reportValidity();
+
+                    phoneInput.focus();
+
+                    return;
+
+                }
+
+
+
+                /* =================================
+                   CREATE TENANT ACCOUNT
+                ================================= */
+
+                const tenantData = {
+
+                    id:
+                        "TENANT-" +
+                        Date.now(),
+
+                    fullName:
+                        fullName,
+
+                    identifier:
+                        email,
+
+                    email:
+                        email,
+
+                    phone:
+                        phone,
+
+                    password:
+                        password,
+
+                    role:
+                        "tenant",
+
+                    accountType:
+                        "Tenant",
+
+                    createdAt:
+                        new Date().toISOString()
+
+                };
+
+
+
+                /* =================================
+                   SAVE COMMON LOGIN ACCOUNT
+                ================================= */
+
+                accounts.push(
+                    tenantData
+                );
+
+
+                localStorage.setItem(
+                    "boardingPayAccounts",
+                    JSON.stringify(
+                        accounts
+                    )
+                );
+
+
+
+                /* =================================
+                   SAVE CURRENT TENANT
+                ================================= */
+
+                localStorage.setItem(
+                    "currentTenant",
+                    JSON.stringify(
+                        tenantData
+                    )
+                );
+
+
+
+                /*
+                 * Save name for the dashboard
+                 * and other existing pages.
+                 */
+
+                localStorage.setItem(
+                    "tenantName",
+                    fullName
+                );
+
+
+
+                localStorage.setItem(
+                    "profileFullName",
+                    fullName
+                );
+
+
+
+                localStorage.setItem(
+                    "currentUserType",
+                    "tenant"
+                );
+
+
+
+                /* =================================
+                   SAVE TENANT LIST
+                ================================= */
+
+                let tenants = [];
+
+
+                try {
+
+                    tenants =
+                        JSON.parse(
+                            localStorage.getItem(
+                                "boardingPay_tenants"
+                            ) || "[]"
+                        );
+
+
+                    if (
+                        !Array.isArray(
+                            tenants
+                        )
+                    ) {
+
+                        tenants = [];
+
+                    }
+
+                }
+
+                catch (error) {
+
+                    tenants = [];
+
+                }
+
+
+                tenants.push({
+
+                    id:
+                        tenantData.id,
+
+                    name:
+                        tenantData.fullName,
+
+                    fullName:
+                        tenantData.fullName,
+
+                    email:
+                        tenantData.email,
+
+                    phone:
+                        tenantData.phone,
+
+                    accountType:
+                        "Tenant",
+
+                    role:
+                        "tenant",
+
+                    createdAt:
+                        tenantData.createdAt
+
+                });
+
+
+                localStorage.setItem(
+                    "boardingPay_tenants",
+                    JSON.stringify(
+                        tenants
+                    )
+                );
+
+
+
+                /* =================================
+                   ADMIN NOTIFICATION
+                ================================= */
+
+                let notifications = [];
+
+
+                try {
+
+                    notifications =
+                        JSON.parse(
+                            localStorage.getItem(
+                                "adminNotifications"
+                            ) || "[]"
+                        );
+
+
+                    if (
+                        !Array.isArray(
+                            notifications
+                        )
+                    ) {
+
+                        notifications = [];
+
+                    }
+
+                }
+
+                catch (error) {
+
+                    notifications = [];
+
+                }
+
+
+                notifications.unshift({
+
+                    id:
+                        "NOTIF-" +
+                        Date.now(),
+
+                    title:
+                        "New Tenant Registration",
+
+                    message:
+                        tenantData.fullName +
+                        " created a new tenant account.",
+
+                    icon:
+                        "👤",
+
+                    time:
+                        new Date().toLocaleString(),
+
+                    read:
+                        false
+
+                });
+
+
+                localStorage.setItem(
+                    "adminNotifications",
+                    JSON.stringify(
+                        notifications
+                    )
+                );
+
+
+
+                /* =================================
+                   ADMIN ACTIVITY
+                ================================= */
+
+                let activities = [];
+
+
+                try {
+
+                    activities =
+                        JSON.parse(
+                            localStorage.getItem(
+                                "boardingPay_activities"
+                            ) || "[]"
+                        );
+
+
+                    if (
+                        !Array.isArray(
+                            activities
+                        )
+                    ) {
+
+                        activities = [];
+
+                    }
+
+                }
+
+                catch (error) {
+
+                    activities = [];
+
+                }
+
+
+                activities.unshift({
+
+                    id:
+                        "ACT-" +
+                        Date.now(),
+
+                    title:
+                        "New Tenant Account",
+
+                    message:
+                        tenantData.fullName +
+                        " registered as a tenant.",
+
+                    icon:
+                        "👤",
+
+                    date:
+                        new Date().toLocaleString()
+
+                });
+
+
+                localStorage.setItem(
+                    "boardingPay_activities",
+                    JSON.stringify(
+                        activities
+                    )
+                );
+
+
+
+                /* =================================
+                   SUCCESS
+                ================================= */
+
+                message.textContent =
+                    "Tenant account created successfully!";
+
+                message.className =
+                    "register-message success";
+
+
+                registerBtn.disabled = true;
+
+                registerBtn.textContent =
+                    "Account Created";
+
+
+
+                /* =================================
+                   REDIRECT TO LOGIN
+                ================================= */
+
+                setTimeout(
+                    function () {
+
+                        window.location.href =
+                            "login.html";
+
+                    },
+                    800
+                );
+
+            }
+        );
+
+
+
+        /* =========================================
+           BACK BUTTON
+        ========================================== */
+
+        if (backBtn) {
+
+            backBtn.addEventListener(
+                "click",
+                function () {
+
+                   window.location.href =
+                     "create-account.html";
+
+                }
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

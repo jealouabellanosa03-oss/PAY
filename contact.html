@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Contact Us - JNJC Boarding House Pay</title>
+
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+
+/* =====================================================
+   BODY
+===================================================== */
+
+body{
+
+    min-height:100vh;
+
+    background:#eef8fd;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    color:#173b63;
+
+    overflow-x:hidden;
+
+}
+
+
+/* =====================================================
+   MAIN APP
+===================================================== */
+
+.contact-app{
+
+    width:100%;
+
+    max-width:500px;
+
+    min-height:100vh;
+
+    margin:auto;
+
+    background:#f8fcff;
+
+    box-shadow:
+        0 0 30px
+        rgba(0,80,130,.08);
+
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.contact-header{
+
+    height:78px;
+
+    background:#fff;
+
+    border-bottom:
+        1px solid #dceaf2;
+
+    display:flex;
+
+    align-items:center;
+
+    padding:
+        0 16px;
+
+    gap:12px;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:20;
+
+}
+
+
+.back-btn{
+
+    width:38px;
+
+    height:38px;
+
+    border:
+        1px solid #d7e8f2;
+
+    border-radius:50%;
+
+    background:#fff;
+
+    color:#07559b;
+
+    font-size:27px;
+
+    line-height:30px;
+
+    cursor:pointer;
+
+    flex-shrink:0;
+
+}
+
+
+.back-btn:active{
+
+    transform:scale(.96);
+
+}
+
+
+.header-text{
+
+    flex:1;
+
+}
+
+
+.header-text h1{
+
+    color:#07559b;
+
+    font-size:19px;
+
+    font-weight:800;
+
+}
+
+
+.header-text p{
+
+    color:#7893a5;
+
+    font-size:10px;
+
+    margin-top:3px;
+
+}
+
+
+/* =====================================================
+   CONTENT
+===================================================== */
+
+.contact-content{
+
+    padding:
+        20px
+        14px
+        35px;
+
+}
+
+
+/* =====================================================
+   ILLUSTRATION
+===================================================== */
+
+.contact-illustration{
+
+    width:100%;
+
+    height:180px;
+
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #f7fcff 0%,
+            #e7f6ff 100%
+        );
+
+    border:
+        1px solid #d8edf8;
+
+    position:relative;
+
+    overflow:hidden;
+
+    margin-bottom:20px;
+
+}
+
+
+/* SKY */
+
+.sky-circle{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    background:#dff2fc;
+
+}
+
+
+.sky-circle.one{
+
+    width:55px;
+
+    height:55px;
+
+    top:24px;
+
+    left:25px;
+
+}
+
+
+.sky-circle.two{
+
+    width:38px;
+
+    height:38px;
+
+    top:52px;
+
+    left:65px;
+
+    background:#d2ecfa;
+
+}
+
+
+.sky-circle.three{
+
+    width:50px;
+
+    height:50px;
+
+    top:30px;
+
+    right:38px;
+
+    background:#d9effb;
+
+}
+
+
+/* CITY */
+
+.city{
+
+    position:absolute;
+
+    bottom:42px;
+
+    right:25px;
+
+    display:flex;
+
+    align-items:flex-end;
+
+    gap:5px;
+
+}
+
+
+.building{
+
+    background:#bde1f4;
+
+    border-radius:
+        3px
+        3px
+        0
+        0;
+
+}
+
+
+.building.one{
+
+    width:20px;
+
+    height:45px;
+
+}
+
+
+.building.two{
+
+    width:25px;
+
+    height:68px;
+
+}
+
+
+.building.three{
+
+    width:18px;
+
+    height:53px;
+
+}
+
+
+.building.four{
+
+    width:27px;
+
+    height:78px;
+
+}
+
+
+/* GROUND */
+
+.ground{
+
+    position:absolute;
+
+    bottom:0;
+
+    left:0;
+
+    width:100%;
+
+    height:52px;
+
+    background:#a9dcf3;
+
+    clip-path:
+        polygon(
+            0 48%,
+            18% 25%,
+            31% 48%,
+            48% 15%,
+            62% 45%,
+            78% 22%,
+            100% 50%,
+            100% 100%,
+            0 100%
+        );
+
+}
+
+
+/* HOUSE */
+
+.house{
+
+    position:absolute;
+
+    left:28px;
+
+    bottom:38px;
+
+    width:112px;
+
+    height:78px;
+
+    background:#fff;
+
+    border:
+        3px solid #5aa9dc;
+
+    border-top:0;
+
+    border-radius:
+        0
+        0
+        5px
+        5px;
+
+}
+
+
+/* HOUSE ROOF */
+
+.house-roof{
+
+    position:absolute;
+
+    width:82px;
+
+    height:82px;
+
+    left:12px;
+
+    top:-41px;
+
+    background:#fff;
+
+    border-left:
+        6px solid #5aa9dc;
+
+    border-top:
+        6px solid #5aa9dc;
+
+    transform:
+        rotate(45deg);
+
+}
+
+
+/* WINDOW */
+
+.house-window{
+
+    position:absolute;
+
+    width:26px;
+
+    height:26px;
+
+    left:16px;
+
+    top:23px;
+
+    background:#bfe7fa;
+
+    border:
+        3px solid #4f9ed3;
+
+    z-index:2;
+
+}
+
+
+.house-window:before{
+
+    content:"";
+
+    position:absolute;
+
+    left:8px;
+
+    top:0;
+
+    height:100%;
+
+    width:3px;
+
+    background:#4f9ed3;
+
+}
+
+
+.house-window:after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    top:9px;
+
+    width:100%;
+
+    height:3px;
+
+    background:#4f9ed3;
+
+}
+
+
+/* DOOR */
+
+.house-door{
+
+    position:absolute;
+
+    width:24px;
+
+    height:41px;
+
+    right:17px;
+
+    bottom:0;
+
+    background:#75b9e4;
+
+    border-radius:
+        4px
+        4px
+        0
+        0;
+
+    z-index:2;
+
+}
+
+
+/* =====================================================
+   CONTACT TITLE
+===================================================== */
+
+.contact-title{
+
+    text-align:center;
+
+    color:#07559b;
+
+    font-size:20px;
+
+    font-weight:800;
+
+}
+
+
+.contact-subtitle{
+
+    text-align:center;
+
+    color:#7893a5;
+
+    font-size:10px;
+
+    margin-top:5px;
+
+    margin-bottom:20px;
+
+}
+
+
+/* =====================================================
+   CONTACT CARD
+===================================================== */
+
+.contact-card{
+
+    background:#fff;
+
+    border:
+        1px solid #dceaf2;
+
+    border-radius:15px;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 3px 12px
+        rgba(0,65,100,.05);
+
+}
+
+
+/* =====================================================
+   CONTACT ITEM
+===================================================== */
+
+.contact-item{
+
+    width:100%;
+
+    min-height:78px;
+
+    padding:
+        13px
+        14px;
+
+    border:0;
+
+    border-bottom:
+        1px solid #edf3f6;
+
+    background:#fff;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:13px;
+
+    text-align:left;
+
+    text-decoration:none;
+
+    cursor:pointer;
+
+}
+
+
+.contact-item:last-child{
+
+    border-bottom:0;
+
+}
+
+
+.contact-item:active{
+
+    background:#f4fbff;
+
+    transform:scale(.99);
+
+}
+
+
+/* =====================================================
+   ICON
+===================================================== */
+
+.contact-icon{
+
+    width:46px;
+
+    height:46px;
+
+    border-radius:13px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:22px;
+
+    flex-shrink:0;
+
+}
+
+
+.contact-icon.facebook{
+
+    background:#e7f0ff;
+
+    color:#1877f2;
+
+}
+
+
+.contact-icon.gmail{
+
+    background:#fff0ef;
+
+    color:#ea4335;
+
+}
+
+
+.contact-icon.instagram{
+
+    background:#f8eaff;
+
+    color:#c13584;
+
+}
+
+
+/* =====================================================
+   CONTACT INFO
+===================================================== */
+
+.contact-info{
+
+    flex:1;
+
+    min-width:0;
+
+}
+
+
+.contact-info strong{
+
+    display:block;
+
+    color:#183e70;
+
+    font-size:12px;
+
+}
+
+
+.contact-info span{
+
+    display:block;
+
+    color:#8a9baa;
+
+    font-size:9px;
+
+    margin-top:4px;
+
+    line-height:1.4;
+
+}
+
+
+.contact-arrow{
+
+    color:#91a6b5;
+
+    font-size:20px;
+
+}
+
+
+/* =====================================================
+   NOTE
+===================================================== */
+
+.contact-note{
+
+    margin-top:18px;
+
+    padding:13px;
+
+    background:#f4faff;
+
+    border:
+        1px solid #e0eef5;
+
+    border-radius:10px;
+
+    text-align:center;
+
+}
+
+
+.contact-note p{
+
+    color:#7893a5;
+
+    font-size:9px;
+
+    line-height:1.6;
+
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.contact-footer{
+
+    text-align:center;
+
+    padding:
+        20px
+        10px
+        10px;
+
+}
+
+
+.contact-footer p{
+
+    color:#9aaeba;
+
+    font-size:9px;
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:380px){
+
+    .contact-header{
+
+        height:70px;
+
+    }
+
+    .header-text h1{
+
+        font-size:17px;
+
+    }
+
+    .contact-illustration{
+
+        height:165px;
+
+    }
+
+}
+
+</style>
+
+
+<style>
+.tenant-message-card{margin-top:18px;padding:16px;background:#fff;border:1px solid #dceaf2;border-radius:14px;box-shadow:0 4px 14px rgba(0,80,130,.06)}
+.tenant-message-card h3{font-size:15px;color:#07559b;margin-bottom:6px}.tenant-message-card p{font-size:11px;color:#7893a5;margin-bottom:12px}
+.tenant-message-card label{display:block;font-size:11px;font-weight:700;color:#36556f;margin:10px 0 5px}.tenant-message-card input,.tenant-message-card textarea{width:100%;padding:11px;border:1px solid #d7e8f2;border-radius:9px;outline:none;font:inherit;font-size:12px}.tenant-message-card textarea{min-height:95px;resize:vertical}.tenant-message-btn{width:100%;margin-top:12px;border:0;border-radius:10px;padding:12px;background:#078bd0;color:#fff;font-weight:800;cursor:pointer}.tenant-message-status{display:none;margin-top:9px;padding:9px;border-radius:8px;font-size:11px;text-align:center;font-weight:700}.tenant-message-status.show{display:block}.tenant-message-status.success{background:#e8f7ef;color:#18794e}.tenant-message-status.error{background:#fff0f0;color:#c62828}
+</style>
+</head>
+
+
+<body>
+
+
+<main class="contact-app">
+
+
+    <!-- =================================================
+         HEADER
+    ================================================== -->
+
+    <header class="contact-header">
+
+
+        <button
+            type="button"
+            class="back-btn"
+            id="backBtn"
+            aria-label=" tenant-dashboard.html">
+
+            ‹
+
+        </button>
+
+
+        <div class="header-text">
+
+            <h1>
+                Contact Us
+            </h1>
+
+            <p>
+                JNJC Boarding House Pay
+            </p>
+
+        </div>
+
+
+    </header>
+
+
+
+    <!-- =================================================
+         CONTENT
+    ================================================== -->
+
+    <section class="contact-content">
+
+
+        <!-- ILLUSTRATION -->
+
+        <div class="contact-illustration">
+
+            <div class="sky-circle one"></div>
+
+            <div class="sky-circle two"></div>
+
+            <div class="sky-circle three"></div>
+
+
+            <div class="city">
+
+                <div class="building one"></div>
+
+                <div class="building two"></div>
+
+                <div class="building three"></div>
+
+                <div class="building four"></div>
+
+            </div>
+
+
+            <div class="house">
+
+                <div class="house-roof"></div>
+
+                <div class="house-window"></div>
+
+                <div class="house-door"></div>
+
+            </div>
+
+
+            <div class="ground"></div>
+
+        </div>
+
+
+
+        <!-- TITLE -->
+
+        <div class="contact-title">
+
+            Contact Us
+
+        </div>
+
+
+        <div class="contact-subtitle">
+
+            Get in touch with JNJC Boarding House
+
+        </div>
+
+
+
+        <!-- =================================================
+             CONTACT OPTIONS
+        ================================================== -->
+
+        <div class="contact-card">
+
+
+            <!-- FACEBOOK -->
+
+            <a
+                href="https://www.facebook.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="contact-item"
+            >
+
+                <div class="contact-icon facebook">
+
+                    f
+
+                </div>
+
+
+                <div class="contact-info">
+
+                    <strong>
+                        Facebook
+                    </strong>
+
+                    <span>
+                        Visit our Facebook page
+                    </span>
+
+                </div>
+
+
+                <div class="contact-arrow">
+
+                    ›
+
+                </div>
+
+            </a>
+
+
+
+            <!-- GMAIL -->
+
+            <a
+                href="mailto:jnjcboardinghouse@gmail.com"
+                class="contact-item"
+            >
+
+                <div class="contact-icon gmail">
+
+                    ✉
+
+                </div>
+
+
+                <div class="contact-info">
+
+                    <strong>
+                        Gmail
+                    </strong>
+
+                    <span>
+                        jnjcboardinghouse@gmail.com
+                    </span>
+
+                </div>
+
+
+                <div class="contact-arrow">
+
+                    ›
+
+                </div>
+
+            </a>
+
+
+
+            <!-- INSTAGRAM -->
+
+            <a
+                href="https://www.instagram.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="contact-item"
+            >
+
+                <div class="contact-icon instagram">
+
+                    ◎
+
+                </div>
+
+
+                <div class="contact-info">
+
+                    <strong>
+                        Instagram
+                    </strong>
+
+                    <span>
+                        Follow us on Instagram
+                    </span>
+
+                </div>
+
+
+                <div class="contact-arrow">
+
+                    ›
+
+                </div>
+
+            </a>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             TENANT MESSAGE TO ADMIN
+        ================================================== -->
+        <div class="tenant-message-card">
+            <h3>Send a Message to Admin</h3>
+            <p>Your message will be recorded and displayed on the Admin Dashboard.</p>
+            <form id="tenantMessageForm">
+                <label for="messageSubject">Subject</label>
+                <input id="messageSubject" type="text" maxlength="100" placeholder="Enter subject" required>
+                <label for="messageText">Message</label>
+                <textarea id="messageText" maxlength="1000" placeholder="Write your message here..." required></textarea>
+                <button type="submit" class="tenant-message-btn">Send to Admin</button>
+                <div id="tenantMessageStatus" class="tenant-message-status"></div>
+            </form>
+        </div>
+
+
+        <!-- =================================================
+             NOTE
+        ================================================== -->
+
+        <div class="contact-note">
+
+            <p>
+                For inquiries, concerns, or additional
+                information, you may contact JNJC Boarding
+                House through the available channels above.
+            </p>
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- FOOTER -->
+
+    <footer class="contact-footer">
+
+        <p>
+            © 2026 JNJC Boarding House Pay
+        </p>
+
+    </footer>
+
+
+</main>
+
+
+
+<script>
+
+(function(){
+
+    "use strict";
+
+
+    /* =================================================
+       BACK TO TENANT DASHBOARD
+    ================================================= */
+
+    const backBtn =
+        document.getElementById("backBtn");
+
+
+    backBtn.addEventListener(
+        "click",
+        function(){
+            window.location.href = "tenant-dashboard.html";
+        }
+    );
+
+    const messageForm = document.getElementById("tenantMessageForm");
+    const messageStatus = document.getElementById("tenantMessageStatus");
+
+    function getJSON(key, fallback){
+        try {
+            const raw = localStorage.getItem(key);
+            return raw ? JSON.parse(raw) : fallback;
+        } catch(e){ return fallback; }
+    }
+
+    if(messageForm){
+        messageForm.addEventListener("submit", function(event){
+            event.preventDefault();
+            const tenant = getJSON("currentTenant", {}) || getJSON("currentUser", {}) || {};
+            const subject = document.getElementById("messageSubject").value.trim();
+            const text = document.getElementById("messageText").value.trim();
+            if(!subject || !text){
+                messageStatus.textContent = "Please complete the subject and message.";
+                messageStatus.className = "tenant-message-status show error";
+                return;
+            }
+
+            const room = tenant.roomNumber || tenant.room?.roomNumber || tenant.room?.room || localStorage.getItem("currentRoomNumber") || "—";
+            const now = new Date().toISOString();
+            const messages = getJSON("boardingPay_messages", []);
+            messages.unshift({
+                id:"MSG-"+Date.now(),
+                senderId:tenant.id || "",
+                senderName:tenant.fullName || tenant.name || localStorage.getItem("loggedInName") || "Tenant",
+                senderEmail:tenant.email || localStorage.getItem("loggedInEmail") || "",
+                senderRole:"tenant",
+                room:room,
+                subject:subject,
+                message:text,
+                status:"Unread",
+                createdAt:now
+            });
+            localStorage.setItem("boardingPay_messages", JSON.stringify(messages.slice(0,300)));
+
+            const notifications = getJSON("adminNotifications", []);
+            notifications.unshift({
+                id:"NOTIF-MSG-"+Date.now(),
+                title:"New Tenant Message",
+                message:(tenant.fullName || tenant.name || "Tenant") + " sent a message: " + subject,
+                type:"message",
+                room:room,
+                read:false,
+                createdAt:now
+            });
+            localStorage.setItem("adminNotifications", JSON.stringify(notifications.slice(0,200)));
+
+            const activities = getJSON("boardingPay_activities", []);
+            activities.unshift({
+                id:"ACT-MSG-"+Date.now(),
+                type:"tenant_message",
+                title:"New Tenant Message",
+                message:(tenant.fullName || tenant.name || "Tenant") + " sent a message to Admin.",
+                room:room,
+                createdAt:now
+            });
+            localStorage.setItem("boardingPay_activities", JSON.stringify(activities.slice(0,200)));
+            localStorage.setItem("boardingPay_lastUpdate", String(Date.now()));
+
+            messageForm.reset();
+            messageStatus.textContent = "Message sent successfully to Admin.";
+            messageStatus.className = "tenant-message-status show success";
+        });
+    }
+
+})();
+
+</script>
+
+
+</body>
+
+</html>

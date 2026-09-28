@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Payment Successful - BoardingPay</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+
+            background: #ffffff;
+
+            color: #173b63;
+        }
+
+
+        .success-page {
+
+            max-width: 430px;
+
+            min-height: 100vh;
+
+            margin: auto;
+
+            text-align: center;
+
+            padding:
+                45px 16px 25px;
+        }
+
+
+        /* CHECK */
+
+        .check-circle {
+
+            width: 74px;
+            height: 74px;
+
+            border-radius: 50%;
+
+            background: #20b77a;
+
+            color: white;
+
+            margin:
+                0 auto 18px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 48px;
+
+            font-weight: bold;
+        }
+
+
+        h1 {
+
+            font-size: 18px;
+
+            color: #159b81;
+
+            margin-bottom: 12px;
+        }
+
+
+        .message {
+
+            font-size: 12px;
+
+            color: #6d7e8b;
+
+            margin-bottom: 25px;
+        }
+
+
+        /* VIEW RECEIPT */
+
+        .view-receipt-btn {
+
+            width: 100%;
+
+            height: 43px;
+
+            border:
+                2px solid #168bd4;
+
+            border-radius: 5px;
+
+            background: white;
+
+            color: #168bd4;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            margin-bottom: 14px;
+        }
+
+
+        /* DASHBOARD */
+
+        .dashboard-btn {
+
+            border: none;
+
+            background: transparent;
+
+            color: #168bd4;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<main class="success-page">
+
+
+    <!-- SUCCESS ICON -->
+
+    <div class="check-circle">
+
+        ✓
+
+    </div>
+
+
+    <h1>
+
+        Payment Submitted!
+
+    </h1>
+
+
+    <p class="message">
+
+        Your payment has been submitted and is now waiting for Admin approval.
+
+    </p>
+
+
+    <!-- VIEW RECEIPT -->
+
+    <button
+        type="button"
+        class="view-receipt-btn"
+        id="viewReceiptBtn">
+
+        View Receipt
+
+    </button>
+
+
+    <!-- BACK DASHBOARD -->
+
+    <button
+        type="button"
+        class="dashboard-btn"
+        id="dashboardBtn">
+
+        Back to Dashboard
+
+    </button>
+
+
+</main>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const isLandlord = String(localStorage.getItem('currentUserType') || '').toLowerCase() === 'landlord';
+    const homePage = isLandlord ? 'landlord-dashboard.html' : 'tenant-dashboard.html';
+    document.getElementById('viewReceiptBtn').addEventListener('click', function(){ window.location.href = 'history.html'; });
+    document.getElementById('dashboardBtn').addEventListener('click', function(){ window.location.href = homePage; });
+});
+</script>
+
+
+</body>
+
+</html>
